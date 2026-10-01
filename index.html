@@ -869,7 +869,7 @@ const CTRL13_f = ()=>{
   W.push({id:'o12',a:'X1-2',b:'TB6-LS2N',type:'ctrl',d:[`M${a} 230 H${b} V260`],note:'같은 점에서 리밋스위치 LS2의 입력(N)으로 보냅니다.'});
   W.push({id:'o13',a:'TB6-LS2N',b:'MC1-5',type:'ctrl',d:[`M${b} 230 H${c} V260`],note:'같은 점에서 MC1 b접점 ⑤로 보내 T1 코일 회로를 만듭니다.'});
   W.push({id:'l2',a:'TB6-LS2O',b:'MC1-6',type:'ctrl',d:[`M${b} 300 V444`],note:'LS2가 감지되면 MC1이 동작합니다.'});
-  W.push({id:'m1',a:'MC1-11',b:'T1-2',type:'ctrl',d:[`M${c} 300 V444`],note:'MC1이 멈춰 있는 동안만 T1이 동작해, MC1이 동작하면 T1이 풀립니다.'});
+  W.push({id:'cm1',a:'MC1-11',b:'T1-2',type:'ctrl',d:[`M${c} 300 V444`],note:'MC1이 멈춰 있는 동안만 T1이 동작해, MC1이 동작하면 T1이 풀립니다.'});
   W.push({id:'o21',a:'TB5-PB2O',b:'X2-2',type:'ctrl',d:[`M${d} 100 V444`],note:'PB2를 누르면 X2 코일에 전원이 들어갑니다.'});
   W.push({id:'o22',a:'X2-2',b:'X2-3',type:'ctrl',d:[`M${d} 130 H${e} V100`],note:'X2 자기유지 접점 출구 ③을 같은 점에 묶습니다.'});
   W.push({id:'o23',a:'X2-3',b:'T1-6',type:'ctrl',d:[`M${e} 130 H${f} V100`],note:'T1 한시 a접점도 PB2와 병렬이라, T1 설정 시간이 지나면 X2가 저절로 기동합니다.'});
@@ -904,7 +904,7 @@ const CTRL12_f = ()=>{
   W.push({id:'o14',a:'T2-6',b:'TB6-LS1N',type:'ctrl',d:[`M${a} 200 H${b} V260`],note:'같은 점에서 리밋스위치 LS1의 입력(N)으로 보냅니다.'});
   W.push({id:'o15',a:'TB6-LS1N',b:'MC1-5',type:'ctrl',d:[`M${b} 200 H${c} V260`],note:'같은 점에서 MC1 b접점 ⑤로 보내 T1 코일 회로를 만듭니다.'});
   W.push({id:'l1',a:'TB6-LS1O',b:'MC1-6',type:'ctrl',d:[`M${b} 300 V444`],note:'LS1이 감지되면 MC1이 동작합니다.'});
-  W.push({id:'m1',a:'MC1-11',b:'T1-2',type:'ctrl',d:[`M${c} 300 V444`],note:'MC1이 멈춰 있는 동안만 T1이 동작해, MC1이 동작하면 T1이 풀립니다.'});
+  W.push({id:'cm1',a:'MC1-11',b:'T1-2',type:'ctrl',d:[`M${c} 300 V444`],note:'MC1이 멈춰 있는 동안만 T1이 동작해, MC1이 동작하면 T1이 풀립니다.'});
   W.push({id:'o21',a:'TB5-PB2O',b:'X2-2',type:'ctrl',d:[`M${d} 100 V444`],note:'PB2를 누르면 X2 코일에 전원이 들어갑니다.'});
   W.push({id:'o22',a:'X2-2',b:'X2-3',type:'ctrl',d:[`M${d} 130 H${e} V100`],note:'X2 자기유지 접점 출구 ③을 같은 점에 묶습니다.'});
   W.push({id:'o23',a:'X2-3',b:'T1-6',type:'ctrl',d:[`M${e} 130 H${f} V100`],note:'T1 한시 a접점도 PB2와 병렬이라, T1 설정 시간이 지나면 X2가 저절로 기동합니다.'});
@@ -1314,8 +1314,8 @@ const CTRL8 = [
   {id:'o3',a:'T-3',b:'X-6',type:'ctrl',d:[`M${TS} 260 H${XA} V100`],note:'자동일 때는 X a접점 출력 ⑥이 같은 점에 전원을 넣습니다.'},
   {id:'o4',a:'X-6',b:'T-8',type:'ctrl',d:[`M${XA} 200 H${TH} V230`],note:'같은 점에서 T 한시 b접점 공통 ⑧로 전원을 보냅니다.'},
   {id:'tc',a:'X-4',b:'T-2',type:'ctrl',d:[`M${S} 330 V444`],note:'X가 쉬고 있을 때(수동)만 X b접점을 통해 T 코일에 전원이 들어갑니다.'},
-  {id:'m1',a:'T-5',b:'MC2-6',type:'ctrl',d:[`M${TH} 270 V444`],note:'T 설정 시간 전까지 한시 b접점이 닫혀 있어 MC2가 동작합니다.'},
-  {id:'m2',a:'MC2-6',b:'MC1-6',type:'ctrl',d:[`M${TH} 400 H${XA} V444`],note:'MC1과 MC2는 같은 점에서 전원을 받아 함께 동작하고 함께 멈춥니다.'},
+  {id:'cm1',a:'T-5',b:'MC2-6',type:'ctrl',d:[`M${TH} 270 V444`],note:'T 설정 시간 전까지 한시 b접점이 닫혀 있어 MC2가 동작합니다.'},
+  {id:'cm2',a:'MC2-6',b:'MC1-6',type:'ctrl',d:[`M${TH} 400 H${XA} V444`],note:'MC1과 MC2는 같은 점에서 전원을 받아 함께 동작하고 함께 멈춥니다.'},
   {id:'e1',a:'FLS-7',b:'TB6-E1',type:'ctrl',d:[`M${FLSx+17} 404 H${E1x} V505`],note:'FLS 전극 E1을 단자대로 내보냅니다. 전극선은 보조회로 전선을 씁니다.'},
   {id:'e2',a:'FLS-8',b:'TB6-E2',type:'ctrl',d:[`M${FLSx+18} 412 H${E2x} V505`],note:'FLS 전극 E2를 단자대로 내보냅니다.'},
   {id:'e3',a:'FLS-1',b:'TB6-E3',type:'ctrl',d:[`M${FLSx+15} 420 H${E3x} V505`],note:'FLS 전극 E3를 단자대로 내보냅니다. FLS의 보호도체(접지)는 제어판(TB6 또는 FLS 소켓)에서 보호도체 전선으로 연결합니다.'},
@@ -1385,11 +1385,11 @@ const CTRL6 = [
   {id:'k5',a:'T-8',b:'FR-8',type:'ctrl',d:[`M${XA} 300 H${M1} V330`,`M${TBc} 300 H${TH} V330`],note:'FR의 두 접점도 공통 ⑧을 같이 씁니다.'},
   {id:'tc',a:'X-4',b:'T-2',type:'ctrl',d:[`M${S} 330 V444`],note:'X가 쉬고 있을 때(수동)만 X b접점을 통해 T 코일에 전원이 들어갑니다.'},
   {id:'fr',a:'T-6',b:'FR-2',type:'ctrl',d:[`M${XA} 370 V444`],note:'T 설정 시간이 지나 한시 a접점이 닫히면 FR 코일이 여자됩니다.'},
-  {id:'m1',a:'FR-5',b:'MC1-6',type:'ctrl',d:[`M${M1} 370 V444`],note:'FR b접점이 닫혀 있는 동안 MC1이 동작합니다.'},
-  {id:'m2',a:'MC1-6',b:'TB5-RL',type:'ctrl',d:[`M${M1} 410 H${RLx} V444`],note:'이 문제는 RL이 MC1 코일과 나란히(병렬로) 연결돼 MC1과 함께 켜집니다.'},
-  {id:'m3',a:'T-5',b:'FR-6',type:'ctrl',d:[`M${TBc} 370 V390 H${TH}`],note:'T 한시 b접점과 FR a접점은 병렬로 MC2에 전원을 줍니다.'},
-  {id:'m4',a:'FR-6',b:'MC2-6',type:'ctrl',d:[`M${TH} 370 V444`],note:'T 설정 시간 전에는 T 한시 b접점으로, 이후에는 FR a접점으로 MC2가 동작합니다.'},
-  {id:'m5',a:'MC2-6',b:'TB5-GL',type:'ctrl',d:[`M${TH} 410 H${TBc} V444`],note:'GL도 MC2 코일과 나란히(병렬로) 연결돼 MC2와 함께 켜집니다.'},
+  {id:'cm1',a:'FR-5',b:'MC1-6',type:'ctrl',d:[`M${M1} 370 V444`],note:'FR b접점이 닫혀 있는 동안 MC1이 동작합니다.'},
+  {id:'cm2',a:'MC1-6',b:'TB5-RL',type:'ctrl',d:[`M${M1} 410 H${RLx} V444`],note:'이 문제는 RL이 MC1 코일과 나란히(병렬로) 연결돼 MC1과 함께 켜집니다.'},
+  {id:'cm3',a:'T-5',b:'FR-6',type:'ctrl',d:[`M${TBc} 370 V390 H${TH}`],note:'T 한시 b접점과 FR a접점은 병렬로 MC2에 전원을 줍니다.'},
+  {id:'cm4',a:'FR-6',b:'MC2-6',type:'ctrl',d:[`M${TH} 370 V444`],note:'T 설정 시간 전에는 T 한시 b접점으로, 이후에는 FR a접점으로 MC2가 동작합니다.'},
+  {id:'cm5',a:'MC2-6',b:'TB5-GL',type:'ctrl',d:[`M${TH} 410 H${TBc} V444`],note:'GL도 MC2 코일과 나란히(병렬로) 연결돼 MC2와 함께 켜집니다.'},
   {id:'e1',a:'FLS-7',b:'TB6-E1',type:'ctrl',d:[`M${FLSx+17} 404 H${E1x} V505`],note:'FLS 전극 E1을 단자대로 내보냅니다. 전극선은 보조회로 전선을 씁니다.'},
   {id:'e2',a:'FLS-8',b:'TB6-E2',type:'ctrl',d:[`M${FLSx+18} 412 H${E2x} V505`],note:'FLS 전극 E2를 단자대로 내보냅니다.'},
   {id:'e3',a:'FLS-1',b:'TB6-E3',type:'ctrl',d:[`M${FLSx+15} 420 H${E3x} V505`],note:'FLS 전극 E3를 단자대로 내보냅니다. FLS의 보호도체(접지)는 제어판(TB6 또는 FLS 소켓)에서 보호도체 전선으로 연결합니다.'}
