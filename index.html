@@ -519,12 +519,12 @@ const CTRL18_f = ()=>{
   return [
   {id:'p1',a:'F-1',b:'EOCR-6',type:'ctrl',d:[`M230 110 H${Px} V40 H${EP} V444`],note:'L1 쪽 퓨즈 출력을 EOCR 전원 ⑥으로 보냅니다.'},
   {id:'p2',a:'EOCR-6',b:'EOCR-10',type:'ctrl',d:[`M${EP} 40 H${EA} V110`,`M${EA} 40 H${EB1}`],note:'EOCR 접점의 공통 ⑩을 전원선에 묶습니다. 도면의 두 접점(⑩-④, ⑩-⑤)은 같은 ⑩번 단자를 씁니다.'},
-  {id:'q0',a:'EOCR-4',b:'TB6-N',type:'ctrl',d:[`M${EB2} 40 H465`],note:'EOCR b접점을 지난 전원을 정지 버튼 PB0의 입력(N)으로 보냅니다. 이 문제는 PB0·PB1함이 아래쪽 TB6에 있어요.'},
-  {id:'q1',a:'TB6-CN',b:'TB6-LS1N',type:'ctrl',d:[`M${PBq} 40 H${c1} V60`,`M${c2} 40 H${c3} V60`],note:'PB0을 지난 공통(CN)이 이 회로 전체의 전원선이 됩니다. 리밋스위치 LS1의 입력(N)으로 보냅니다. 도면의 PB1 위쪽(N)도 같은 CN이에요.'},
+  {id:'q0',a:'EOCR-4',b:'TB6-N',type:'ctrl',d:[`M${EB2} 40 H465`],note:'EOCR b접점을 지난 전원을 정지 버튼 PB0 NC L1으로 보냅니다. 이 문제는 PB0·PB1함이 아래쪽 TB6에 있어요.'},
+  {id:'q1',a:'TB6-CN',b:'TB6-LS1N',type:'ctrl',d:[`M${PBq} 40 H${c1} V60`,`M${c2} 40 H${c3} V60`],note:'PB0을 지난 공통(PB0 NC L2·PB1 NO L1)이 이 회로 전체의 전원선이 됩니다. 리밋스위치 LS1의 입력(N)으로 보냅니다. 도면의 PB1 위쪽(NO L1)도 같은 공통 단자예요.'},
   {id:'q2',a:'TB6-LS1N',b:'TB6-LS2N',type:'ctrl',d:[`M${c1} 40 H${c2} V60`],note:'LS1 입력에서 LS2 입력(N)으로 건너 연결합니다.'},
   {id:'q3',a:'TB6-LS2N',b:'T1-1',type:'ctrl',d:[`M${c3} 40 H${c4} V60`],note:'T1 순시 a접점(자기유지) ①도 같은 전원선에서 받습니다.'},
   {id:'q4',a:'T1-1',b:'MC1-4',type:'ctrl',d:[`M${c4} 40 H${c5} V70`],note:'램프용 MC1 보조 a접점도 같은 전원선에서 받습니다.'},
-  {id:'q5',a:'MC1-4',b:'TB5-PB2N',type:'ctrl',d:[`M${c5} 40 H${c6} V60`],note:'PB2는 위쪽 TB5에서 따로 떨어진 함으로 나갑니다. 같은 전원선을 PB2 입력(N)으로 보냅니다.'},
+  {id:'q5',a:'MC1-4',b:'TB5-PB2N',type:'ctrl',d:[`M${c5} 40 H${c6} V60`],note:'PB2는 위쪽 TB5에서 따로 떨어진 함으로 나갑니다. 같은 전원선을 PB2 NO L1으로 보냅니다.'},
   {id:'q6',a:'TB5-PB2N',b:'T2-1',type:'ctrl',d:[`M${c6} 40 H${c7} V60`],note:'T2 순시 a접점(자기유지) ①로 이어 줍니다.'},
   {id:'q7',a:'T2-1',b:'MC2-4',type:'ctrl',d:[`M${c7} 40 H${c8} V70`],note:'램프용 MC2 보조 a접점으로 이어 줍니다.'},
   {id:'q8',a:'MC2-4',b:'T1-8',type:'ctrl',d:[`M${c8} 40 H${c9} V60`],note:'WL용 T1 한시 a접점 공통 ⑧로 이어 줍니다.'},
@@ -532,13 +532,13 @@ const CTRL18_f = ()=>{
   {id:'a1',a:'EOCR-5',b:'TB5-YL',type:'ctrl',d:[`M${EA} 150 V444`],note:'트립되면 EOCR ⑩-⑤가 닫혀 YL이 켜집니다.'},
   {id:'l1',a:'TB6-LS1O',b:'X1-2',type:'ctrl',d:[`M${c1} 100 V444`],note:'LS1이 감지되면 X1이 여자됩니다.'},
   {id:'l2',a:'TB6-LS2O',b:'X2-2',type:'ctrl',d:[`M${c2} 100 V444`],note:'LS2가 감지되면 X2가 여자됩니다.'},
-  {id:'k1',a:'TB6-O',b:'X1-1',type:'ctrl',d:[`M${c3} 100 V130`],note:'PB1 출력(O)을 X1 a접점 ①로 보냅니다.'},
+  {id:'k1',a:'TB6-O',b:'X1-1',type:'ctrl',d:[`M${c3} 100 V130`],note:'PB1 NO L2을 X1 a접점 ①로 보냅니다.'},
   {id:'k2',a:'X1-3',b:'X2-1',type:'ctrl',d:[`M${c3} 170 V190`],note:'X1 a접점과 X2 b접점을 직렬로 이어 줍니다. LS1은 감지, LS2는 해제 상태여야 PB1이 먹혀요.'},
   {id:'k3',a:'X2-4',b:'MC1-6',type:'ctrl',d:[`M${c3} 230 V444`],note:'이 점에서 MC1 코일에 전원이 들어갑니다.'},
   {id:'k4',a:'MC1-6',b:'T1-3',type:'ctrl',d:[`M${c3} 260 H${c4} V100`],note:'T1 순시 a접점 출구 ③을 같은 점에 묶어 자기유지 회로를 만듭니다. X 접점 뒤에 붙어서, 이후 LS가 바뀌어도 계속 돌아요.'},
   {id:'k5',a:'X2-4',b:'T1-2',type:'ctrl',d:[`M${c3} 330 H${c4} V444`],note:'MC1과 T1은 같은 점에서 전원을 받아 함께 동작합니다.'},
   {id:'rl',a:'MC1-10',b:'TB5-RL',type:'ctrl',d:[`M${c5} 110 V444`],note:'MC1이 동작하면 보조 a접점이 닫혀 RL이 켜집니다.'},
-  {id:'j1',a:'TB5-PB2O',b:'X1-8',type:'ctrl',d:[`M${c6} 100 V130`],note:'PB2 출력(O)을 X1 b접점 ⑧로 보냅니다.'},
+  {id:'j1',a:'TB5-PB2O',b:'X1-8',type:'ctrl',d:[`M${c6} 100 V130`],note:'PB2 NO L2을 X1 b접점 ⑧로 보냅니다.'},
   {id:'j2',a:'X1-5',b:'X2-8',type:'ctrl',d:[`M${c6} 170 V190`],note:'X1 b접점과 X2 a접점을 직렬로 이어 줍니다. LS1은 해제, LS2는 감지 상태여야 PB2가 먹혀요.'},
   {id:'j3',a:'X2-6',b:'MC2-6',type:'ctrl',d:[`M${c6} 230 V444`],note:'이 점에서 MC2 코일에 전원이 들어갑니다.'},
   {id:'j4',a:'MC2-6',b:'T2-3',type:'ctrl',d:[`M${c6} 260 H${c7} V100`],note:'T2 순시 a접점 출구 ③을 같은 점에 묶어 자기유지 회로를 만듭니다.'},
@@ -584,18 +584,18 @@ const CTRL17_f = ()=>{
   return [
   {id:'p1',a:'F-1',b:'EOCR-6',type:'ctrl',d:[`M230 110 H${Px} V40 H${EP} V444`],note:'L1 쪽 퓨즈 출력을 EOCR 전원 ⑥으로 보냅니다.'},
   {id:'p2',a:'EOCR-6',b:'EOCR-10',type:'ctrl',d:[`M${EP} 40 H${EA} V110`,`M${EA} 40 H${EB1}`],note:'EOCR 접점의 공통 ⑩을 전원선에 묶습니다. 도면의 두 접점(⑩-④, ⑩-⑤)은 같은 ⑩번 단자를 씁니다.'},
-  {id:'q0',a:'EOCR-4',b:'TB5-N',type:'ctrl',d:[`M${EB2} 40 H465`],note:'EOCR b접점을 지난 전원을 정지 버튼 PB0의 입력(N)으로 보냅니다. PB0은 윗줄 전원선에 직렬로 들어가 있어요.'},
-  {id:'q1',a:'TB5-CN',b:'TB6-LS1N',type:'ctrl',d:[`M${PBq} 40 H${c1} V60`,`M${c2} 40 H${c3} V60`],note:'PB0을 지난 공통(CN)이 이 회로 전체의 전원선이 됩니다. 리밋스위치 LS1의 입력(N)으로 보냅니다. 도면의 PB1 위쪽(N)도 같은 CN이에요.'},
+  {id:'q0',a:'EOCR-4',b:'TB5-N',type:'ctrl',d:[`M${EB2} 40 H465`],note:'EOCR b접점을 지난 전원을 정지 버튼 PB0 NC L1으로 보냅니다. PB0은 윗줄 전원선에 직렬로 들어가 있어요.'},
+  {id:'q1',a:'TB5-CN',b:'TB6-LS1N',type:'ctrl',d:[`M${PBq} 40 H${c1} V60`,`M${c2} 40 H${c3} V60`],note:'PB0을 지난 공통(PB0 NC L2·PB1 NO L1)이 이 회로 전체의 전원선이 됩니다. 리밋스위치 LS1의 입력(N)으로 보냅니다. 도면의 PB1 위쪽(NO L1)도 같은 공통 단자예요.'},
   {id:'q2',a:'TB6-LS1N',b:'TB6-LS2N',type:'ctrl',d:[`M${c1} 40 H${c2} V60`],note:'LS1 입력에서 LS2 입력(N)으로 건너 연결합니다.'},
   {id:'q3',a:'TB6-LS2N',b:'T1-1',type:'ctrl',d:[`M${c3} 40 H${c4} V60`],note:'T1 순시 a접점(자기유지) ①도 같은 전원선에서 받습니다.'},
   {id:'q4',a:'T1-1',b:'MC1-4',type:'ctrl',d:[`M${c4} 40 H${c5} V70`],note:'램프용 MC1 보조 a접점도 같은 전원선에서 받습니다.'},
-  {id:'q5',a:'MC1-4',b:'TB6-PB2N',type:'ctrl',d:[`M${c5} 40 H${c6} V60`],note:'PB2는 아래쪽 TB6에서 따로 떨어진 함으로 나갑니다. 같은 전원선을 PB2 입력(N)으로 보냅니다.'},
+  {id:'q5',a:'MC1-4',b:'TB6-PB2N',type:'ctrl',d:[`M${c5} 40 H${c6} V60`],note:'PB2는 아래쪽 TB6에서 따로 떨어진 함으로 나갑니다. 같은 전원선을 PB2 NO L1으로 보냅니다.'},
   {id:'q6',a:'TB6-PB2N',b:'T2-1',type:'ctrl',d:[`M${c6} 40 H${c7} V60`],note:'T2 순시 a접점(자기유지) ①로 이어 줍니다.'},
   {id:'q7',a:'T2-1',b:'MC2-4',type:'ctrl',d:[`M${c7} 40 H${c9} V70`],note:'램프용 MC2 보조 a접점으로 이어 줍니다.'},
   {id:'a1',a:'EOCR-5',b:'TB5-YL',type:'ctrl',d:[`M${EA} 150 V444`],note:'트립되면 EOCR ⑩-⑤가 닫혀 YL이 켜집니다.'},
   {id:'l1',a:'TB6-LS1O',b:'X1-2',type:'ctrl',d:[`M${c1} 100 V444`],note:'LS1이 감지되면 X1이 여자됩니다.'},
   {id:'l2',a:'TB6-LS2O',b:'X2-2',type:'ctrl',d:[`M${c2} 100 V444`],note:'LS2가 감지되면 X2가 여자됩니다.'},
-  {id:'a2',a:'TB5-O',b:'X1-1',type:'ctrl',d:[`M${c3} 100 V160`],note:'PB1 출력(O)을 X1 a접점 ①로 보냅니다.'},
+  {id:'a2',a:'TB5-O',b:'X1-1',type:'ctrl',d:[`M${c3} 100 V160`],note:'PB1 NO L2을 X1 a접점 ①로 보냅니다.'},
   {id:'a3',a:'X1-1',b:'T1-3',type:'ctrl',d:[`M${c3} 130 H${c4} V100`],note:'T1 순시 a접점 출구 ③을 같은 점에 묶어 자기유지 회로를 만듭니다.'},
   {id:'a4',a:'T1-3',b:'X1-8',type:'ctrl',d:[`M${c4} 130 V160`],note:'같은 점에서 X1 b접점 공통 ⑧로 보냅니다.'},
   {id:'a5',a:'X1-3',b:'X2-1',type:'ctrl',d:[`M${c3} 200 V220`],note:'X1 a접점과 X2 b접점을 직렬로 이어 줍니다(LS1만 감지).'},
@@ -604,7 +604,7 @@ const CTRL17_f = ()=>{
   {id:'a8',a:'X2-6',b:'X2-4',type:'ctrl',d:[`M${c4} 260 V290 H${c3}`],note:'두 줄의 출구를 묶습니다.'},
   {id:'a9',a:'MC1-6',b:'T1-2',type:'ctrl',d:[`M${c3} 330 H${c4} V444`],note:'MC1과 T1은 같은 점에서 전원을 받아 함께 동작합니다.'},
   {id:'rl',a:'MC1-10',b:'TB5-RL',type:'ctrl',d:[`M${c5} 110 V444`],note:'MC1이 동작하면 보조 a접점이 닫혀 RL이 켜집니다.'},
-  {id:'b1',a:'TB6-PB2O',b:'T1-8',type:'ctrl',d:[`M${c6} 100 V160`],note:'PB2 출력(O)을 T1 한시 a접점 ⑧로 보냅니다. T1 시간이 지나야 PB2가 허가돼요.'},
+  {id:'b1',a:'TB6-PB2O',b:'T1-8',type:'ctrl',d:[`M${c6} 100 V160`],note:'PB2 NO L2을 T1 한시 a접점 ⑧로 보냅니다. T1 시간이 지나야 PB2가 허가돼요.'},
   {id:'b2',a:'T1-8',b:'T2-3',type:'ctrl',d:[`M${c6} 130 H${c7} V100`],note:'T2 순시 a접점 출구 ③을 같은 점에 묶어 자기유지 회로를 만듭니다.'},
   {id:'b3',a:'T1-6',b:'T2-8',type:'ctrl',d:[`M${c6} 200 V270`,`M${c6} 240 H${c7} V270`],note:'T2의 한시 b접점과 한시 a접점은 공통 ⑧을 같이 씁니다.'},
   {id:'b4',a:'T2-8',b:'T2-2',type:'ctrl',d:[`M${c7} 240 H${c8} V444`],note:'같은 점에서 T2 코일에 전원이 들어가 시간을 재기 시작합니다.'},
@@ -647,25 +647,25 @@ const CTRL16_f = ()=>{
   return [
   {id:'p1',a:'F-1',b:'EOCR-6',type:'ctrl',d:[`M230 110 H${Px} V40 H${EP} V444`],note:'L1 쪽 퓨즈 출력을 EOCR 전원 ⑥으로 보냅니다.'},
   {id:'p2',a:'EOCR-6',b:'EOCR-10',type:'ctrl',d:[`M${EP} 40 H${EA} V110`,`M${EA} 40 H${EB1}`],note:'EOCR 접점의 공통 ⑩을 전원선에 묶습니다. 도면의 두 접점(⑩-④, ⑩-⑤)은 같은 ⑩번 단자를 씁니다.'},
-  {id:'q0',a:'EOCR-4',b:'TB5-N',type:'ctrl',d:[`M${EB2} 40 H465`],note:'EOCR b접점을 지난 전원을 정지 버튼 PB0의 입력(N)으로 보냅니다. PB0은 윗줄 전원선에 직렬로 들어가 있어요.'},
-  {id:'q1',a:'TB5-CN',b:'TB6-LS1N',type:'ctrl',d:[`M${PBq} 40 H${c1} V60`,`M${c2} 40 H${c3} V60`],note:'PB0을 지난 공통(CN)이 이 회로 전체의 전원선이 됩니다. 리밋스위치 LS1의 입력(N)으로 보냅니다. 도면의 PB1 위쪽(N)도 같은 CN이에요.'},
+  {id:'q0',a:'EOCR-4',b:'TB5-N',type:'ctrl',d:[`M${EB2} 40 H465`],note:'EOCR b접점을 지난 전원을 정지 버튼 PB0 NC L1으로 보냅니다. PB0은 윗줄 전원선에 직렬로 들어가 있어요.'},
+  {id:'q1',a:'TB5-CN',b:'TB6-LS1N',type:'ctrl',d:[`M${PBq} 40 H${c1} V60`,`M${c2} 40 H${c3} V60`],note:'PB0을 지난 공통(PB0 NC L2·PB1 NO L1)이 이 회로 전체의 전원선이 됩니다. 리밋스위치 LS1의 입력(N)으로 보냅니다. 도면의 PB1 위쪽(NO L1)도 같은 공통 단자예요.'},
   {id:'q2',a:'TB6-LS1N',b:'TB6-LS2N',type:'ctrl',d:[`M${c1} 40 H${c2} V60`],note:'LS1 입력에서 LS2 입력(N)으로 건너 연결합니다.'},
   {id:'q3',a:'TB6-LS2N',b:'X1-1',type:'ctrl',d:[`M${c3} 40 H${c4} V60`],note:'X1 자기유지 접점 ①도 같은 전원선에서 받습니다.'},
   {id:'q4',a:'X1-1',b:'T1-8',type:'ctrl',d:[`M${c4} 40 H${c5} V60`],note:'T1 한시 a접점 공통 ⑧로 이어 줍니다.'},
   {id:'q5',a:'T1-8',b:'MC1-4',type:'ctrl',d:[`M${c5} 40 H${c6} V70`],note:'램프용 MC1 보조 a접점도 같은 전원선에서 받습니다.'},
-  {id:'q6',a:'MC1-4',b:'TB6-PB2N',type:'ctrl',d:[`M${c6} 40 H${c7} V60`],note:'PB2는 아래쪽 TB6에서 따로 떨어진 함으로 나갑니다. 같은 전원선을 PB2 입력(N)으로 보냅니다.'},
+  {id:'q6',a:'MC1-4',b:'TB6-PB2N',type:'ctrl',d:[`M${c6} 40 H${c7} V60`],note:'PB2는 아래쪽 TB6에서 따로 떨어진 함으로 나갑니다. 같은 전원선을 PB2 NO L1으로 보냅니다.'},
   {id:'q7',a:'TB6-PB2N',b:'X2-1',type:'ctrl',d:[`M${c7} 40 H${c8} V60`],note:'X2 자기유지 접점 ①로 이어 줍니다.'},
   {id:'q8',a:'X2-1',b:'T2-1',type:'ctrl',d:[`M${c8} 40 H${c9} V60`],note:'T2 순시 a접점 ①로 이어 줍니다.'},
   {id:'q9',a:'T2-1',b:'MC2-4',type:'ctrl',d:[`M${c9} 40 H${c10} V70`],note:'램프용 MC2 보조 a접점으로 이어 줍니다.'},
   {id:'a1',a:'EOCR-5',b:'TB5-YL',type:'ctrl',d:[`M${EA} 150 V444`],note:'트립되면 EOCR ⑩-⑤가 닫혀 YL이 켜집니다.'},
   {id:'l1',a:'TB6-LS1O',b:'T1-2',type:'ctrl',d:[`M${c1} 100 V444`],note:'LS1이 감지되면 T1이 여자됩니다.'},
   {id:'l2',a:'TB6-LS2O',b:'T2-2',type:'ctrl',d:[`M${c2} 100 V444`],note:'LS2가 감지되면 T2가 여자됩니다.'},
-  {id:'k1',a:'TB5-O',b:'X1-3',type:'ctrl',d:[`M${c3} 100 V130 H${c4} V100`],note:'X1 자기유지 접점 출구 ③을 PB1 출력(O)과 같은 점에 묶습니다.'},
+  {id:'k1',a:'TB5-O',b:'X1-3',type:'ctrl',d:[`M${c3} 100 V130 H${c4} V100`],note:'X1 자기유지 접점 출구 ③을 PB1 NO L2과 같은 점에 묶습니다.'},
   {id:'k2',a:'X1-3',b:'T1-6',type:'ctrl',d:[`M${c4} 130 H${c5} V100`],note:'T1 한시 a접점도 PB1과 병렬이라, T1 설정 시간이 지나면 MC1이 저절로 기동합니다.'},
   {id:'k3',a:'TB5-O',b:'MC1-6',type:'ctrl',d:[`M${c3} 130 V444`],note:'이 점에서 MC1 코일에 전원이 들어갑니다.'},
   {id:'k4',a:'MC1-6',b:'X1-2',type:'ctrl',d:[`M${c3} 340 H${c4} V444`],note:'MC1과 X1은 같은 점에서 전원을 받아 함께 동작합니다.'},
   {id:'rl',a:'MC1-10',b:'TB5-RL',type:'ctrl',d:[`M${c6} 110 V444`],note:'MC1이 동작하면 보조 a접점이 닫혀 RL이 켜집니다.'},
-  {id:'j1',a:'TB6-PB2O',b:'X2-3',type:'ctrl',d:[`M${c7} 100 V130 H${c8} V100`],note:'X2 자기유지 접점 출구 ③을 PB2 출력(O)과 같은 점에 묶습니다.'},
+  {id:'j1',a:'TB6-PB2O',b:'X2-3',type:'ctrl',d:[`M${c7} 100 V130 H${c8} V100`],note:'X2 자기유지 접점 출구 ③을 PB2 NO L2과 같은 점에 묶습니다.'},
   {id:'j2',a:'X2-3',b:'T2-3',type:'ctrl',d:[`M${c8} 130 H${c9} V100`],note:'T2 순시 a접점도 PB2와 병렬이라, LS2가 감지되면 X2·MC2 쪽이 기동합니다.'},
   {id:'j3',a:'TB6-PB2O',b:'T1-1',type:'ctrl',d:[`M${c7} 130 V170`],note:'T1 순시 a접점이 직렬로 있어, LS1이 감지되어 T1이 동작 중일 때만 MC2 쪽이 동작할 수 있어요.'},
   {id:'j4',a:'T1-3',b:'T2-8',type:'ctrl',d:[`M${c7} 210 V280`],note:'T1 순시 a접점 출구를 T2 한시 접점 공통 ⑧로 보냅니다.'},
@@ -712,19 +712,19 @@ const CTRL15_f = ()=>{
   return [
   {id:'p1',a:'F-1',b:'EOCR-6',type:'ctrl',d:[`M230 110 H${Px} V40 H${EP} V444`],note:'L1 쪽 퓨즈 출력을 EOCR 전원 ⑥으로 보냅니다.'},
   {id:'p2',a:'EOCR-6',b:'EOCR-10',type:'ctrl',d:[`M${EP} 40 H${EA} V110`,`M${EA} 40 H${EB1}`],note:'EOCR 접점의 공통 ⑩을 전원선에 묶습니다. 도면의 두 접점(⑩-④, ⑩-⑤)은 같은 ⑩번 단자를 씁니다.'},
-  {id:'q0',a:'EOCR-4',b:'TB5-N',type:'ctrl',d:[`M${EB2} 40 H465`],note:'EOCR b접점을 지난 전원을 정지 버튼 PB0의 입력(N)으로 보냅니다. PB0은 윗줄 전원선에 직렬로 들어가 있어요.'},
-  {id:'q1',a:'TB5-CN',b:'TB6-LS1N',type:'ctrl',d:[`M${PBq} 40 H${c1} V60`,`M${c2} 40 H${c3} V60`],note:'PB0을 지난 공통(CN)이 이 회로 전체의 전원선이 됩니다. 리밋스위치 LS1의 입력(N)으로 보냅니다. 도면의 PB1 위쪽(N)도 같은 CN이에요.'},
+  {id:'q0',a:'EOCR-4',b:'TB5-N',type:'ctrl',d:[`M${EB2} 40 H465`],note:'EOCR b접점을 지난 전원을 정지 버튼 PB0 NC L1으로 보냅니다. PB0은 윗줄 전원선에 직렬로 들어가 있어요.'},
+  {id:'q1',a:'TB5-CN',b:'TB6-LS1N',type:'ctrl',d:[`M${PBq} 40 H${c1} V60`,`M${c2} 40 H${c3} V60`],note:'PB0을 지난 공통(PB0 NC L2·PB1 NO L1)이 이 회로 전체의 전원선이 됩니다. 리밋스위치 LS1의 입력(N)으로 보냅니다. 도면의 PB1 위쪽(NO L1)도 같은 공통 단자예요.'},
   {id:'q2',a:'TB6-LS1N',b:'TB6-LS2N',type:'ctrl',d:[`M${c1} 40 H${c2} V60`],note:'LS1 입력에서 LS2 입력(N)으로 건너 연결합니다.'},
   {id:'q3',a:'TB6-LS2N',b:'T1-1',type:'ctrl',d:[`M${c3} 40 H${c4} V60`],note:'T1 순시 a접점(자기유지) ①도 같은 전원선에서 받습니다.'},
   {id:'q4',a:'T1-1',b:'MC1-4',type:'ctrl',d:[`M${c4} 40 H${c5} V70`],note:'램프용 MC1 보조 a접점도 같은 전원선에서 받습니다.'},
-  {id:'q5',a:'MC1-4',b:'TB6-PB2N',type:'ctrl',d:[`M${c5} 40 H${c6} V60`],note:'PB2는 아래쪽 TB6에서 따로 떨어진 함으로 나갑니다. 같은 전원선을 PB2 입력(N)으로 보냅니다.'},
+  {id:'q5',a:'MC1-4',b:'TB6-PB2N',type:'ctrl',d:[`M${c5} 40 H${c6} V60`],note:'PB2는 아래쪽 TB6에서 따로 떨어진 함으로 나갑니다. 같은 전원선을 PB2 NO L1으로 보냅니다.'},
   {id:'q6',a:'TB6-PB2N',b:'T2-1',type:'ctrl',d:[`M${c6} 40 H${c7} V60`],note:'T2 순시 a접점(자기유지) ①로 이어 줍니다.'},
   {id:'q7',a:'T2-1',b:'MC2-4',type:'ctrl',d:[`M${c7} 40 H${c8} V70`],note:'램프용 MC2 보조 a접점으로 이어 줍니다.'},
   {id:'q8',a:'MC2-4',b:'MC1-5',type:'ctrl',d:[`M${c8} 40 H${c9} V60`],note:'WL용 MC1 b접점 ⑤로 이어 줍니다.'},
   {id:'a1',a:'EOCR-5',b:'TB5-YL',type:'ctrl',d:[`M${EA} 150 V444`],note:'트립되면 EOCR ⑩-⑤가 닫혀 YL이 켜집니다.'},
   {id:'l1',a:'TB6-LS1O',b:'X1-2',type:'ctrl',d:[`M${c1} 100 V444`],note:'LS1이 감지되면 X1이 여자됩니다.'},
   {id:'l2',a:'TB6-LS2O',b:'X2-2',type:'ctrl',d:[`M${c2} 100 V444`],note:'LS2가 감지되면 X2가 여자됩니다.'},
-  {id:'k1',a:'TB5-O',b:'X1-1',type:'ctrl',d:[`M${c3} 100 V150`],note:'PB1 출력(O)을 X1 a접점 ①로 보냅니다.'},
+  {id:'k1',a:'TB5-O',b:'X1-1',type:'ctrl',d:[`M${c3} 100 V150`],note:'PB1 NO L2을 X1 a접점 ①로 보냅니다.'},
   {id:'k2',a:'X1-1',b:'X2-1',type:'ctrl',d:[`M${c3} 130 H${cb} V150`],note:'X1 a접점과 X2 a접점이 병렬이라, LS1이나 LS2 중 하나만 감지되어도(OR) PB1로 기동할 수 있어요.'},
   {id:'k3',a:'X1-3',b:'X2-3',type:'ctrl',d:[`M${c3} 190 V220 H${cb} V190`],note:'두 a접점의 출구를 묶습니다.'},
   {id:'k4',a:'X2-3',b:'T1-3',type:'ctrl',d:[`M${cb} 220 H${c4} V100`],note:'T1 순시 a접점 출구 ③을 같은 점에 묶어 자기유지 회로를 만듭니다. X 접점을 건너뛰어 붙어서, 운전 중 LS가 풀려도 계속 돌아요.'},
@@ -732,7 +732,7 @@ const CTRL15_f = ()=>{
   {id:'k6',a:'T1-5',b:'MC1-6',type:'ctrl',d:[`M${c3} 290 V444`],note:'T1 설정 시간 전까지 한시 b접점이 닫혀 있어 MC1이 동작합니다.'},
   {id:'k7',a:'MC1-6',b:'T1-2',type:'ctrl',d:[`M${c3} 330 H${c4} V444`],note:'MC1과 T1은 같은 점에서 전원을 받아 함께 동작합니다.'},
   {id:'rl',a:'MC1-10',b:'TB5-RL',type:'ctrl',d:[`M${c5} 110 V444`],note:'MC1이 동작하면 보조 a접점이 닫혀 RL이 켜집니다.'},
-  {id:'j1',a:'TB6-PB2O',b:'X1-8',type:'ctrl',d:[`M${c6} 100 V130`],note:'PB2 출력(O)을 X1 a접점 ⑧로 보냅니다.'},
+  {id:'j1',a:'TB6-PB2O',b:'X1-8',type:'ctrl',d:[`M${c6} 100 V130`],note:'PB2 NO L2을 X1 a접점 ⑧로 보냅니다.'},
   {id:'j2',a:'X1-6',b:'X2-8',type:'ctrl',d:[`M${c6} 170 V190`],note:'X1 a접점과 X2 a접점이 직렬이라, LS1과 LS2가 모두 감지되어야(AND) PB2로 기동할 수 있어요.'},
   {id:'j3',a:'X2-6',b:'T2-3',type:'ctrl',d:[`M${c6} 230 V260 H${c7} V100`],note:'T2 순시 a접점 출구 ③을 같은 점에 묶어 자기유지 회로를 만듭니다.'},
   {id:'j4',a:'X2-6',b:'T2-8',type:'ctrl',d:[`M${c6} 260 V280`],note:'같은 점에서 T2 한시 b접점 공통 ⑧로 보냅니다.'},
@@ -780,26 +780,26 @@ const CTRL14_f = ()=>{
   const W=[
   {id:'p1',a:'F-1',b:'EOCR-6',type:'ctrl',d:[`M230 110 H${Px} V40 H${EP} V444`],note:'L1 쪽 퓨즈 출력을 EOCR 전원 ⑥으로 보냅니다.'},
   {id:'p2',a:'EOCR-6',b:'EOCR-10',type:'ctrl',d:[`M${EP} 40 H${EA} V110`,`M${EA} 40 H${EB1}`],note:'EOCR 접점의 공통 ⑩을 전원선에 묶습니다. 도면의 두 접점(⑩-④, ⑩-⑤)은 같은 ⑩번 단자를 씁니다.'},
-  {id:'q0',a:'EOCR-4',b:'TB5-N',type:'ctrl',d:[`M${EB2} 40 H465`],note:'EOCR b접점을 지난 전원을 정지 버튼 PB0의 입력(N)으로 보냅니다. PB0은 윗줄 전원선에 직렬로 들어가 있어요.'},
-  {id:'q1',a:'TB5-CN',b:'TB6-LS1N',type:'ctrl',d:[`M${PBq} 40 H${c1} V60`,`M${c2} 40 H${c3} V60`],note:'PB0을 지난 공통(CN)이 이 회로 전체의 전원선이 됩니다. 리밋스위치 LS1의 입력(N)으로 보냅니다. 도면의 PB1 위쪽(N)도 같은 CN이에요.'},
+  {id:'q0',a:'EOCR-4',b:'TB5-N',type:'ctrl',d:[`M${EB2} 40 H465`],note:'EOCR b접점을 지난 전원을 정지 버튼 PB0 NC L1으로 보냅니다. PB0은 윗줄 전원선에 직렬로 들어가 있어요.'},
+  {id:'q1',a:'TB5-CN',b:'TB6-LS1N',type:'ctrl',d:[`M${PBq} 40 H${c1} V60`,`M${c2} 40 H${c3} V60`],note:'PB0을 지난 공통(PB0 NC L2·PB1 NO L1)이 이 회로 전체의 전원선이 됩니다. 리밋스위치 LS1의 입력(N)으로 보냅니다. 도면의 PB1 위쪽(NO L1)도 같은 공통 단자예요.'},
   {id:'q2',a:'TB6-LS1N',b:'TB6-LS2N',type:'ctrl',d:[`M${c1} 40 H${c2} V60`],note:'LS1 입력에서 LS2 입력(N)으로 건너 연결합니다.'},
   {id:'q3',a:'TB6-LS2N',b:'T1-1',type:'ctrl',d:[`M${c3} 40 H${c4} V60`],note:'T1 순시 a접점(자기유지) ①도 같은 전원선에서 받습니다.'},
   {id:'q4',a:'T1-1',b:'MC1-4',type:'ctrl',d:[`M${c4} 40 H${c5} V70`],note:'램프용 MC1 보조 a접점도 같은 전원선에서 받습니다.'},
-  {id:'q5',a:'MC1-4',b:'TB5-PB2N',type:'ctrl',d:[`M${c5} 40 H${c6} V60`],note:'PB2는 따로 떨어진 함에 있어서, 같은 전원선을 PB2 입력(N)으로 보냅니다.'},
+  {id:'q5',a:'MC1-4',b:'TB5-PB2N',type:'ctrl',d:[`M${c5} 40 H${c6} V60`],note:'PB2는 따로 떨어진 함에 있어서, 같은 전원선을 PB2 NO L1으로 보냅니다.'},
   {id:'q6',a:'TB5-PB2N',b:'T2-1',type:'ctrl',d:[`M${c6} 40 H${c7} V60`],note:'T2 순시 a접점(자기유지) ①로 이어 줍니다.'},
   {id:'q7',a:'T2-1',b:'MC2-4',type:'ctrl',d:[`M${c7} 40 H${c8} V70`],note:'램프용 MC2 보조 a접점으로 이어 줍니다.'},
   {id:'q8',a:'MC2-4',b:'MC1-5',type:'ctrl',d:[`M${c8} 40 H${c9} V60`],note:'WL용 MC1 b접점 ⑤로 이어 줍니다.'},
   {id:'a1',a:'EOCR-5',b:'TB5-YL',type:'ctrl',d:[`M${EA} 150 V444`],note:'트립되면 EOCR ⑩-⑤가 닫혀 YL이 켜집니다.'},
   {id:'l1',a:'TB6-LS1O',b:'X1-2',type:'ctrl',d:[`M${c1} 100 V444`],note:'LS1이 감지되면 X1이 여자됩니다.'},
   {id:'l2',a:'TB6-LS2O',b:'X2-2',type:'ctrl',d:[`M${c2} 100 V444`],note:'LS2가 감지되면 X2가 여자됩니다.'},
-  {id:'k1',a:'TB5-O',b:'X1-1',type:'ctrl',d:[`M${c3} 100 V150`],note:'PB1 출력(O)을 X1 a접점 ①로 보냅니다.'},
+  {id:'k1',a:'TB5-O',b:'X1-1',type:'ctrl',d:[`M${c3} 100 V150`],note:'PB1 NO L2을 X1 a접점 ①로 보냅니다.'},
   {id:'k2',a:'X1-1',b:'T1-3',type:'ctrl',d:[`M${c3} 130 H${c4} V100`],note:'T1 순시 a접점 출구 ③을 같은 점에 묶어 자기유지 회로를 만듭니다.'},
   {id:'k3',a:'X1-3',b:'X2-1',type:'ctrl',d:[`M${c3} 190 V210`],note:'X1 a접점과 X2 a접점을 직렬로 이어 줍니다. LS1과 LS2가 모두 감지되어야(AND) MC1이 돕니다.'},
   {id:'k4',a:'X2-3',b:'T1-8',type:'ctrl',d:[`M${c3} 250 V270`],note:'X2 a접점 출구를 T1 한시 b접점 공통 ⑧로 보냅니다.'},
   {id:'k5',a:'T1-5',b:'MC1-6',type:'ctrl',d:[`M${c3} 310 V444`],note:'T1 설정 시간 전까지 한시 b접점이 닫혀 있어 MC1이 동작합니다.'},
   {id:'k6',a:'MC1-6',b:'T1-2',type:'ctrl',d:[`M${c3} 340 H${c4} V444`],note:'MC1과 T1은 같은 점에서 전원을 받아 함께 동작합니다.'},
   {id:'rl',a:'MC1-10',b:'TB6-RL',type:'ctrl',d:[`M${c5} 110 V444`],note:'MC1이 동작하면 보조 a접점이 닫혀 RL이 켜집니다.'},
-  {id:'j1',a:'TB5-PB2O',b:'X1-8',type:'ctrl',d:[`M${c6} 100 V160`],note:'PB2 출력(O)을 X1 a접점 ⑧로 보냅니다.'},
+  {id:'j1',a:'TB5-PB2O',b:'X1-8',type:'ctrl',d:[`M${c6} 100 V160`],note:'PB2 NO L2을 X1 a접점 ⑧로 보냅니다.'},
   {id:'j2',a:'X1-8',b:'T2-3',type:'ctrl',d:[`M${c6} 130 H${c7} V100`],note:'T2 순시 a접점 출구 ③을 같은 점에 묶어 자기유지 회로를 만듭니다.'},
   {id:'j3',a:'T2-3',b:'X2-8',type:'ctrl',d:[`M${c7} 130 V160`],note:'X2 a접점 ⑧도 같은 점에 묶습니다. X1과 X2 a접점이 병렬이에요.'},
   {id:'j4',a:'X1-6',b:'X2-6',type:'ctrl',d:[`M${c6} 200 V230 H${c7} V200`],note:'두 a접점의 출구를 묶습니다. LS1이나 LS2 중 하나만 감지되어도(OR) MC2가 돕니다.'},
@@ -846,7 +846,7 @@ const CTRL13_f = ()=>{
   const W=[
   {id:'p1',a:'F-1',b:'EOCR-6',type:'ctrl',d:[`M230 110 H${Px} V40 H${EP} V444`],note:'L1 쪽 퓨즈 출력을 EOCR 전원 ⑥으로 보냅니다.'},
   {id:'p2',a:'EOCR-6',b:'EOCR-10',type:'ctrl',d:[`M${EP} 40 H${EA} V110`,`M${EA} 40 H${EB1}`],note:'EOCR 접점의 공통 ⑩을 전원선에 묶습니다. 도면의 두 접점(⑩-④, ⑩-⑤)은 같은 ⑩번 단자를 씁니다.'},
-  {id:'q0',a:'EOCR-4',b:'TB6-N',type:'ctrl',d:[`M${EB2} 40 H465`],note:'EOCR b접점을 지난 전원을 정지 버튼 PB0의 입력(N)으로 보냅니다. 이 문제는 PB0·PB1함이 아래쪽 TB6에 있어요.'},
+  {id:'q0',a:'EOCR-4',b:'TB6-N',type:'ctrl',d:[`M${EB2} 40 H465`],note:'EOCR b접점을 지난 전원을 정지 버튼 PB0 NC L1으로 보냅니다. 이 문제는 PB0·PB1함이 아래쪽 TB6에 있어요.'},
   {id:'a1',a:'EOCR-5',b:'TB5-YL',type:'ctrl',d:[`M${EA} 150 V444`],note:'트립되면 EOCR ⑩-⑤가 닫혀 YL이 켜집니다.'},
   {id:'wa',a:'T1-3',b:'TB5-WL',type:'ctrl',d:[`M${W1x} 100 V444`],note:'T1이 동작하는 동안 순시 a접점이 닫혀 WL이 켜집니다.'},
   {id:'wb',a:'T2-3',b:'T1-3',type:'ctrl',d:[`M${W2x} 100 V130 H${W1x}`],note:'T2 순시 a접점도 같은 점에서 WL로 들어갑니다. 두 접점이 병렬이에요.'},
@@ -856,7 +856,7 @@ const CTRL13_f = ()=>{
   {id:'n2',a:'EOCR-12',b:'TB5-CM1',type:'ctrl',d:[`M${EP} 530 H${EA} V476`,`M${W1x} 476 V530`],note:'YL과 WL은 공통 L2를 단자대 한 단자로 같이 씁니다. 도면에서 떨어져 있어도 같은 단자예요.'}
   ];
   const qb=[['TB6-CN',G[0]],['X1-1',G[1]],['TB6-LS1N',G[2]],['TB5-PB2N',G[3]],['X2-1',G[4]],['T1-8',G[5]],['T1-1',W1x],['T2-1',W2x],['MC1-4',RLx],['MC2-4',GLx]];
-  const qn=['PB0을 지난 공통(CN)이 이 회로 전체의 전원선이 됩니다.','같은 전원선을 리밋스위치 LS1의 입력(N)으로 보냅니다. LS1은 PB1과 병렬이에요.','PB2는 위쪽 TB5에서 따로 떨어진 함으로 나갑니다. 같은 전원선을 PB2 입력(N)으로 보냅니다.','X2 자기유지 접점 ①로 이어 줍니다.','T1 한시 a접점 공통 ⑧로 이어 줍니다.','같은 T1 소켓의 순시 a접점 ①로 건너 연결합니다.','T2 순시 a접점 ①로 이어 줍니다.','램프용 MC1 보조접점도 같은 전원선에서 받습니다.','MC1 ④에서 MC2 ④로 건너 연결합니다.'];
+  const qn=['PB0을 지난 공통(PB0 NC L2·PB1 NO L1)이 이 회로 전체의 전원선이 됩니다.','같은 전원선을 리밋스위치 LS1의 입력(N)으로 보냅니다. LS1은 PB1과 병렬이에요.','PB2는 위쪽 TB5에서 따로 떨어진 함으로 나갑니다. 같은 전원선을 PB2 NO L1으로 보냅니다.','X2 자기유지 접점 ①로 이어 줍니다.','T1 한시 a접점 공통 ⑧로 이어 줍니다.','같은 T1 소켓의 순시 a접점 ①로 건너 연결합니다.','T2 순시 a접점 ①로 이어 줍니다.','램프용 MC1 보조접점도 같은 전원선에서 받습니다.','MC1 ④에서 MC2 ④로 건너 연결합니다.'];
   for(let i=1;i<qb.length;i++) W.push({id:'q'+i,a:qb[i-1][0],b:qb[i][0],type:'ctrl',d:[`M${qb[i-1][1]} 40 H${qb[i][1]} V${i>=8?70:60}`],note:qn[i-1]});
   const nb=[['TB5-CM1',EA],['X1-7',G[0]],['MC1-12',G[1]],['T1-7',G[2]],['X2-7',G[3]],['MC2-12',G[4]],['T2-7',G[5]]];
   for(let i=1;i<nb.length;i++) W.push({id:'n'+(i+2),a:nb[i-1][0],b:nb[i][0],type:'ctrl',d:[`M${nb[i-1][1]} 530 H${nb[i][1]} V476`],note:N_NOTE});
@@ -882,7 +882,7 @@ const CTRL12_f = ()=>{
   const W=[
   {id:'p1',a:'F-1',b:'EOCR-6',type:'ctrl',d:[`M230 110 H${Px} V40 H${EP} V444`],note:'L1 쪽 퓨즈 출력을 EOCR 전원 ⑥으로 보냅니다.'},
   {id:'p2',a:'EOCR-6',b:'EOCR-10',type:'ctrl',d:[`M${EP} 40 H${EA} V110`,`M${EA} 40 H${EB1}`],note:'EOCR 접점의 공통 ⑩을 전원선에 묶습니다. 도면의 두 접점(⑩-④, ⑩-⑤)은 같은 ⑩번 단자를 씁니다.'},
-  {id:'q0',a:'EOCR-4',b:'TB5-N',type:'ctrl',d:[`M${EB2} 40 H465`],note:'EOCR b접점을 지난 전원을 정지 버튼 PB0의 입력(N)으로 보냅니다. PB0은 윗줄 전원선에 직렬로 들어가 있어요.'},
+  {id:'q0',a:'EOCR-4',b:'TB5-N',type:'ctrl',d:[`M${EB2} 40 H465`],note:'EOCR b접점을 지난 전원을 정지 버튼 PB0 NC L1으로 보냅니다. PB0은 윗줄 전원선에 직렬로 들어가 있어요.'},
   {id:'a1',a:'EOCR-5',b:'TB6-YL',type:'ctrl',d:[`M${EA} 150 V444`],note:'트립되면 EOCR ⑩-⑤가 닫혀 YL이 켜집니다. 이 문제는 YL·WL이 아래쪽 TB6에 있어요.'},
   {id:'wa',a:'T1-3',b:'TB6-WL',type:'ctrl',d:[`M${W1x} 100 V444`],note:'T1이 동작하는 동안 순시 a접점이 닫혀 WL이 켜집니다.'},
   {id:'wb',a:'T2-3',b:'T1-3',type:'ctrl',d:[`M${W2x} 100 V130 H${W1x}`],note:'T2 순시 a접점도 같은 점에서 WL로 들어갑니다. 두 접점이 병렬이에요.'},
@@ -892,7 +892,7 @@ const CTRL12_f = ()=>{
   {id:'n2',a:'EOCR-12',b:'TB6-CM1',type:'ctrl',d:[`M${EP} 530 H${EA} V476`,`M${W1x} 476 V530`],note:'YL과 WL은 공통 L2를 단자대 한 단자로 같이 씁니다. 도면에서 떨어져 있어도 같은 단자예요.'}
   ];
   const qb=[['TB5-CN',G[0]],['X1-1',G[1]],['T2-8',G[2]],['TB5-PB2N',G[3]],['X2-1',G[4]],['T1-8',G[5]],['T1-1',W1x],['T2-1',W2x],['MC1-4',RLx],['MC2-4',GLx]];
-  const qn=['PB0을 지난 공통(CN)이 이 회로 전체의 전원선이 됩니다.','X1 자기유지 접점 ①에서 T2 한시 a접점 공통 ⑧로 이어 줍니다.','PB2는 따로 떨어진 함에 있어서, 같은 전원선을 PB2 입력(N)으로 보냅니다.','X2 자기유지 접점 ①로 이어 줍니다.','T1 한시 a접점 공통 ⑧로 이어 줍니다.','같은 T1 소켓의 순시 a접점 ①로 건너 연결합니다.','T2 순시 a접점 ①로 이어 줍니다.','램프용 MC1 보조접점도 같은 전원선에서 받습니다.','MC1 ④에서 MC2 ④로 건너 연결합니다.'];
+  const qn=['PB0을 지난 공통(PB0 NC L2·PB1 NO L1)이 이 회로 전체의 전원선이 됩니다.','X1 자기유지 접점 ①에서 T2 한시 a접점 공통 ⑧로 이어 줍니다.','PB2는 따로 떨어진 함에 있어서, 같은 전원선을 PB2 NO L1으로 보냅니다.','X2 자기유지 접점 ①로 이어 줍니다.','T1 한시 a접점 공통 ⑧로 이어 줍니다.','같은 T1 소켓의 순시 a접점 ①로 건너 연결합니다.','T2 순시 a접점 ①로 이어 줍니다.','램프용 MC1 보조접점도 같은 전원선에서 받습니다.','MC1 ④에서 MC2 ④로 건너 연결합니다.'];
   for(let i=1;i<qb.length;i++) W.push({id:'q'+i,a:qb[i-1][0],b:qb[i][0],type:'ctrl',d:[`M${qb[i-1][1]} 40 H${qb[i][1]} V${i>=8?70:60}`],note:qn[i-1]});
   const nb=[['TB6-CM1',EA],['X1-7',G[0]],['MC1-12',G[1]],['T1-7',G[2]],['X2-7',G[3]],['MC2-12',G[4]],['T2-7',G[5]]];
   for(let i=1;i<nb.length;i++) W.push({id:'n'+(i+2),a:nb[i-1][0],b:nb[i][0],type:'ctrl',d:[`M${nb[i-1][1]} 530 H${nb[i][1]} V476`],note:N_NOTE});
@@ -917,9 +917,9 @@ const CTRL11_f = ()=>{
   const W=[
   {id:'p1',a:'F-1',b:'EOCR-6',type:'ctrl',d:[`M230 110 H${Px} V40 H${EP} V444`],note:'L1 쪽 퓨즈 출력을 EOCR 전원 ⑥으로 보냅니다.'},
   {id:'p2',a:'EOCR-6',b:'EOCR-10',type:'ctrl',d:[`M${EP} 40 H${EA} V110`,`M${EA} 40 H${EB1}`],note:'EOCR 접점의 공통 ⑩을 전원선에 묶습니다. 도면의 두 접점(⑩-④, ⑩-⑤)은 같은 ⑩번 단자를 씁니다.'},
-  {id:'q0',a:'EOCR-4',b:'TB6-N',type:'ctrl',d:[`M${EB2} 40 H465`],note:'EOCR b접점을 지난 전원을 정지 버튼 PB0의 입력(N)으로 보냅니다. 이 문제는 PB0·PB1함이 아래쪽 TB6에 있어요.'},
-  {id:'q1',a:'TB6-CN',b:'T1-8',type:'ctrl',d:[`M${G[0]} 40 H${G[1]} V60`],note:'PB0을 지난 공통(CN)이 이 회로 전체의 전원선이 됩니다. T1 한시 a접점 공통 ⑧로 보냅니다.'},
-  {id:'q2',a:'T1-8',b:'TB5-PB2N',type:'ctrl',d:[`M${G[1]} 40 H${G[3]} V60`],note:'PB2는 위쪽 TB5에서 따로 떨어진 함으로 나갑니다. 같은 전원선을 PB2 입력(N)으로 보냅니다.'},
+  {id:'q0',a:'EOCR-4',b:'TB6-N',type:'ctrl',d:[`M${EB2} 40 H465`],note:'EOCR b접점을 지난 전원을 정지 버튼 PB0 NC L1으로 보냅니다. 이 문제는 PB0·PB1함이 아래쪽 TB6에 있어요.'},
+  {id:'q1',a:'TB6-CN',b:'T1-8',type:'ctrl',d:[`M${G[0]} 40 H${G[1]} V60`],note:'PB0을 지난 공통(PB0 NC L2·PB1 NO L1)이 이 회로 전체의 전원선이 됩니다. T1 한시 a접점 공통 ⑧로 보냅니다.'},
+  {id:'q2',a:'T1-8',b:'TB5-PB2N',type:'ctrl',d:[`M${G[1]} 40 H${G[3]} V60`],note:'PB2는 위쪽 TB5에서 따로 떨어진 함으로 나갑니다. 같은 전원선을 PB2 NO L1으로 보냅니다.'},
   {id:'q3',a:'TB5-PB2N',b:'T2-8',type:'ctrl',d:[`M${G[3]} 40 H${G[4]} V60`],note:'T2 한시 a접점 공통 ⑧도 같은 전원선에서 받습니다.'},
   {id:'q4',a:'T2-8',b:'X1-8',type:'ctrl',d:[`M${G[4]} 40 H${W1x} V60`],note:'WL용 X1 a접점 공통 ⑧로 이어 줍니다.'},
   {id:'q5',a:'X1-8',b:'X2-8',type:'ctrl',d:[`M${W1x} 40 H${W2x} V60`],note:'X1 ⑧에서 X2 ⑧로 건너 연결합니다.'},
@@ -953,9 +953,9 @@ const CTRL10_f = ()=>{
   const W=[
   {id:'p1',a:'F-1',b:'EOCR-6',type:'ctrl',d:[`M230 110 H${Px} V40 H${EP} V444`],note:'L1 쪽 퓨즈 출력을 EOCR 전원 ⑥으로 보냅니다.'},
   {id:'p2',a:'EOCR-6',b:'EOCR-10',type:'ctrl',d:[`M${EP} 40 H${EA} V110`,`M${EA} 40 H${EB1}`],note:'EOCR 접점의 공통 ⑩을 전원선에 묶습니다. 도면의 두 접점(⑩-④, ⑩-⑤)은 같은 ⑩번 단자를 씁니다.'},
-  {id:'q0',a:'EOCR-4',b:'TB5-N',type:'ctrl',d:[`M${EB2} 40 H465`],note:'EOCR b접점을 지난 전원을 정지 버튼 PB0의 입력(N)으로 보냅니다. PB0은 윗줄 전원선에 직렬로 들어가 있어요.'},
-  {id:'q1',a:'TB5-CN',b:'X1-1',type:'ctrl',d:[`M${G[0]} 40 H${G[1]} V60`],note:'PB0을 지난 공통(CN)이 이 회로 전체의 전원선이 됩니다. X1 자기유지 접점 ①로 보냅니다.'},
-  {id:'q2',a:'X1-1',b:'TB6-PB2N',type:'ctrl',d:[`M${G[1]} 40 H${G[3]} V60`],note:'PB2는 따로 떨어진 함에 있어서, 같은 전원선을 아래쪽 TB6의 PB2 입력(N)으로 보냅니다.'},
+  {id:'q0',a:'EOCR-4',b:'TB5-N',type:'ctrl',d:[`M${EB2} 40 H465`],note:'EOCR b접점을 지난 전원을 정지 버튼 PB0 NC L1으로 보냅니다. PB0은 윗줄 전원선에 직렬로 들어가 있어요.'},
+  {id:'q1',a:'TB5-CN',b:'X1-1',type:'ctrl',d:[`M${G[0]} 40 H${G[1]} V60`],note:'PB0을 지난 공통(PB0 NC L2·PB1 NO L1)이 이 회로 전체의 전원선이 됩니다. X1 자기유지 접점 ①로 보냅니다.'},
+  {id:'q2',a:'X1-1',b:'TB6-PB2N',type:'ctrl',d:[`M${G[1]} 40 H${G[3]} V60`],note:'PB2는 따로 떨어진 함에 있어서, 같은 전원선을 아래쪽 TB6의 PB2 NO L1으로 보냅니다.'},
   {id:'q3',a:'TB6-PB2N',b:'X2-1',type:'ctrl',d:[`M${G[3]} 40 H${G[4]} V60`],note:'X2 자기유지 접점 ①도 같은 전원선에서 받습니다.'},
   {id:'q4',a:'X2-1',b:'X1-8',type:'ctrl',d:[`M${G[4]} 40 H${W1x} V60`],note:'WL용 X1 a접점 공통 ⑧로 이어 줍니다.'},
   {id:'q5',a:'X1-8',b:'X2-8',type:'ctrl',d:[`M${W1x} 40 H${W2x} V60`],note:'X1 ⑧에서 X2 ⑧로 건너 연결합니다.'},
@@ -1162,9 +1162,9 @@ const CTRL1 = [
   {id:'e1',a:'FLS-7',b:'TB6-E1',type:'ctrl',d:[`M${FLSx+17} 404 H${E1x} V505`],note:'FLS 전극 E1을 단자대로 내보냅니다.'},
   {id:'e2',a:'FLS-8',b:'TB6-E2',type:'ctrl',d:[`M${FLSx+18} 412 H${E2x} V505`],note:'FLS 전극 E2를 단자대로 내보냅니다.'},
   {id:'e3',a:'FLS-1',b:'TB6-E3',type:'ctrl',d:[`M${FLSx+15} 420 H${E3x} V505`],note:'FLS 전극 E3를 단자대로 내보냅니다. 도면의 접지 표시는 시험지 지시에 따라 처리하세요.'},
-  {id:'mn',a:'TB5-SSM',b:'TB5-N',type:'ctrl',d:[`M${S} 95 V120`],note:'SS의 수동(M) 출력과 PB0 입력(N)은 서로 다른 함에 있어서, 제어함 단자대에서 점퍼로 이어 줍니다.'},
-  {id:'cn',a:'TB5-CN',b:'T-1',type:'ctrl',d:[`M${S} 175 H${TS} V190`],note:'PB0과 PB1 사이 공통(CN)을 T 순시 a접점 ①에 연결해 자기유지 회로를 만듭니다.'},
-  {id:'k1',a:'TB5-O',b:'X-1',type:'ctrl',d:[`M${S} 230 V290`],note:'PB1 출력(O)을 X b접점 ①로 보냅니다.'},
+  {id:'mn',a:'TB5-SSM',b:'TB5-N',type:'ctrl',d:[`M${S} 95 V120`],note:'SS의 수동(M) 출력과 PB0 NC L1은 서로 다른 함에 있어서, 제어함 단자대에서 점퍼로 이어 줍니다.'},
+  {id:'cn',a:'TB5-CN',b:'T-1',type:'ctrl',d:[`M${S} 175 H${TS} V190`],note:'PB0과 PB1 사이 공통(PB0 NC L2·PB1 NO L1)을 T 순시 a접점 ①에 연결해 자기유지 회로를 만듭니다.'},
+  {id:'k1',a:'TB5-O',b:'X-1',type:'ctrl',d:[`M${S} 230 V290`],note:'PB1 NO L2을 X b접점 ①로 보냅니다.'},
   {id:'k2',a:'X-1',b:'T-3',type:'ctrl',d:[`M${S} 260 H${TS} V230`],note:'자기유지 접점 출구 ③을 같은 점에 묶습니다.'},
   {id:'k3',a:'T-3',b:'X-6',type:'ctrl',d:[`M${TS} 260 H${XA} V110`],note:'자동일 때 X a접점 출력 ⑥도 같은 점으로 들어옵니다.'},
   {id:'k4',a:'X-6',b:'MC1-6',type:'ctrl',d:[`M${XA} 260 H${M1} V444`],note:'이 점에 전원이 들어오면 MC1 코일이 여자됩니다.'},
@@ -1199,8 +1199,8 @@ const CTRL2 = [
   {id:'e2',a:'FLS-8',b:'TB6-E2',type:'ctrl',d:[`M${FLSx+18} 412 H${E2x} V505`],note:'FLS 전극 E2를 단자대로 내보냅니다.'},
   {id:'e3',a:'FLS-1',b:'TB6-E3',type:'ctrl',d:[`M${FLSx+15} 420 H${E3x} V505`],note:'FLS 전극 E3를 단자대로 내보냅니다. 도면의 접지 표시는 시험지 지시에 따라 처리하세요.'},
   {id:'mn',a:'TB5-SSM',b:'TB6-N',type:'ctrl',d:[`M${S} 95 V120`],note:'SS(위쪽 TB5)의 수동(M) 출력을 PB함으로 가는 PB0 입력(아래쪽 TB6 N)으로 넘겨 줍니다.'},
-  {id:'cn',a:'TB6-CN',b:'T-1',type:'ctrl',d:[`M${S} 175 H${TS} V190`],note:'PB0과 PB1 사이 공통(CN)을 T 순시 a접점 ①에 연결해 자기유지 회로를 만듭니다.'},
-  {id:'k1',a:'TB6-O',b:'T-3',type:'ctrl',d:[`M${S} 230 V260 H${TS} V230`],note:'PB1 출력(O)과 자기유지 접점 출구 ③을 같은 점에 묶습니다.'},
+  {id:'cn',a:'TB6-CN',b:'T-1',type:'ctrl',d:[`M${S} 175 H${TS} V190`],note:'PB0과 PB1 사이 공통(PB0 NC L2·PB1 NO L1)을 T 순시 a접점 ①에 연결해 자기유지 회로를 만듭니다.'},
+  {id:'k1',a:'TB6-O',b:'T-3',type:'ctrl',d:[`M${S} 230 V260 H${TS} V230`],note:'PB1 NO L2과 자기유지 접점 출구 ③을 같은 점에 묶습니다.'},
   {id:'k2',a:'T-3',b:'T-2',type:'ctrl',d:[`M${S} 260 V300`],note:'이 점에서 T 코일(과 X 코일)로 전원이 들어갑니다.'},
   {id:'x1',a:'X-3',b:'T-8',type:'ctrl',d:[`M${XA} 100 V115`],note:'X a접점 출구 ③을 T 한시 a접점 공통 ⑧로 이어 직렬로 만듭니다.'},
   {id:'x2',a:'T-6',b:'FR-2',type:'ctrl',d:[`M${XA} 155 V444`],note:'설정 시간이 지나 T 한시 a접점이 닫히면 FR 코일이 여자됩니다.'},
@@ -1239,7 +1239,7 @@ const CTRL3 = [
   {id:'e2',a:'FLS-8',b:'TB6-E2',type:'ctrl',d:[`M${FLSx+18} 412 H${E2x} V505`],note:'FLS 전극 E2를 단자대로 내보냅니다.'},
   {id:'e3',a:'FLS-1',b:'TB6-E3',type:'ctrl',d:[`M${FLSx+15} 420 H${E3x} V505`],note:'FLS 전극 E3를 단자대로 내보냅니다. FLS의 보호도체(접지)는 제어판(TB6 또는 FLS 소켓)에서 보호도체 전선으로 연결합니다.'},
   {id:'mn',a:'TB6-SSM',b:'TB5-N',type:'ctrl',d:[`M${S} 95 V120`],note:'SS(아래쪽 TB6)의 수동(M) 출력을 PB함으로 가는 PB0 입력(위쪽 TB5 N)으로 넘겨 줍니다.'},
-  {id:'cn',a:'TB5-CN',b:'T-1',type:'ctrl',d:[`M${S} 175 H${TS} V190`],note:'PB0과 PB1 사이 공통(CN)을 T 순시 a접점 ①에 연결해 자기유지 회로를 만듭니다.'},
+  {id:'cn',a:'TB5-CN',b:'T-1',type:'ctrl',d:[`M${S} 175 H${TS} V190`],note:'PB0과 PB1 사이 공통(PB0 NC L2·PB1 NO L1)을 T 순시 a접점 ①에 연결해 자기유지 회로를 만듭니다.'},
   {id:'o1',a:'TB5-O',b:'T-2',type:'ctrl',d:[`M${S} 230 V444`],note:'PB1을 누르면 T 코일에 전원이 들어갑니다.'},
   {id:'o2',a:'T-2',b:'T-3',type:'ctrl',d:[`M${S} 260 H${TS} V230`],note:'자기유지 접점 출구 ③을 같은 점에 묶습니다.'},
   {id:'o3',a:'T-3',b:'T-8',type:'ctrl',d:[`M${TS} 260 V290`],note:'T 한시 a접점 공통 ⑧도 같은 점에서 받습니다.'},
@@ -1273,8 +1273,8 @@ const CTRL9 = [
   {id:'k1',a:'FLS-3',b:'MC1-6',type:'ctrl',d:[`M${FC} 270 V444`],note:'자동일 때 수위를 감지해 FLS a접점이 닫히면 MC1이 동작합니다.'},
   {id:'k2',a:'X-6',b:'FLS-3',type:'ctrl',d:[`M${XA} 100 V300 H${FC}`],note:'수동일 때는 X a접점 출구 ⑥이 같은 점에 전원을 넣어 MC1을 동작시킵니다.'},
   {id:'mn',a:'TB5-SSM',b:'TB6-N',type:'ctrl',d:[`M${S} 95 V120`],note:'SS(위쪽 TB5)의 수동(M) 출력을 PB함으로 가는 PB0 입력(아래쪽 TB6 N)으로 넘겨 줍니다.'},
-  {id:'cn',a:'TB6-CN',b:'X-1',type:'ctrl',d:[`M${S} 175 H${TS} V190`],note:'PB0과 PB1 사이 공통(CN)을 X a접점 ①에 연결해 자기유지 회로를 만듭니다.'},
-  {id:'o1',a:'TB6-O',b:'X-3',type:'ctrl',d:[`M${S} 230 V260 H${TS} V230`],note:'PB1 출력(O)과 X 자기유지 접점 출구 ③을 같은 점에 묶습니다.'},
+  {id:'cn',a:'TB6-CN',b:'X-1',type:'ctrl',d:[`M${S} 175 H${TS} V190`],note:'PB0과 PB1 사이 공통(PB0 NC L2·PB1 NO L1)을 X a접점 ①에 연결해 자기유지 회로를 만듭니다.'},
+  {id:'o1',a:'TB6-O',b:'X-3',type:'ctrl',d:[`M${S} 230 V260 H${TS} V230`],note:'PB1 NO L2과 X 자기유지 접점 출구 ③을 같은 점에 묶습니다.'},
   {id:'o2',a:'X-3',b:'X-2',type:'ctrl',d:[`M${S} 260 V444`],note:'이 점에서 X 코일에 전원이 들어갑니다.'},
   {id:'o3',a:'X-2',b:'T-2',type:'ctrl',d:[`M${S} 300 H${TS} V444`],note:'X 코일과 T 코일은 같은 점에서 전원을 받아 함께 동작합니다.'},
   {id:'t1',a:'T-6',b:'MC2-6',type:'ctrl',d:[`M${TH} 110 V444`],note:'T 설정 시간이 지나 한시 a접점이 닫히면 MC2가 동작합니다.'},
@@ -1307,9 +1307,9 @@ const CTRL8 = [
   {id:'k2',a:'X-2',b:'FR-2',type:'ctrl',d:[`M${FC} 300 H${FRc8} V444`],note:'X와 FR은 같은 점에서 전원을 받아 함께 동작합니다.'},
   {id:'k3',a:'FR-2',b:'FR-8',type:'ctrl',d:[`M${FRc8} 300 H${YLx} V330`],note:'FR 접점 공통 ⑧도 같은 점에서 받습니다.'},
   {id:'y1',a:'FR-5',b:'TB6-YL',type:'ctrl',d:[`M${YLx} 370 V444`],note:'FR 접점이 설정 시간 간격으로 열리고 닫혀 YL이 점멸합니다.'},
-  {id:'mn',a:'TB5-SSM',b:'TB5-N',type:'ctrl',d:[`M${S} 95 V120`],note:'SS의 수동(M) 출력과 PB0 입력(N)은 서로 다른 함에 있어서, 제어함 단자대에서 점퍼로 이어 줍니다.'},
-  {id:'cn',a:'TB5-CN',b:'T-1',type:'ctrl',d:[`M${S} 175 H${TS} V190`],note:'PB0과 PB1 사이 공통(CN)을 T 순시 a접점 ①에 연결해 자기유지 회로를 만듭니다.'},
-  {id:'o1',a:'TB5-O',b:'X-1',type:'ctrl',d:[`M${S} 230 V290`],note:'PB1 출력(O)을 X b접점 ①로 보냅니다.'},
+  {id:'mn',a:'TB5-SSM',b:'TB5-N',type:'ctrl',d:[`M${S} 95 V120`],note:'SS의 수동(M) 출력과 PB0 NC L1은 서로 다른 함에 있어서, 제어함 단자대에서 점퍼로 이어 줍니다.'},
+  {id:'cn',a:'TB5-CN',b:'T-1',type:'ctrl',d:[`M${S} 175 H${TS} V190`],note:'PB0과 PB1 사이 공통(PB0 NC L2·PB1 NO L1)을 T 순시 a접점 ①에 연결해 자기유지 회로를 만듭니다.'},
+  {id:'o1',a:'TB5-O',b:'X-1',type:'ctrl',d:[`M${S} 230 V290`],note:'PB1 NO L2을 X b접점 ①로 보냅니다.'},
   {id:'o2',a:'X-1',b:'T-3',type:'ctrl',d:[`M${S} 260 H${TS} V230`],note:'T 자기유지 접점 출구 ③을 같은 점에 묶습니다.'},
   {id:'o3',a:'T-3',b:'X-6',type:'ctrl',d:[`M${TS} 260 H${XA} V100`],note:'자동일 때는 X a접점 출력 ⑥이 같은 점에 전원을 넣습니다.'},
   {id:'o4',a:'X-6',b:'T-8',type:'ctrl',d:[`M${XA} 200 H${TH} V230`],note:'같은 점에서 T 한시 b접점 공통 ⑧로 전원을 보냅니다.'},
@@ -1343,10 +1343,10 @@ const CTRL7 = [
   {id:'s2',a:'FLS-4',b:'FLS-5',type:'ctrl',d:[`M${FC} 170 H${FLSx} V392`],note:'FLS 전원 ⑤도 자동(A) 전원에서 받습니다. 같은 기구 안의 점퍼예요.'},
   {id:'k1',a:'FLS-3',b:'FR-2',type:'ctrl',d:[`M${FC} 270 V444`],note:'수위를 감지해 FLS a접점이 닫히면 FR 코일에 전원이 들어갑니다.'},
   {id:'k2',a:'FR-2',b:'X-2',type:'ctrl',d:[`M${FC} 300 H${S}`,`M${S} 300 V444`],note:'FR 코일과 X 코일은 같은 점에서 전원을 받아 함께 동작합니다.'},
-  {id:'k3',a:'TB6-O',b:'X-3',type:'ctrl',d:[`M${S} 230 V260 H${TS} V230`],note:'PB1 출력(O)과 X 자기유지 접점 출구 ③을 같은 점에 묶습니다.'},
+  {id:'k3',a:'TB6-O',b:'X-3',type:'ctrl',d:[`M${S} 230 V260 H${TS} V230`],note:'PB1 NO L2과 X 자기유지 접점 출구 ③을 같은 점에 묶습니다.'},
   {id:'k4',a:'X-3',b:'X-2',type:'ctrl',d:[`M${S} 260 V300`],note:'이 점에서 X 코일(과 FR 코일)로 전원이 들어갑니다.'},
   {id:'mn',a:'TB5-SSM',b:'TB6-N',type:'ctrl',d:[`M${S} 95 V120`],note:'SS(위쪽 TB5)의 수동(M) 출력을 PB함으로 가는 PB0 입력(아래쪽 TB6 N)으로 넘겨 줍니다.'},
-  {id:'cn',a:'TB6-CN',b:'X-1',type:'ctrl',d:[`M${S} 175 H${TS} V190`],note:'PB0과 PB1 사이 공통(CN)을 X a접점 ①에 연결해 자기유지 회로를 만듭니다.'},
+  {id:'cn',a:'TB6-CN',b:'X-1',type:'ctrl',d:[`M${S} 175 H${TS} V190`],note:'PB0과 PB1 사이 공통(PB0 NC L2·PB1 NO L1)을 X a접점 ①에 연결해 자기유지 회로를 만듭니다.'},
   {id:'x1',a:'X-6',b:'FR-8',type:'ctrl',d:[`M${XA} 100 V150`],note:'X a접점 출구 ⑥을 FR b접점 공통 ⑧로 이어 직렬로 만듭니다.'},
   {id:'f1',a:'FR-5',b:'T-2',type:'ctrl',d:[`M${XA} 190 V444`],note:'FR b접점이 닫혀 있는 동안 T 코일에 전원이 들어갑니다.'},
   {id:'f2',a:'T-2',b:'T-8',type:'ctrl',d:[`M${XA} 300 H${M1} V330`,`M${M1} 300 H${TH} V330`],note:'T의 한시 b접점과 한시 a접점은 공통 ⑧을 같이 씁니다.'},
@@ -1377,8 +1377,8 @@ const CTRL6 = [
   {id:'s2',a:'FLS-5',b:'FLS-4',type:'ctrl',d:[`M${FLSx} 170 H${FC} V230`],note:'FLS 접점 공통 ④도 자동(A) 전원에서 받습니다. 같은 기구 안의 점퍼예요.'},
   {id:'x1',a:'FLS-3',b:'X-2',type:'ctrl',d:[`M${FC} 270 V444`],note:'수위를 감지해 FLS a접점이 닫히면 X 코일이 여자됩니다.'},
   {id:'mn',a:'TB5-SSM',b:'TB6-N',type:'ctrl',d:[`M${S} 95 V120`],note:'SS(위쪽 TB5)의 수동(M) 출력을 PB함으로 가는 PB0 입력(아래쪽 TB6 N)으로 넘겨 줍니다.'},
-  {id:'cn',a:'TB6-CN',b:'T-1',type:'ctrl',d:[`M${S} 175 H${TS} V190`],note:'PB0과 PB1 사이 공통(CN)을 T 순시 a접점 ①에 연결해 자기유지 회로를 만듭니다.'},
-  {id:'k1',a:'TB6-O',b:'X-1',type:'ctrl',d:[`M${S} 230 V290`],note:'PB1 출력(O)을 X b접점 ①로 보냅니다.'},
+  {id:'cn',a:'TB6-CN',b:'T-1',type:'ctrl',d:[`M${S} 175 H${TS} V190`],note:'PB0과 PB1 사이 공통(PB0 NC L2·PB1 NO L1)을 T 순시 a접점 ①에 연결해 자기유지 회로를 만듭니다.'},
+  {id:'k1',a:'TB6-O',b:'X-1',type:'ctrl',d:[`M${S} 230 V290`],note:'PB1 NO L2을 X b접점 ①로 보냅니다.'},
   {id:'k2',a:'X-1',b:'T-3',type:'ctrl',d:[`M${S} 260 H${TS} V230`],note:'T 자기유지 접점 출구 ③을 같은 점에 묶습니다.'},
   {id:'k3',a:'T-3',b:'X-6',type:'ctrl',d:[`M${TS} 260 H${XA} V100`],note:'자동일 때는 X a접점 출력 ⑥이 같은 점에 전원을 넣습니다.'},
   {id:'k4',a:'X-6',b:'T-8',type:'ctrl',d:[`M${XA} 260 V330`,`M${M1} 300 H${TBc} V330`],note:'T의 한시 a접점과 한시 b접점은 공통 ⑧을 같이 씁니다.'},
@@ -1422,8 +1422,8 @@ const CTRL5 = [
   {id:'c1',a:'FR-5',b:'MC1-6',type:'ctrl',d:[`M${M1} 370 V444`],note:'FR b접점이 닫혀 있는 동안 MC1이 동작합니다. FR이 멈추면 계속 닫혀 있어요.'},
   {id:'c2',a:'FR-6',b:'MC2-6',type:'ctrl',d:[`M${TH} 370 V444`],note:'FR a접점이 닫혀 있는 동안 MC2가 동작합니다.'},
   {id:'c3',a:'T-6',b:'MC2-6',type:'ctrl',d:[`M${TAx} 370 V400 H${TH}`],note:'T 설정 시간이 지나면 한시 a접점으로 MC2가 계속 동작해, M1과 M2가 함께 돌아요.'},
-  {id:'mn',a:'TB5-SSM',b:'TB5-N',type:'ctrl',d:[`M${S} 95 V120`],note:'SS의 수동(M) 출력과 PB0 입력(N)은 서로 다른 함에 있어서, 제어함 단자대에서 점퍼로 이어 줍니다.'},
-  {id:'cn',a:'TB5-CN',b:'X-1',type:'ctrl',d:[`M${S} 175 H${TS} V190`],note:'PB0과 PB1 사이 공통(CN)을 X a접점 ①에 연결해 자기유지 회로를 만듭니다.'},
+  {id:'mn',a:'TB5-SSM',b:'TB5-N',type:'ctrl',d:[`M${S} 95 V120`],note:'SS의 수동(M) 출력과 PB0 NC L1은 서로 다른 함에 있어서, 제어함 단자대에서 점퍼로 이어 줍니다.'},
+  {id:'cn',a:'TB5-CN',b:'X-1',type:'ctrl',d:[`M${S} 175 H${TS} V190`],note:'PB0과 PB1 사이 공통(PB0 NC L2·PB1 NO L1)을 X a접점 ①에 연결해 자기유지 회로를 만듭니다.'},
   {id:'e1',a:'FLS-7',b:'TB6-E1',type:'ctrl',d:[`M${FLSx+17} 404 H${E1x} V505`],note:'FLS 전극 E1을 단자대로 내보냅니다. 전극선은 보조회로 전선을 씁니다.'},
   {id:'e2',a:'FLS-8',b:'TB6-E2',type:'ctrl',d:[`M${FLSx+18} 412 H${E2x} V505`],note:'FLS 전극 E2를 단자대로 내보냅니다.'},
   {id:'e3',a:'FLS-1',b:'TB6-E3',type:'ctrl',d:[`M${FLSx+15} 420 H${E3x} V505`],note:'FLS 전극 E3를 단자대로 내보냅니다. FLS의 보호도체(접지)는 제어판(TB6 또는 FLS 소켓)에서 보호도체 전선으로 연결합니다.'},
@@ -1451,10 +1451,10 @@ const CTRL4 = [
   {id:'s2',a:'FLS-4',b:'FLS-5',type:'ctrl',d:[`M${FC} 170 H${FLSx} V392`],note:'FLS 전원 ⑤도 자동(A) 전원에서 받습니다. 같은 기구 안의 점퍼예요.'},
   {id:'k1',a:'FLS-3',b:'FR-2',type:'ctrl',d:[`M${FC} 270 V444`],note:'수위를 감지해 FLS a접점이 닫히면 FR 코일에 전원이 들어갑니다.'},
   {id:'k2',a:'FR-2',b:'X-2',type:'ctrl',d:[`M${FC} 300 H${S}`,`M${S} 300 V444`],note:'FR 코일과 X 코일은 같은 점에서 전원을 받아 함께 동작합니다.'},
-  {id:'k3',a:'TB6-O',b:'X-3',type:'ctrl',d:[`M${S} 230 V260 H${TS} V230`],note:'PB1 출력(O)과 X 자기유지 접점 출구 ③을 같은 점에 묶습니다.'},
+  {id:'k3',a:'TB6-O',b:'X-3',type:'ctrl',d:[`M${S} 230 V260 H${TS} V230`],note:'PB1 NO L2과 X 자기유지 접점 출구 ③을 같은 점에 묶습니다.'},
   {id:'k4',a:'X-3',b:'X-2',type:'ctrl',d:[`M${S} 260 V300`],note:'이 점에서 X 코일(과 FR 코일)로 전원이 들어갑니다.'},
   {id:'mn',a:'TB5-SSM',b:'TB6-N',type:'ctrl',d:[`M${S} 95 V120`],note:'SS(위쪽 TB5)의 수동(M) 출력을 PB함으로 가는 PB0 입력(아래쪽 TB6 N)으로 넘겨 줍니다.'},
-  {id:'cn',a:'TB6-CN',b:'X-1',type:'ctrl',d:[`M${S} 175 H${TS} V190`],note:'PB0과 PB1 사이 공통(CN)을 X a접점 ①에 연결해 자기유지 회로를 만듭니다.'},
+  {id:'cn',a:'TB6-CN',b:'X-1',type:'ctrl',d:[`M${S} 175 H${TS} V190`],note:'PB0과 PB1 사이 공통(PB0 NC L2·PB1 NO L1)을 X a접점 ①에 연결해 자기유지 회로를 만듭니다.'},
   {id:'x1',a:'X-6',b:'FR-8',type:'ctrl',d:[`M${XA} 100 V230`,`M${XA} 200 H${TH} V230`],note:'X가 동작하면 X a접점을 거쳐 FR 접점 공통 ⑧에 전원이 들어갑니다. FR의 두 접점은 ⑧을 같이 써요.'},
   {id:'c1',a:'FR-5',b:'MC1-6',type:'ctrl',d:[`M${XA} 270 V444`],note:'FR b접점이 닫혀 있는 동안 MC1이 동작합니다.'},
   {id:'f1',a:'FR-6',b:'T-8',type:'ctrl',d:[`M${TH} 270 V330`],note:'FR a접점이 닫히면 T 한시 b접점 공통 ⑧에 전원이 들어갑니다.'},
@@ -1471,7 +1471,7 @@ const WIRES = [...MAIN_WIRES, ...(({1:CTRL1,2:CTRL2,3:CTRL3,4:CTRL4,5:CTRL5,6:CT
 const TYPE_NAME = {R:'주회로 L1 · 갈색', S:'주회로 L2 · 흑색', T:'주회로 L3 · 회색', PE:'접지 · 녹-황색', ctrl:'제어회로 · 황색'};
 
 /* ================= 제어함 배치 (mm, 배치도 기준) ================= */
-const TB5_1 = [['PB0','N','N'],['공통','CN','CN'],['PB1','O','O'],null,['S/S','공','SSC'],['S/S','M','SSM'],['S/S','A','SSA'],null,
+const TB5_1 = [['PB0','NC L1','N'],['공통','NC L2|NO L1','CN'],['PB1','NO L2','O'],null,['S/S','공','SSC'],['S/S','M','SSM'],['S/S','A','SSA'],null,
   ['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,null,null,null];
 const TB6_1 = [['YL','L1','YL'],['BZ','L1','BZ'],['공통','L2','CM'],null,['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,
   ['E1','','E1'],['E2','','E2'],['E3','','E3'],null,['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,null,null];
@@ -1489,9 +1489,9 @@ const DEV_1 = {
 };
 const TB5_2 = [['YL/BZ','L1','YB'],['YL/BZ','L2','CM1'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,
   ['GL','L1','GL'],['RL','L1','RL'],['공통','L2','CM'],null,['S/S','공','SSC'],['S/S','M','SSM'],['S/S','A','SSA'],null,null,null,null,null];
-const TB6_2 = [['PB0','N','N'],['공통','CN','CN'],['PB1','O','O'],null,['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,
+const TB6_2 = [['PB0','NC L1','N'],['공통','NC L2|NO L1','CN'],['PB1','NO L2','O'],null,['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,
   ['E1','','E1'],['E2','','E2'],['E3','','E3'],null,['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,null,null];
-const TB5_3 = [['PB0','N','N'],['공통','CN','CN'],['PB1','O','O'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,
+const TB5_3 = [['PB0','NC L1','N'],['공통','NC L2|NO L1','CN'],['PB1','NO L2','O'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,
   ['YL/BZ','L1','YB'],['YL/BZ','L2','CM1'],null,['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,null,null,null,null];
 const TB6_3 = [['S/S','공','SSC'],['S/S','M','SSM'],['S/S','A','SSA'],null,['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,
   ['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,['E1','','E1'],['E2','','E2'],['E3','','E3'],null,null,null];
@@ -1507,10 +1507,10 @@ const DEV_2 = {
   T:   {x:227,y:240,w:47,h:70,row:2,top:R8T,bot:R8B,sub:'8핀'},
   FLS: {x:303,y:240,w:50,h:70,row:2,top:R8T,bot:R8B,sub:'8핀'}
 };
-const TB5_18 = [['PB2','N','PB2N'],['PB2','O','PB2O'],null,['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,
+const TB5_18 = [['PB2','NO L1','PB2N'],['PB2','NO L2','PB2O'],null,['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,
   ['WL','L1','WL'],['YL','L1','YL'],['공통','L2','CM1'],null,null,null,null,null];
 const TB6_18 = [['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,['LS1','N','LS1N'],['LS1','O','LS1O'],['LS2','N','LS2N'],['LS2','O','LS2O'],null,
-  ['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,['PB0','N','N'],['공통','CN','CN'],['PB1','O','O'],null,null];
+  ['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,['PB0','NC L1','N'],['공통','NC L2|NO L1','CN'],['PB1','NO L2','O'],null,null];
 const DEV_18 = {
   MCCB:{x:34, y:110,w:72,h:70,row:1,top:[1,3,5],bot:[2,4,6],sub:''},
   EOCR:{x:116,y:109,w:65,h:75,row:1,top:R12T,bot:R12B,sub:'12핀'},
@@ -1522,10 +1522,10 @@ const DEV_18 = {
   MC2: {x:212,y:237,w:64,h:76,row:2,top:R12T,bot:R12B,sub:'12핀'},
   T1:  {x:303,y:240,w:51,h:71,row:2,top:R8T,bot:R8B,sub:'8핀'}
 };
-const TB5_17 = [['PB0','N','N'],['공통','CN','CN'],['PB1','O','O'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,
+const TB5_17 = [['PB0','NC L1','N'],['공통','NC L2|NO L1','CN'],['PB1','NO L2','O'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,
   ['WL','L1','WL'],['YL','L1','YL'],['공통','L2','CM1'],null,['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,null,null,null];
 const TB6_17 = [['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,['LS1','N','LS1N'],['LS1','O','LS1O'],['LS2','N','LS2N'],['LS2','O','LS2O'],null,
-  ['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,['PB2','N','PB2N'],['PB2','O','PB2O'],null,null,null];
+  ['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,['PB2','NO L1','PB2N'],['PB2','NO L2','PB2O'],null,null,null];
 const DEV_17 = {
   MCCB:{x:34, y:110,w:72,h:70,row:1,top:[1,3,5],bot:[2,4,6],sub:''},
   F:   {x:126,y:118,w:31,h:56,row:1,top:[1,2],bot:[3,4],sub:'퓨즈'},
@@ -1538,9 +1538,9 @@ const DEV_17 = {
   T2:  {x:303,y:240,w:51,h:71,row:2,top:R8T,bot:R8B,sub:'8핀'}
 };
 const TB5_16 = [['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,['WL','L1','WL'],['YL','L1','YL'],['공통','L2','CM1'],null,
-  ['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,['PB0','N','N'],['공통','CN','CN'],['PB1','O','O'],null,null,null,null];
+  ['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,['PB0','NC L1','N'],['공통','NC L2|NO L1','CN'],['PB1','NO L2','O'],null,null,null,null];
 const TB6_16 = [['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,['LS1','N','LS1N'],['LS1','O','LS1O'],['LS2','N','LS2N'],['LS2','O','LS2O'],null,
-  ['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,['PB2','N','PB2N'],['PB2','O','PB2O'],null,null,null];
+  ['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,['PB2','NO L1','PB2N'],['PB2','NO L2','PB2O'],null,null,null];
 const DEV_16 = {
   MCCB:{x:34, y:110,w:72,h:70,row:1,top:[1,3,5],bot:[2,4,6],sub:''},
   EOCR:{x:124,y:109,w:65,h:75,row:1,top:R12T,bot:R12B,sub:'12핀'},
@@ -1553,8 +1553,8 @@ const DEV_16 = {
   T1:  {x:303,y:240,w:51,h:71,row:2,top:R8T,bot:R8B,sub:'8핀'}
 };
 const TB5_15 = [['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,['WL','L1','WL'],['YL','L1','YL'],['공통','L2','CM1'],null,
-  ['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,['PB0','N','N'],['공통','CN','CN'],['PB1','O','O'],null,null,null,null];
-const TB6_15 = [['PB2','N','PB2N'],['PB2','O','PB2O'],null,['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,
+  ['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,['PB0','NC L1','N'],['공통','NC L2|NO L1','CN'],['PB1','NO L2','O'],null,null,null,null];
+const TB6_15 = [['PB2','NO L1','PB2N'],['PB2','NO L2','PB2O'],null,['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,
   ['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,['LS1','N','LS1N'],['LS1','O','LS1O'],['LS2','N','LS2N'],['LS2','O','LS2O'],null,null,null];
 const DEV_15 = {
   MCCB:{x:36, y:112,w:71,h:70,row:1,top:[1,3,5],bot:[2,4,6],sub:''},
@@ -1567,8 +1567,8 @@ const DEV_15 = {
   MC2: {x:210,y:237,w:63,h:76,row:2,top:R12T,bot:R12B,sub:'12핀'},
   T1:  {x:303,y:240,w:51,h:71,row:2,top:R8T,bot:R8B,sub:'8핀'}
 };
-const TB5_14 = [['PB2','N','PB2N'],['PB2','O','PB2O'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,
-  ['PB0','N','N'],['공통','CN','CN'],['PB1','O','O'],null,['WL','L1','WL'],['YL','L1','YL'],['공통','L2','CM1'],null,null,null,null,null];
+const TB5_14 = [['PB2','NO L1','PB2N'],['PB2','NO L2','PB2O'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,
+  ['PB0','NC L1','N'],['공통','NC L2|NO L1','CN'],['PB1','NO L2','O'],null,['WL','L1','WL'],['YL','L1','YL'],['공통','L2','CM1'],null,null,null,null,null];
 const TB6_14 = [['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,
   ['LS1','N','LS1N'],['LS1','O','LS1O'],['LS2','N','LS2N'],['LS2','O','LS2O'],null,['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,null];
 const DEV_14 = {
@@ -1583,8 +1583,8 @@ const DEV_14 = {
   MC2: {x:291,y:237,w:63,h:76,row:2,top:R12T,bot:R12B,sub:'12핀'}
 };
 const TB5_13 = [['WL','L1','WL'],['YL','L1','YL'],['공통','L2','CM1'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,
-  ['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,['PB2','N','PB2N'],['PB2','O','PB2O'],null,null,null,null,null];
-const TB6_13 = [['PB0','N','N'],['공통','CN','CN'],['PB1','O','O'],null,['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,
+  ['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,['PB2','NO L1','PB2N'],['PB2','NO L2','PB2O'],null,null,null,null,null];
+const TB6_13 = [['PB0','NC L1','N'],['공통','NC L2|NO L1','CN'],['PB1','NO L2','O'],null,['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,
   ['LS1','N','LS1N'],['LS1','O','LS1O'],['LS2','N','LS2N'],['LS2','O','LS2O'],null,['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,null];
 const DEV_13 = {
   EOCR:{x:34, y:109,w:66,h:75,row:1,top:R12T,bot:R12B,sub:'12핀'},
@@ -1598,7 +1598,7 @@ const DEV_13 = {
   T2:  {x:303,y:240,w:51,h:71,row:2,top:R8T,bot:R8B,sub:'8핀'}
 };
 const TB5_12 = [['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,
-  ['PB2','N','PB2N'],['PB2','O','PB2O'],null,['PB0','N','N'],['공통','CN','CN'],['PB1','O','O'],null,null,null,null,null];
+  ['PB2','NO L1','PB2N'],['PB2','NO L2','PB2O'],null,['PB0','NC L1','N'],['공통','NC L2|NO L1','CN'],['PB1','NO L2','O'],null,null,null,null,null];
 const TB6_12 = [['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,['LS1','N','LS1N'],['LS1','O','LS1O'],['LS2','N','LS2N'],['LS2','O','LS2O'],null,
   ['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,['WL','L1','WL'],['YL','L1','YL'],['공통','L2','CM1'],null,null];
 const DEV_12 = {
@@ -1612,9 +1612,9 @@ const DEV_12 = {
   MC1: {x:207,y:237,w:64,h:76,row:2,top:R12T,bot:R12B,sub:'12핀'},
   MC2: {x:290,y:237,w:64,h:76,row:2,top:R12T,bot:R12B,sub:'12핀'}
 };
-const TB5_11 = [['PB2','N','PB2N'],['PB2','O','PB2O'],null,['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,
+const TB5_11 = [['PB2','NO L1','PB2N'],['PB2','NO L2','PB2O'],null,['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,
   ['WL','L1','WL'],['YL','L1','YL'],['공통','L2','CM1'],null,null,null,null,null];
-const TB6_11 = [['PB0','N','N'],['공통','CN','CN'],['PB1','O','O'],null,['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,
+const TB6_11 = [['PB0','NC L1','N'],['공통','NC L2|NO L1','CN'],['PB1','NO L2','O'],null,['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,
   ['LS1','N','LS1N'],['LS1','O','LS1O'],['LS2','N','LS2N'],['LS2','O','LS2O'],null,['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,null];
 const DEV_11 = {
   EOCR:{x:36, y:109,w:65,h:75,row:1,top:R12T,bot:R12B,sub:'12핀'},
@@ -1627,9 +1627,9 @@ const DEV_11 = {
   T2:  {x:226,y:241,w:51,h:70,row:2,top:R8T,bot:R8B,sub:'8핀'},
   T1:  {x:303,y:241,w:50,h:70,row:2,top:R8T,bot:R8B,sub:'8핀'}
 };
-const TB5_10 = [['PB0','N','N'],['공통','CN','CN'],['PB1','O','O'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,
+const TB5_10 = [['PB0','NC L1','N'],['공통','NC L2|NO L1','CN'],['PB1','NO L2','O'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,
   ['WL','L1','WL'],['YL','L1','YL'],['공통','L2','CM1'],null,['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,null,null,null];
-const TB6_10 = [['PB2','N','PB2N'],['PB2','O','PB2O'],null,['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,
+const TB6_10 = [['PB2','NO L1','PB2N'],['PB2','NO L2','PB2O'],null,['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,
   ['LS1','N','LS1N'],['LS1','O','LS1O'],['LS2','N','LS2N'],['LS2','O','LS2O'],null,['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,null,null];
 const DEV_10 = {
   MCCB:{x:34, y:110,w:72,h:70,row:1,top:[1,3,5],bot:[2,4,6],sub:''},
@@ -1645,7 +1645,7 @@ const DEV_10 = {
 const TB5_9 = [['S/S','공','SSC'],['S/S','M','SSM'],['S/S','A','SSA'],null,['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,
   ['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,['YL','L1','YL'],['BZ','L1','BZ'],['공통','L2','CM1'],null,null,null,null];
 const TB6_9 = [['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,['E1','','E1'],['E2','','E2'],['E3','','E3'],null,
-  ['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,['PB0','N','N'],['공통','CN','CN'],['PB1','O','O'],null,null,null];
+  ['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,['PB0','NC L1','N'],['공통','NC L2|NO L1','CN'],['PB1','NO L2','O'],null,null,null];
 const DEV_9 = {
   MCCB:{x:36, y:110,w:72,h:70,row:1,top:[1,3,5],bot:[2,4,6],sub:''},
   EOCR:{x:117,y:109,w:65,h:75,row:1,top:R12T,bot:R12B,sub:'12핀'},
@@ -1657,7 +1657,7 @@ const DEV_9 = {
   MC2: {x:209,y:237,w:64,h:76,row:2,top:R12T,bot:R12B,sub:'12핀'},
   FLS: {x:303,y:240,w:51,h:71,row:2,top:R8T,bot:R8B,sub:'8핀'}
 };
-const TB5_8 = [['PB0','N','N'],['공통','CN','CN'],['PB1','O','O'],null,['S/S','공','SSC'],['S/S','M','SSM'],['S/S','A','SSA'],null,
+const TB5_8 = [['PB0','NC L1','N'],['공통','NC L2|NO L1','CN'],['PB1','NO L2','O'],null,['S/S','공','SSC'],['S/S','M','SSM'],['S/S','A','SSA'],null,
   ['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,null,null,null];
 const TB6_8 = [['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,
   ['E1','','E1'],['E2','','E2'],['E3','','E3'],null,['YL','L1','YL'],['BZ','L1','BZ'],['공통','L2','CM'],null,null,null];
@@ -1674,7 +1674,7 @@ const DEV_8 = {
 };
 const TB5_7 = [['YL/BZ','L1','YB'],['YL/BZ','L2','CM1'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,
   ['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,['S/S','공','SSC'],['S/S','M','SSM'],['S/S','A','SSA'],null,null,null,null,null];
-const TB6_7 = [['PB0','N','N'],['공통','CN','CN'],['PB1','O','O'],null,['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,
+const TB6_7 = [['PB0','NC L1','N'],['공통','NC L2|NO L1','CN'],['PB1','NO L2','O'],null,['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,
   ['E1','','E1'],['E2','','E2'],['E3','','E3'],null,['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,null,null];
 const DEV_7 = {
   MCCB:{x:36, y:110,w:72,h:70,row:1,top:[1,3,5],bot:[2,4,6],sub:''},
@@ -1689,7 +1689,7 @@ const DEV_7 = {
 };
 const TB5_6 = [['YL/BZ','L1','YB'],['YL/BZ','L2','CM1'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,
   ['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,['S/S','공','SSC'],['S/S','M','SSM'],['S/S','A','SSA'],null,null,null,null,null];
-const TB6_6 = [['PB0','N','N'],['공통','CN','CN'],['PB1','O','O'],null,['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,
+const TB6_6 = [['PB0','NC L1','N'],['공통','NC L2|NO L1','CN'],['PB1','NO L2','O'],null,['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,
   ['E1','','E1'],['E2','','E2'],['E3','','E3'],null,['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,null,null];
 const DEV_6 = {
   EOCR:{x:34, y:109,w:66,h:75,row:1,top:R12T,bot:R12B,sub:'12핀'},
@@ -1703,7 +1703,7 @@ const DEV_6 = {
   MC2: {x:291,y:237,w:63,h:76,row:2,top:R12T,bot:R12B,sub:'12핀'}
 };
 const TB5_5 = [['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,null,
-  ['S/S','공','SSC'],['S/S','M','SSM'],['S/S','A','SSA'],null,['PB0','N','N'],['공통','CN','CN'],['PB1','O','O'],null,null,null];
+  ['S/S','공','SSC'],['S/S','M','SSM'],['S/S','A','SSA'],null,['PB0','NC L1','N'],['공통','NC L2|NO L1','CN'],['PB1','NO L2','O'],null,null,null];
 const TB6_5 = [['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,['E1','','E1'],['E2','','E2'],['E3','','E3'],null,
   ['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,['YL/BZ','L1','YB'],['YL/BZ','L2','CM1'],null,null,null,null];
 const DEV_5 = {
@@ -1720,7 +1720,7 @@ const DEV_5 = {
 const TB5_4 = [['YL/BZ','L1','YB'],['YL/BZ','L2','CM1'],null,['L1','','L1'],['L2','','L2'],['L3','','L3'],['PE','','PE'],null,
   ['RL','L1','RL'],['GL','L1','GL'],['공통','L2','CM'],null,['S/S','공','SSC'],['S/S','M','SSM'],['S/S','A','SSA'],null,null,null,null,null];
 const TB6_4 = [['U1','','U1'],['V1','','V1'],['W1','','W1'],['PE','','PE1'],null,['U2','','U2'],['V2','','V2'],['W2','','W2'],['PE','','PE2'],null,
-  ['E1','','E1'],['E2','','E2'],['E3','','E3'],null,['PB0','N','N'],['공통','CN','CN'],['PB1','O','O'],null,null,null];
+  ['E1','','E1'],['E2','','E2'],['E3','','E3'],null,['PB0','NC L1','N'],['공통','NC L2|NO L1','CN'],['PB1','NO L2','O'],null,null,null];
 const DEV_4 = {
   MCCB:{x:34, y:110,w:72,h:70,row:1,top:[1,3,5],bot:[2,4,6],sub:''},
   EOCR:{x:123,y:108,w:66,h:77,row:1,top:R12T,bot:R12B,sub:'12핀'},
@@ -1750,8 +1750,8 @@ const CH_ORDER = {top:0, mid:1, bot:2};
 const MARGIN = {L:[5,31], R:[370,396]};
 
 const PIN = {};
-TB5.forEach((c,i)=>{ const x=TBX+CELL*(i+.5); if(c) PIN['TB5-'+c[2]]={x,y:59,ch:'top',label:`TB5 ${c[0]}${c[1]?'('+c[1]+')':''}`,t:''}; });
-TB6.forEach((c,i)=>{ const x=TBX+CELL*(i+.5); if(c) PIN['TB6-'+c[2]]={x,y:361,ch:'bot',label:`TB6 ${c[0]}${c[1]?'('+c[1]+')':''}`,t:''}; });
+TB5.forEach((c,i)=>{ const x=TBX+CELL*(i+.5); if(c) PIN['TB5-'+c[2]]={x,y:59,ch:'top',label:`TB5 ${c[0]}${c[1]?'('+c[1].replace('|','·')+')':''}`,t:''}; });
+TB6.forEach((c,i)=>{ const x=TBX+CELL*(i+.5); if(c) PIN['TB6-'+c[2]]={x,y:361,ch:'bot',label:`TB6 ${c[0]}${c[1]?'('+c[1].replace('|','·')+')':''}`,t:''}; });
 for (const [k,d] of Object.entries(DEV)){
   const place = (arr,y,ch)=>arr.forEach((p,i)=>{ PIN[k+'-'+p]={x:d.x+d.w*(i+.5)/arr.length,y,ch,label:`${k} ${circ(p)}`,t:p}; });
   place(d.top, d.y+7, d.row===1?'top':'mid');
@@ -1801,12 +1801,12 @@ const MAX_PER_PIN = Math.max(...Object.values(PIN_COUNT));
 
 /* ================= 3단계: 배관 및 기구 배치 ================= */
 const DUCT_NAME={1:'PE 전선관',2:'플렉시블 전선관',3:'케이블'};
-const W_PB=[['TB5 PB0(N)','PB함 PB0 입력 N','ctrl'],['TB5 공통(CN)','PB함 공통 CN','ctrl'],['TB5 PB1(O)','PB함 PB1 출력 O','ctrl']];
+const W_PB=[['TB5 PB0(NC L1)','PB함 PB0 NC L1','ctrl'],['TB5 공통(PB0 NC L2·PB1 NO L1)','PB함 공통 (PB0 NC L2·PB1 NO L1)','ctrl'],['TB5 PB1(NO L2)','PB함 PB1 NO L2','ctrl']];
 const W_SS=[['TB5 S/S(공)','SS함 공통','ctrl'],['TB5 S/S(M)','SS함 M(수동)','ctrl'],['TB5 S/S(A)','SS함 A(자동)','ctrl']];
 const DUCTS_1=[
   {id:'d_tb1',no:3,from:'TB1 (전원)',to:'제어함 TB5',pts:[[750,450],[750,-40]],wires:[['TB1 L1','TB5 L1','R'],['TB1 L2','TB5 L2','S'],['TB1 L3','TB5 L3','T'],['TB1 PE','TB5 PE','PE']],note:'전원 3상과 접지를 케이블 하나로 제어함에 넣습니다.'},
   {id:'d_jp',no:2,from:'제어함 TB5',to:'J박스',pts:[[650,450],[650,50],[332,50]],wires:[...W_PB,...W_SS],note:'PB함과 SS함으로 갈 6가닥을 한 관에 넣어 J박스까지 보냅니다.'},
-  {id:'d_pb',no:2,from:'J박스',to:'PB함 (PB1·PB0)',pts:[[268,50],[0,50],[0,450]],wires:W_PB,note:'J박스에서 3가닥을 PB함으로 나눕니다. PB함 안에서 PB0은 N과 CN 사이, PB1은 CN과 O 사이에 연결돼요.'},
+  {id:'d_pb',no:2,from:'J박스',to:'PB함 (PB1·PB0)',pts:[[268,50],[0,50],[0,450]],wires:W_PB,note:'J박스에서 3가닥을 PB함으로 나눕니다. PB함 안에서 PB0(NC)은 L1과 L2 사이, PB1(NO)은 L1과 L2 사이에 연결돼요.'},
   {id:'d_ss',no:1,from:'J박스',to:'SS함 (SS·CAP)',pts:[[300,82],[300,450]],wires:W_SS,note:'J박스에서 3가닥을 셀렉터 스위치로 보냅니다.'},
   {id:'d_rg',no:1,from:'제어함 TB5',to:'램프함 (RL·GL)',pts:[[850,450],[850,50],[1250,50],[1250,450]],wires:[['TB5 RL(L1)','RL L1','ctrl'],['TB5 GL(L1)','GL L1','ctrl'],['TB5 공통(L2)','RL·GL 공통 L2','ctrl']],note:'두 램프는 공통 L2 한 가닥을 같이 씁니다. 램프함 안에서 RL과 GL의 L2를 묶어요.'},
   {id:'d_yb',no:2,from:'제어함 TB6',to:'경보함 (YL·BZ)',pts:[[600,870],[600,1270],[200,1270],[200,870]],wires:[['TB6 YL(L1)','YL L1','ctrl'],['TB6 BZ(L1)','BZ L1','ctrl'],['TB6 공통(L2)','YL·BZ 공통 L2','ctrl']],note:'YL과 BZ는 공통 L2 한 가닥을 같이 씁니다.'},
@@ -1815,24 +1815,24 @@ const DUCTS_1=[
   {id:'d_tb2',no:1,from:'제어함 TB6',to:'TB2 (전동기 M1)',pts:[[900,870],[900,1270],[1330,1270]],wires:[['TB6 U1','TB2 U1','R'],['TB6 V1','TB2 V1','S'],['TB6 W1','TB2 W1','T'],['TB6 PE','TB2 PE','PE']],note:'M1 전동기로 가는 3상과 접지입니다.'}
 ];
 const W_RG2=[['TB5 RL(L1)','RL L1','ctrl'],['TB5 GL(L1)','GL L1','ctrl'],['TB5 공통(L2)','RL·GL 공통 L2','ctrl']];
-const W_PB2=[['TB6 PB0(N)','PB함 PB0 입력 N','ctrl'],['TB6 공통(CN)','PB함 공통 CN','ctrl'],['TB6 PB1(O)','PB함 PB1 출력 O','ctrl']];
+const W_PB2=[['TB6 PB0(NC L1)','PB함 PB0 NC L1','ctrl'],['TB6 공통(PB0 NC L2·PB1 NO L1)','PB함 공통 (PB0 NC L2·PB1 NO L1)','ctrl'],['TB6 PB1(NO L2)','PB함 PB1 NO L2','ctrl']];
 const DUCTS_2=[
   {id:'d_tb1',no:3,from:'TB1 (전원)',to:'제어함 TB5',pts:[[500,450],[500,-40]],wires:[['TB1 L1','TB5 L1','R'],['TB1 L2','TB5 L2','S'],['TB1 L3','TB5 L3','T'],['TB1 PE','TB5 PE','PE']],note:'전원 3상과 접지를 케이블 하나로 제어함에 넣습니다.'},
   {id:'d_yb',no:1,from:'제어함 TB5',to:'경보함 (YL·BZ)',pts:[[400,450],[400,50],[0,50],[0,450]],wires:[['TB5 YL·BZ(L1)','YL·BZ L1','ctrl'],['TB5 공통(L2)','YL·BZ 공통 L2','ctrl']],note:'이 회로는 YL과 BZ가 EOCR a접점에 함께 연결돼 있어서 L1, L2 두 가닥이면 됩니다. 함 안에서 두 기구의 L1끼리, L2끼리 점퍼로 묶어요.'},
   {id:'d_jp',no:2,from:'제어함 TB5',to:'J박스',pts:[[600,450],[600,50],[918,50]],wires:[...W_RG2,...W_SS],note:'램프함과 SS함으로 갈 6가닥을 한 관에 넣어 J박스까지 보냅니다.'},
   {id:'d_rg',no:1,from:'J박스',to:'램프함 (GL·RL)',pts:[[950,82],[950,450]],wires:W_RG2,note:'J박스에서 3가닥을 램프함으로 나눕니다. 공통 L2는 함 안에서 GL과 RL에 같이 묶어요.'},
   {id:'d_ss',no:2,from:'J박스',to:'SS함 (SS·CAP)',pts:[[982,50],[1250,50],[1250,450]],wires:W_SS,note:'J박스에서 3가닥을 셀렉터 스위치로 보냅니다.'},
-  {id:'d_pb',no:1,from:'제어함 TB6',to:'PB함 (PB0·PB1)',pts:[[350,870],[350,1270],[-50,1270],[-50,870]],wires:W_PB2,note:'PB함은 아래쪽 TB6에서 나갑니다. PB함 안에서 PB0은 N과 CN 사이, PB1은 CN과 O 사이에 연결돼요.'},
+  {id:'d_pb',no:1,from:'제어함 TB6',to:'PB함 (PB0·PB1)',pts:[[350,870],[350,1270],[-50,1270],[-50,870]],wires:W_PB2,note:'PB함은 아래쪽 TB6에서 나갑니다. PB함 안에서 PB0(NC)은 L1과 L2 사이, PB1(NO)은 L1과 L2 사이에 연결돼요.'},
   {id:'d_tb3',no:2,from:'제어함 TB6',to:'TB3 (전동기 M2)',pts:[[450,870],[450,1370],[-75,1370]],wires:[['TB6 U2','TB3 U2','R'],['TB6 V2','TB3 V2','S'],['TB6 W2','TB3 W2','T'],['TB6 PE','TB3 PE','PE']],note:'M2 전동기로 가는 3상과 접지입니다.'},
   {id:'d_tb4',no:1,from:'제어함 TB6',to:'TB4 (FLS 전극)',pts:[[550,870],[550,1410]],wires:[['TB6 E1','TB4 E1','ctrl'],['TB6 E2','TB4 E2','ctrl'],['TB6 E3','TB4 E3','ctrl']],note:'FLS 전극 E1, E2, E3을 수조 쪽 단자대로 보냅니다.'},
   {id:'d_tb2',no:2,from:'제어함 TB6',to:'TB2 (전동기 M1)',pts:[[650,870],[650,1270],[1080,1270]],wires:[['TB6 U1','TB2 U1','R'],['TB6 V1','TB2 V1','S'],['TB6 W1','TB2 W1','T'],['TB6 PE','TB2 PE','PE']],note:'M1 전동기로 가는 3상과 접지입니다.'}
 ];
-const W_PB3=[['TB5 PB0(N)','PB함 PB0 입력 N','ctrl'],['TB5 공통(CN)','PB함 공통 CN','ctrl'],['TB5 PB1(O)','PB함 PB1 출력 O','ctrl']];
+const W_PB3=[['TB5 PB0(NC L1)','PB함 PB0 NC L1','ctrl'],['TB5 공통(PB0 NC L2·PB1 NO L1)','PB함 공통 (PB0 NC L2·PB1 NO L1)','ctrl'],['TB5 PB1(NO L2)','PB함 PB1 NO L2','ctrl']];
 const W_SS3=[['TB6 S/S(공)','SS함 공통','ctrl'],['TB6 S/S(M)','SS함 M(수동)','ctrl'],['TB6 S/S(A)','SS함 A(자동)','ctrl']];
 const W_YB3=[['TB5 YL/BZ(L1)','YL·BZ L1','ctrl'],['TB5 YL/BZ(L2)','YL·BZ 공통 L2','ctrl']];
 const W_RG3=[['TB5 RL(L1)','RL L1','ctrl'],['TB5 GL(L1)','GL L1','ctrl'],['TB5 공통(L2)','RL·GL 공통 L2','ctrl']];
 const DUCTS_3=[
-  {id:'d_pb',no:1,from:'제어함 TB5',to:'PB함 (PB0·PB1)',pts:[[400,450],[400,50],[0,50],[0,450]],wires:W_PB3,note:'PB함 안에서 PB0은 N과 CN 사이, PB1은 CN과 O 사이에 연결돼요.'},
+  {id:'d_pb',no:1,from:'제어함 TB5',to:'PB함 (PB0·PB1)',pts:[[400,450],[400,50],[0,50],[0,450]],wires:W_PB3,note:'PB함 안에서 PB0(NC)은 L1과 L2 사이, PB1(NO)은 L1과 L2 사이에 연결돼요.'},
   {id:'d_tb1',no:3,from:'TB1 (전원)',to:'제어함 TB5',pts:[[500,450],[500,-40]],wires:[['TB1 L1','TB5 L1','R'],['TB1 L2','TB5 L2','S'],['TB1 L3','TB5 L3','T'],['TB1 PE','TB5 PE','PE']],note:'전원 3상과 접지를 케이블 하나로 제어함에 넣습니다.'},
   {id:'d_jp',no:2,from:'제어함 TB5',to:'J박스',pts:[[600,450],[600,50],[918,50]],wires:[...W_YB3,...W_RG3],note:'경보함과 램프함으로 갈 5가닥을 한 관에 넣어 J박스까지 보냅니다.'},
   {id:'d_yb',no:1,from:'J박스',to:'경보함 (YL·BZ)',pts:[[950,82],[950,450]],wires:W_YB3,note:'YL과 BZ는 EOCR a접점에 함께 연결돼 L1, L2 두 가닥이면 됩니다. 함 안에서 두 기구의 L1끼리, L2끼리 점퍼로 묶어요.'},
@@ -1845,14 +1845,14 @@ const DUCTS_3=[
 const W_YB4=[['TB5 YL/BZ(L1)','YL·BZ L1','ctrl'],['TB5 YL/BZ(L2)','YL·BZ 공통 L2','ctrl']];
 const W_RG4=[['TB5 RL(L1)','RL L1','ctrl'],['TB5 GL(L1)','GL L1','ctrl'],['TB5 공통(L2)','RL·GL 공통 L2','ctrl']];
 const W_SS4=[['TB5 S/S(공)','SS함 공통','ctrl'],['TB5 S/S(M)','SS함 M(수동)','ctrl'],['TB5 S/S(A)','SS함 A(자동)','ctrl']];
-const W_PB6=[['TB6 PB0(N)','PB함 PB0 입력 N','ctrl'],['TB6 공통(CN)','PB함 공통 CN','ctrl'],['TB6 PB1(O)','PB함 PB1 출력 O','ctrl']];
+const W_PB6=[['TB6 PB0(NC L1)','PB함 PB0 NC L1','ctrl'],['TB6 공통(PB0 NC L2·PB1 NO L1)','PB함 공통 (PB0 NC L2·PB1 NO L1)','ctrl'],['TB6 PB1(NO L2)','PB함 PB1 NO L2','ctrl']];
 const DUCTS_6=[
   {id:'d_yb',no:1,from:'제어함 TB5',to:'경보함 (YL·BZ)',pts:[[400,450],[400,50],[0,50],[0,450]],wires:W_YB4,note:'YL과 BZ는 EOCR a접점에 함께 연결돼 L1, L2 두 가닥이면 됩니다. 함 안에서 두 기구의 L1끼리, L2끼리 점퍼로 묶어요.'},
   {id:'d_tb1',no:3,from:'TB1 (전원)',to:'제어함 TB5',pts:[[500,450],[500,-40]],wires:[['TB1 L1','TB5 L1','R'],['TB1 L2','TB5 L2','S'],['TB1 L3','TB5 L3','T'],['TB1 PE','TB5 PE','PE']],note:'전원 3상과 접지를 케이블 하나로 제어함에 넣습니다.'},
   {id:'d_jp',no:2,from:'제어함 TB5',to:'J박스',pts:[[600,450],[600,50],[918,50]],wires:[...W_RG4,...W_SS4],note:'램프함과 SS함으로 갈 6가닥을 한 관에 넣어 J박스까지 보냅니다.'},
   {id:'d_rg',no:1,from:'J박스',to:'램프함 (RL·GL)',pts:[[950,82],[950,450]],wires:W_RG4,note:'공통 L2는 함 안에서 RL과 GL에 같이 묶어요.'},
   {id:'d_ss',no:2,from:'J박스',to:'SS함 (SS·CAP)',pts:[[982,50],[1250,50],[1250,450]],wires:W_SS4,note:'J박스에서 3가닥을 셀렉터 스위치로 보냅니다.'},
-  {id:'d_pb',no:1,from:'제어함 TB6',to:'PB함 (PB1·PB0)',pts:[[350,870],[350,1270],[-50,1270],[-50,870]],wires:W_PB6,note:'PB함은 아래쪽 TB6에서 나갑니다. PB함 안에서 PB0은 N과 CN 사이, PB1은 CN과 O 사이에 연결돼요.'},
+  {id:'d_pb',no:1,from:'제어함 TB6',to:'PB함 (PB1·PB0)',pts:[[350,870],[350,1270],[-50,1270],[-50,870]],wires:W_PB6,note:'PB함은 아래쪽 TB6에서 나갑니다. PB함 안에서 PB0(NC)은 L1과 L2 사이, PB1(NO)은 L1과 L2 사이에 연결돼요.'},
   {id:'d_tb3',no:2,from:'제어함 TB6',to:'TB3 (전동기 M2)',pts:[[450,870],[450,1370],[-75,1370]],wires:[['TB6 U2','TB3 U2','R'],['TB6 V2','TB3 V2','S'],['TB6 W2','TB3 W2','T'],['TB6 PE','TB3 PE','PE']],note:'M2 전동기로 가는 3상과 접지입니다.'},
   {id:'d_tb4',no:1,from:'제어함 TB6',to:'TB4 (FLS 전극)',pts:[[550,870],[550,1410]],wires:[['TB6 E1','TB4 E1','ctrl'],['TB6 E2','TB4 E2','ctrl'],['TB6 E3','TB4 E3','ctrl']],note:'FLS 전극 E1, E2, E3을 수조 쪽 단자대로 보냅니다.'},
   {id:'d_tb2',no:2,from:'제어함 TB6',to:'TB2 (전동기 M1)',pts:[[650,870],[650,1270],[1075,1270]],wires:[['TB6 U1','TB2 U1','R'],['TB6 V1','TB2 V1','S'],['TB6 W1','TB2 W1','T'],['TB6 PE','TB2 PE','PE']],note:'M1 전동기로 가는 3상과 접지입니다.'}
@@ -1863,17 +1863,17 @@ const DUCTS_7=[
   {id:'d_jp',no:2,from:'제어함 TB5',to:'J박스',pts:[[600,450],[600,50],[918,50]],wires:[...W_RG4,...W_SS4],note:'램프함과 SS함으로 갈 6가닥을 한 관에 넣어 J박스까지 보냅니다.'},
   {id:'d_rg',no:1,from:'J박스',to:'램프함 (RL·GL)',pts:[[950,82],[950,450]],wires:W_RG4,note:'공통 L2는 함 안에서 RL과 GL에 같이 묶어요.'},
   {id:'d_ss',no:2,from:'J박스',to:'SS함 (SS·CAP)',pts:[[982,50],[1250,50],[1250,450]],wires:W_SS4,note:'J박스에서 3가닥을 셀렉터 스위치로 보냅니다.'},
-  {id:'d_pb',no:1,from:'제어함 TB6',to:'PB함 (PB0·PB1)',pts:[[350,870],[350,1270],[-50,1270],[-50,870]],wires:W_PB6,note:'PB함은 아래쪽 TB6에서 나갑니다. PB함 안에서 PB0은 N과 CN 사이, PB1은 CN과 O 사이에 연결돼요.'},
+  {id:'d_pb',no:1,from:'제어함 TB6',to:'PB함 (PB0·PB1)',pts:[[350,870],[350,1270],[-50,1270],[-50,870]],wires:W_PB6,note:'PB함은 아래쪽 TB6에서 나갑니다. PB함 안에서 PB0(NC)은 L1과 L2 사이, PB1(NO)은 L1과 L2 사이에 연결돼요.'},
   {id:'d_tb2',no:2,from:'제어함 TB6',to:'TB2 (전동기 M1)',pts:[[450,870],[450,1370],[-75,1370]],wires:[['TB6 U1','TB2 U1','R'],['TB6 V1','TB2 V1','S'],['TB6 W1','TB2 W1','T'],['TB6 PE','TB2 PE','PE']],note:'M1 전동기로 가는 3상과 접지입니다.'},
   {id:'d_tb4',no:1,from:'제어함 TB6',to:'TB4 (FLS 전극)',pts:[[550,870],[550,1410]],wires:[['TB6 E1','TB4 E1','ctrl'],['TB6 E2','TB4 E2','ctrl'],['TB6 E3','TB4 E3','ctrl']],note:'FLS 전극 E1, E2, E3을 수조 쪽 단자대로 보냅니다.'},
   {id:'d_tb3',no:2,from:'제어함 TB6',to:'TB3 (전동기 M2)',pts:[[650,870],[650,1270],[1075,1270]],wires:[['TB6 U2','TB3 U2','R'],['TB6 V2','TB3 V2','S'],['TB6 W2','TB3 W2','T'],['TB6 PE','TB3 PE','PE']],note:'M2 전동기로 가는 3상과 접지입니다.'}
 ];
-const W_PB8=[['TB5 PB0(N)','PB함 PB0 입력 N','ctrl'],['TB5 공통(CN)','PB함 공통 CN','ctrl'],['TB5 PB1(O)','PB함 PB1 출력 O','ctrl']];
+const W_PB8=[['TB5 PB0(NC L1)','PB함 PB0 NC L1','ctrl'],['TB5 공통(PB0 NC L2·PB1 NO L1)','PB함 공통 (PB0 NC L2·PB1 NO L1)','ctrl'],['TB5 PB1(NO L2)','PB함 PB1 NO L2','ctrl']];
 const W_SS8=[['TB5 S/S(공)','SS함 공통','ctrl'],['TB5 S/S(M)','SS함 M(수동)','ctrl'],['TB5 S/S(A)','SS함 A(자동)','ctrl']];
 const W_RG8=[['TB5 GL(L1)','GL L1','ctrl'],['TB5 공통(L2)','GL·RL 공통 L2','ctrl'],['TB5 RL(L1)','RL L1','ctrl']];
 const W_YB8=[['TB6 YL(L1)','YL L1','ctrl'],['TB6 BZ(L1)','BZ L1','ctrl'],['TB6 공통(L2)','YL·BZ 공통 L2','ctrl']];
 const DUCTS_8=[
-  {id:'d_pb',no:2,from:'J박스',to:'PB함 (PB0·PB1)',pts:[[268,50],[0,50],[0,450]],wires:W_PB8,note:'J박스에서 3가닥을 PB함으로 나눕니다. PB함 안에서 PB0은 N과 CN 사이, PB1은 CN과 O 사이에 연결돼요.'},
+  {id:'d_pb',no:2,from:'J박스',to:'PB함 (PB0·PB1)',pts:[[268,50],[0,50],[0,450]],wires:W_PB8,note:'J박스에서 3가닥을 PB함으로 나눕니다. PB함 안에서 PB0(NC)은 L1과 L2 사이, PB1(NO)은 L1과 L2 사이에 연결돼요.'},
   {id:'d_ss',no:1,from:'J박스',to:'SS함 (SS·CAP)',pts:[[300,82],[300,450]],wires:W_SS8,note:'J박스에서 3가닥을 셀렉터 스위치로 보냅니다.'},
   {id:'d_jp',no:2,from:'제어함 TB5',to:'J박스',pts:[[650,450],[650,50],[332,50]],wires:[...W_PB8,...W_SS8],note:'PB함과 SS함으로 갈 6가닥을 한 관에 넣어 J박스까지 보냅니다.'},
   {id:'d_tb1',no:3,from:'TB1 (전원)',to:'제어함 TB5',pts:[[750,450],[750,-40]],wires:[['TB1 L1','TB5 L1','R'],['TB1 L2','TB5 L2','S'],['TB1 L3','TB5 L3','T'],['TB1 PE','TB5 PE','PE']],note:'전원 3상과 접지를 케이블 하나로 제어함에 넣습니다.'},
@@ -1883,16 +1883,16 @@ const DUCTS_8=[
   {id:'d_tb4',no:1,from:'제어함 TB6',to:'TB4 (FLS 전극)',pts:[[800,870],[800,1370],[1325,1370]],wires:[['TB6 E1','TB4 E1','ctrl'],['TB6 E2','TB4 E2','ctrl'],['TB6 E3','TB4 E3','ctrl']],note:'FLS 전극 E1, E2, E3을 수조 쪽 단자대로 보냅니다.'},
   {id:'d_yb',no:2,from:'제어함 TB6',to:'경보함 (YL·BZ)',pts:[[900,870],[900,1270],[1300,1270],[1300,870]],wires:W_YB8,note:'이 문제는 YL(FR 점멸)과 BZ(EOCR 경보)가 따로 동작해 L1이 두 가닥이고, 공통 L2 한 가닥을 같이 씁니다.'}
 ];
-const W_P216=[['TB6 PB2(N)','PB2 입력 N','ctrl'],['TB6 PB2(O)','PB2 출력 O','ctrl']];
+const W_P216=[['TB6 PB2(NO L1)','PB2 NO L1','ctrl'],['TB6 PB2(NO L2)','PB2 NO L2','ctrl']];
 const W_RG15=[['TB5 RL(L1)','RL L1','ctrl'],['TB5 GL(L1)','GL L1','ctrl'],['TB5 공통(L2)','RL·GL 공통 L2','ctrl']];
 const W_WY15=[['TB5 WL(L1)','WL L1','ctrl'],['TB5 YL(L1)','YL L1','ctrl'],['TB5 공통(L2)','WL·YL 공통 L2','ctrl']];
-const W_PB15=[['TB5 PB0(N)','PB함 PB0 입력 N','ctrl'],['TB5 공통(CN)','PB함 공통 CN','ctrl'],['TB5 PB1(O)','PB함 PB1 출력 O','ctrl']];
-const W_P215=[['TB6 PB2(N)','PB2 입력 N','ctrl'],['TB6 PB2(O)','PB2 출력 O','ctrl']];
+const W_PB15=[['TB5 PB0(NC L1)','PB함 PB0 NC L1','ctrl'],['TB5 공통(PB0 NC L2·PB1 NO L1)','PB함 공통 (PB0 NC L2·PB1 NO L1)','ctrl'],['TB5 PB1(NO L2)','PB함 PB1 NO L2','ctrl']];
+const W_P215=[['TB6 PB2(NO L1)','PB2 NO L1','ctrl'],['TB6 PB2(NO L2)','PB2 NO L2','ctrl']];
 const DUCTS_18_f=()=>{
-  const P2=[['TB5 PB2(N)','PB2 입력 N','ctrl'],['TB5 PB2(O)','PB2 출력 O','ctrl']];
-  const PB=[['TB6 PB0(N)','PB함 PB0 입력 N','ctrl'],['TB6 공통(CN)','PB함 공통 CN','ctrl'],['TB6 PB1(O)','PB함 PB1 출력 O','ctrl']];
+  const P2=[['TB5 PB2(NO L1)','PB2 NO L1','ctrl'],['TB5 PB2(NO L2)','PB2 NO L2','ctrl']];
+  const PB=[['TB6 PB0(NC L1)','PB함 PB0 NC L1','ctrl'],['TB6 공통(PB0 NC L2·PB1 NO L1)','PB함 공통 (PB0 NC L2·PB1 NO L1)','ctrl'],['TB6 PB1(NO L2)','PB함 PB1 NO L2','ctrl']];
   return [
-  {id:'d_pb2',no:2,from:'J박스',to:'PB2함 (PB2·CAP)',pts:[[268,50],[0,50],[0,450]],wires:P2,note:'PB2는 따로 떨어진 함에 있어서 입력(N)과 출력(O) 두 가닥이 갑니다.'},
+  {id:'d_pb2',no:2,from:'J박스',to:'PB2함 (PB2·CAP)',pts:[[268,50],[0,50],[0,450]],wires:P2,note:'PB2는 따로 떨어진 함에 있어서 NO L1과 NO L2 두 가닥이 갑니다.'},
   {id:'d_rg',no:1,from:'J박스',to:'램프함 (RL·GL)',pts:[[300,82],[300,450]],wires:W_RG15,note:'공통 L2는 함 안에서 RL과 GL에 같이 묶어요.'},
   {id:'d_jp',no:2,from:'제어함 TB5',to:'J박스',pts:[[650,450],[650,50],[332,50]],wires:[...P2,...W_RG15],note:'PB2함과 램프함으로 갈 5가닥을 한 관에 넣어 J박스까지 보냅니다.'},
   {id:'d_tb1',no:3,from:'TB1 (전원)',to:'제어함 TB5',pts:[[750,450],[750,-40]],wires:[['TB1 L1','TB5 L1','R'],['TB1 L2','TB5 L2','S'],['TB1 L3','TB5 L3','T'],['TB1 PE','TB5 PE','PE']],note:'전원 3상과 접지를 케이블 하나로 제어함에 넣습니다.'},
@@ -1900,11 +1900,11 @@ const DUCTS_18_f=()=>{
   {id:'d_tb3',no:1,from:'제어함 TB6',to:'TB3 (전동기 M2)',pts:[[600,870],[600,1270],[175,1270]],wires:[['TB6 U2','TB3 U2','R'],['TB6 V2','TB3 V2','S'],['TB6 W2','TB3 W2','T'],['TB6 PE','TB3 PE','PE']],note:'M2 전동기로 가는 3상과 접지입니다.'},
   {id:'d_tb4',no:2,from:'제어함 TB6',to:'TB4 (LS1·LS2)',pts:[[700,870],[700,1410]],wires:[['TB6 LS1(N)','TB4 LS1 N','ctrl'],['TB6 LS1(O)','TB4 LS1 O','ctrl'],['TB6 LS2(N)','TB4 LS2 N','ctrl'],['TB6 LS2(O)','TB4 LS2 O','ctrl']],note:'리밋스위치 LS1, LS2의 입력(N)과 출력(O)을 TB4로 보냅니다.'},
   {id:'d_tb2',no:1,from:'제어함 TB6',to:'TB2 (전동기 M1)',pts:[[800,870],[800,1370],[1325,1370]],wires:[['TB6 U1','TB2 U1','R'],['TB6 V1','TB2 V1','S'],['TB6 W1','TB2 W1','T'],['TB6 PE','TB2 PE','PE']],note:'M1 전동기로 가는 3상과 접지입니다.'},
-  {id:'d_pb',no:2,from:'제어함 TB6',to:'PB함 (PB0·PB1)',pts:[[900,870],[900,1270],[1300,1270],[1300,870]],wires:PB,note:'이 문제는 PB0·PB1함이 아래쪽 TB6에서 나갑니다. PB함 안에서 PB0은 N과 CN 사이, PB1은 CN과 O 사이에 연결돼요.'}
+  {id:'d_pb',no:2,from:'제어함 TB6',to:'PB함 (PB0·PB1)',pts:[[900,870],[900,1270],[1300,1270],[1300,870]],wires:PB,note:'이 문제는 PB0·PB1함이 아래쪽 TB6에서 나갑니다. PB함 안에서 PB0(NC)은 L1과 L2 사이, PB1(NO)은 L1과 L2 사이에 연결돼요.'}
   ];
 };
 const DUCTS_17_f=()=>[
-  {id:'d_pb',no:1,from:'제어함 TB5',to:'PB함 (PB0·PB1)',pts:[[400,450],[400,50],[0,50],[0,450]],wires:W_PB10,note:'PB함 안에서 PB0은 N과 CN 사이, PB1은 CN과 O 사이에 연결돼요.'},
+  {id:'d_pb',no:1,from:'제어함 TB5',to:'PB함 (PB0·PB1)',pts:[[400,450],[400,50],[0,50],[0,450]],wires:W_PB10,note:'PB함 안에서 PB0(NC)은 L1과 L2 사이, PB1(NO)은 L1과 L2 사이에 연결돼요.'},
   {id:'d_tb1',no:3,from:'TB1 (전원)',to:'제어함 TB5',pts:[[500,450],[500,-40]],wires:[['TB1 L1','TB5 L1','R'],['TB1 L2','TB5 L2','S'],['TB1 L3','TB5 L3','T'],['TB1 PE','TB5 PE','PE']],note:'전원 3상과 접지를 케이블 하나로 제어함에 넣습니다.'},
   {id:'d_jp',no:2,from:'제어함 TB5',to:'J박스',pts:[[600,450],[600,50],[918,50]],wires:[...W_WY15,...W_RG15],note:'두 램프함으로 갈 6가닥을 한 관에 넣어 J박스까지 보냅니다.'},
   {id:'d_wy',no:1,from:'J박스',to:'램프함 (WL·YL)',pts:[[950,82],[950,450]],wires:W_WY15,note:'공통 L2는 함 안에서 WL과 YL에 같이 묶어요.'},
@@ -1912,39 +1912,39 @@ const DUCTS_17_f=()=>[
   {id:'d_tb2',no:2,from:'제어함 TB6',to:'TB2 (전동기 M1)',pts:[[350,870],[350,1270],[-75,1270]],wires:[['TB6 U1','TB2 U1','R'],['TB6 V1','TB2 V1','S'],['TB6 W1','TB2 W1','T'],['TB6 PE','TB2 PE','PE']],note:'M1 전동기로 가는 3상과 접지입니다.'},
   {id:'d_tb4',no:1,from:'제어함 TB6',to:'TB4 (LS1·LS2)',pts:[[450,870],[450,1410]],wires:[['TB6 LS1(N)','TB4 LS1 N','ctrl'],['TB6 LS1(O)','TB4 LS1 O','ctrl'],['TB6 LS2(N)','TB4 LS2 N','ctrl'],['TB6 LS2(O)','TB4 LS2 O','ctrl']],note:'리밋스위치 LS1, LS2의 입력(N)과 출력(O)을 TB4로 보냅니다.'},
   {id:'d_tb3',no:2,from:'제어함 TB6',to:'TB3 (전동기 M2)',pts:[[550,870],[550,1370],[1075,1370]],wires:[['TB6 U2','TB3 U2','R'],['TB6 V2','TB3 V2','S'],['TB6 W2','TB3 W2','T'],['TB6 PE','TB3 PE','PE']],note:'M2 전동기로 가는 3상과 접지입니다.'},
-  {id:'d_pb2',no:1,from:'제어함 TB6',to:'PB2함 (PB2·CAP)',pts:[[650,870],[650,1270],[1050,1270],[1050,870]],wires:W_P216,note:'PB2는 아래쪽 TB6에서 따로 떨어진 함으로 갑니다. 입력(N)과 출력(O) 두 가닥이에요.'}
+  {id:'d_pb2',no:1,from:'제어함 TB6',to:'PB2함 (PB2·CAP)',pts:[[650,870],[650,1270],[1050,1270],[1050,870]],wires:W_P216,note:'PB2는 아래쪽 TB6에서 따로 떨어진 함으로 갑니다. NO L1과 NO L2 두 가닥이에요.'}
 ];
 const DUCTS_16_f=()=>[
   {id:'d_rg',no:2,from:'J박스',to:'램프함 (RL·GL)',pts:[[268,50],[0,50],[0,450]],wires:W_RG15,note:'공통 L2는 함 안에서 RL과 GL에 같이 묶어요.'},
   {id:'d_wy',no:1,from:'J박스',to:'램프함 (WL·YL)',pts:[[300,82],[300,450]],wires:W_WY15,note:'공통 L2는 함 안에서 WL과 YL에 같이 묶어요.'},
   {id:'d_jp',no:2,from:'제어함 TB5',to:'J박스',pts:[[650,450],[650,50],[332,50]],wires:[...W_RG15,...W_WY15],note:'두 램프함으로 갈 6가닥을 한 관에 넣어 J박스까지 보냅니다.'},
   {id:'d_tb1',no:3,from:'TB1 (전원)',to:'제어함 TB5',pts:[[750,450],[750,-40]],wires:[['TB1 L1','TB5 L1','R'],['TB1 L2','TB5 L2','S'],['TB1 L3','TB5 L3','T'],['TB1 PE','TB5 PE','PE']],note:'전원 3상과 접지를 케이블 하나로 제어함에 넣습니다.'},
-  {id:'d_pb',no:1,from:'제어함 TB5',to:'PB함 (PB0·PB1)',pts:[[850,450],[850,50],[1250,50],[1250,450]],wires:W_PB15,note:'PB함 안에서 PB0은 N과 CN 사이, PB1은 CN과 O 사이에 연결돼요.'},
+  {id:'d_pb',no:1,from:'제어함 TB5',to:'PB함 (PB0·PB1)',pts:[[850,450],[850,50],[1250,50],[1250,450]],wires:W_PB15,note:'PB함 안에서 PB0(NC)은 L1과 L2 사이, PB1(NO)은 L1과 L2 사이에 연결돼요.'},
   {id:'d_tb2',no:1,from:'제어함 TB6',to:'TB2 (전동기 M1)',pts:[[600,870],[600,1270],[175,1270]],wires:[['TB6 U1','TB2 U1','R'],['TB6 V1','TB2 V1','S'],['TB6 W1','TB2 W1','T'],['TB6 PE','TB2 PE','PE']],note:'M1 전동기로 가는 3상과 접지입니다.'},
   {id:'d_tb4',no:2,from:'제어함 TB6',to:'TB4 (LS1·LS2)',pts:[[700,870],[700,1410]],wires:[['TB6 LS1(N)','TB4 LS1 N','ctrl'],['TB6 LS1(O)','TB4 LS1 O','ctrl'],['TB6 LS2(N)','TB4 LS2 N','ctrl'],['TB6 LS2(O)','TB4 LS2 O','ctrl']],note:'리밋스위치 LS1, LS2의 입력(N)과 출력(O)을 TB4로 보냅니다.'},
   {id:'d_tb3',no:1,from:'제어함 TB6',to:'TB3 (전동기 M2)',pts:[[800,870],[800,1370],[1325,1370]],wires:[['TB6 U2','TB3 U2','R'],['TB6 V2','TB3 V2','S'],['TB6 W2','TB3 W2','T'],['TB6 PE','TB3 PE','PE']],note:'M2 전동기로 가는 3상과 접지입니다.'},
-  {id:'d_pb2',no:2,from:'제어함 TB6',to:'PB2함 (PB2·CAP)',pts:[[900,870],[900,1270],[1300,1270],[1300,870]],wires:W_P216,note:'PB2는 아래쪽 TB6에서 따로 떨어진 함으로 갑니다. 입력(N)과 출력(O) 두 가닥이에요.'}
+  {id:'d_pb2',no:2,from:'제어함 TB6',to:'PB2함 (PB2·CAP)',pts:[[900,870],[900,1270],[1300,1270],[1300,870]],wires:W_P216,note:'PB2는 아래쪽 TB6에서 따로 떨어진 함으로 갑니다. NO L1과 NO L2 두 가닥이에요.'}
 ];
 const DUCTS_15=[
   {id:'d_rg',no:2,from:'J박스',to:'램프함 (RL·GL)',pts:[[268,50],[0,50],[0,450]],wires:W_RG15,note:'공통 L2는 함 안에서 RL과 GL에 같이 묶어요.'},
   {id:'d_wy',no:1,from:'J박스',to:'램프함 (WL·YL)',pts:[[300,82],[300,450]],wires:W_WY15,note:'공통 L2는 함 안에서 WL과 YL에 같이 묶어요.'},
   {id:'d_jp',no:2,from:'제어함 TB5',to:'J박스',pts:[[650,450],[650,50],[332,50]],wires:[...W_RG15,...W_WY15],note:'두 램프함으로 갈 6가닥을 한 관에 넣어 J박스까지 보냅니다.'},
   {id:'d_tb1',no:3,from:'TB1 (전원)',to:'제어함 TB5',pts:[[750,450],[750,-40]],wires:[['TB1 L1','TB5 L1','R'],['TB1 L2','TB5 L2','S'],['TB1 L3','TB5 L3','T'],['TB1 PE','TB5 PE','PE']],note:'전원 3상과 접지를 케이블 하나로 제어함에 넣습니다.'},
-  {id:'d_pb',no:1,from:'제어함 TB5',to:'PB함 (PB1·PB0)',pts:[[850,450],[850,50],[1250,50],[1250,450]],wires:W_PB15,note:'PB함 안에서 PB0은 N과 CN 사이, PB1은 CN과 O 사이에 연결돼요.'},
-  {id:'d_pb2',no:2,from:'제어함 TB6',to:'PB2함 (PB2·CAP)',pts:[[600,870],[600,1270],[200,1270],[200,870]],wires:W_P215,note:'PB2는 아래쪽 TB6에서 따로 떨어진 함으로 갑니다. 입력(N)과 출력(O) 두 가닥이에요.'},
+  {id:'d_pb',no:1,from:'제어함 TB5',to:'PB함 (PB1·PB0)',pts:[[850,450],[850,50],[1250,50],[1250,450]],wires:W_PB15,note:'PB함 안에서 PB0(NC)은 L1과 L2 사이, PB1(NO)은 L1과 L2 사이에 연결돼요.'},
+  {id:'d_pb2',no:2,from:'제어함 TB6',to:'PB2함 (PB2·CAP)',pts:[[600,870],[600,1270],[200,1270],[200,870]],wires:W_P215,note:'PB2는 아래쪽 TB6에서 따로 떨어진 함으로 갑니다. NO L1과 NO L2 두 가닥이에요.'},
   {id:'d_tb2',no:1,from:'제어함 TB6',to:'TB2 (전동기 M1)',pts:[[700,870],[700,1370],[175,1370]],wires:[['TB6 U1','TB2 U1','R'],['TB6 V1','TB2 V1','S'],['TB6 W1','TB2 W1','T'],['TB6 PE','TB2 PE','PE']],note:'M1 전동기로 가는 3상과 접지입니다.'},
   {id:'d_tb3',no:2,from:'제어함 TB6',to:'TB3 (전동기 M2)',pts:[[800,870],[800,1410]],wires:[['TB6 U2','TB3 U2','R'],['TB6 V2','TB3 V2','S'],['TB6 W2','TB3 W2','T'],['TB6 PE','TB3 PE','PE']],note:'M2 전동기로 가는 3상과 접지입니다.'},
   {id:'d_tb4',no:1,from:'제어함 TB6',to:'TB4 (LS1·LS2)',pts:[[900,870],[900,1270],[1325,1270]],wires:[['TB6 LS1(N)','TB4 LS1 N','ctrl'],['TB6 LS1(O)','TB4 LS1 O','ctrl'],['TB6 LS2(N)','TB4 LS2 N','ctrl'],['TB6 LS2(O)','TB4 LS2 O','ctrl']],note:'리밋스위치 LS1, LS2의 입력(N)과 출력(O)을 TB4로 보냅니다.'}
 ];
-const W_P214=[['TB5 PB2(N)','PB2 입력 N','ctrl'],['TB5 PB2(O)','PB2 출력 O','ctrl']];
-const W_PB14=[['TB5 PB0(N)','PB함 PB0 입력 N','ctrl'],['TB5 공통(CN)','PB함 공통 CN','ctrl'],['TB5 PB1(O)','PB함 PB1 출력 O','ctrl']];
+const W_P214=[['TB5 PB2(NO L1)','PB2 NO L1','ctrl'],['TB5 PB2(NO L2)','PB2 NO L2','ctrl']];
+const W_PB14=[['TB5 PB0(NC L1)','PB함 PB0 NC L1','ctrl'],['TB5 공통(PB0 NC L2·PB1 NO L1)','PB함 공통 (PB0 NC L2·PB1 NO L1)','ctrl'],['TB5 PB1(NO L2)','PB함 PB1 NO L2','ctrl']];
 const W_WY14=[['TB5 WL(L1)','WL L1','ctrl'],['TB5 YL(L1)','YL L1','ctrl'],['TB5 공통(L2)','WL·YL 공통 L2','ctrl']];
 const W_GR14=[['TB6 GL(L1)','GL L1','ctrl'],['TB6 RL(L1)','RL L1','ctrl'],['TB6 공통(L2)','GL·RL 공통 L2','ctrl']];
 const DUCTS_14=[
-  {id:'d_pb2',no:1,from:'제어함 TB5',to:'PB2함 (PB2·CAP)',pts:[[400,450],[400,50],[0,50],[0,450]],wires:W_P214,note:'PB2는 따로 떨어진 함에 있어서 입력(N)과 출력(O) 두 가닥이 갑니다.'},
+  {id:'d_pb2',no:1,from:'제어함 TB5',to:'PB2함 (PB2·CAP)',pts:[[400,450],[400,50],[0,50],[0,450]],wires:W_P214,note:'PB2는 따로 떨어진 함에 있어서 NO L1과 NO L2 두 가닥이 갑니다.'},
   {id:'d_tb1',no:3,from:'TB1 (전원)',to:'제어함 TB5',pts:[[500,450],[500,-40]],wires:[['TB1 L1','TB5 L1','R'],['TB1 L2','TB5 L2','S'],['TB1 L3','TB5 L3','T'],['TB1 PE','TB5 PE','PE']],note:'전원 3상과 접지를 케이블 하나로 제어함에 넣습니다.'},
   {id:'d_jp',no:2,from:'제어함 TB5',to:'J박스',pts:[[600,450],[600,50],[918,50]],wires:[...W_PB14,...W_WY14],note:'PB함과 램프함으로 갈 6가닥을 한 관에 넣어 J박스까지 보냅니다.'},
-  {id:'d_pb',no:1,from:'J박스',to:'PB함 (PB0·PB1)',pts:[[950,82],[950,450]],wires:W_PB14,note:'PB함 안에서 PB0은 N과 CN 사이, PB1은 CN과 O 사이에 연결돼요.'},
+  {id:'d_pb',no:1,from:'J박스',to:'PB함 (PB0·PB1)',pts:[[950,82],[950,450]],wires:W_PB14,note:'PB함 안에서 PB0(NC)은 L1과 L2 사이, PB1(NO)은 L1과 L2 사이에 연결돼요.'},
   {id:'d_wy',no:2,from:'J박스',to:'램프함 (WL·YL)',pts:[[982,50],[1250,50],[1250,450]],wires:W_WY14,note:'공통 L2는 함 안에서 WL과 YL에 같이 묶어요.'},
   {id:'d_gr',no:1,from:'제어함 TB6',to:'램프함 (GL·RL)',pts:[[350,870],[350,1270],[-50,1270],[-50,870]],wires:W_GR14,note:'이 문제는 GL·RL함이 아래쪽 TB6에서 나갑니다. 공통 L2는 함 안에서 묶어요.'},
   {id:'d_tb3',no:2,from:'제어함 TB6',to:'TB3 (전동기 M2)',pts:[[450,870],[450,1370],[-75,1370]],wires:[['TB6 U2','TB3 U2','R'],['TB6 V2','TB3 V2','S'],['TB6 W2','TB3 W2','T'],['TB6 PE','TB3 PE','PE']],note:'M2 전동기로 가는 3상과 접지입니다.'},
@@ -1953,59 +1953,59 @@ const DUCTS_14=[
 ];
 const W_WY13=[['TB5 WL(L1)','WL L1','ctrl'],['TB5 YL(L1)','YL L1','ctrl'],['TB5 공통(L2)','WL·YL 공통 L2','ctrl']];
 const W_GR13=[['TB5 GL(L1)','GL L1','ctrl'],['TB5 RL(L1)','RL L1','ctrl'],['TB5 공통(L2)','GL·RL 공통 L2','ctrl']];
-const W_P213=[['TB5 PB2(N)','PB2 입력 N','ctrl'],['TB5 PB2(O)','PB2 출력 O','ctrl']];
-const W_PB13=[['TB6 PB0(N)','PB함 PB0 입력 N','ctrl'],['TB6 공통(CN)','PB함 공통 CN','ctrl'],['TB6 PB1(O)','PB함 PB1 출력 O','ctrl']];
+const W_P213=[['TB5 PB2(NO L1)','PB2 NO L1','ctrl'],['TB5 PB2(NO L2)','PB2 NO L2','ctrl']];
+const W_PB13=[['TB6 PB0(NC L1)','PB함 PB0 NC L1','ctrl'],['TB6 공통(PB0 NC L2·PB1 NO L1)','PB함 공통 (PB0 NC L2·PB1 NO L1)','ctrl'],['TB6 PB1(NO L2)','PB함 PB1 NO L2','ctrl']];
 const DUCTS_13=[
   {id:'d_wy',no:1,from:'제어함 TB5',to:'램프함 (WL·YL)',pts:[[400,450],[400,50],[0,50],[0,450]],wires:W_WY13,note:'공통 L2는 함 안에서 WL과 YL에 같이 묶어요.'},
   {id:'d_tb1',no:3,from:'TB1 (전원)',to:'제어함 TB5',pts:[[500,450],[500,-40]],wires:[['TB1 L1','TB5 L1','R'],['TB1 L2','TB5 L2','S'],['TB1 L3','TB5 L3','T'],['TB1 PE','TB5 PE','PE']],note:'전원 3상과 접지를 케이블 하나로 제어함에 넣습니다.'},
   {id:'d_jp',no:2,from:'제어함 TB5',to:'J박스',pts:[[600,450],[600,50],[918,50]],wires:[...W_GR13,...W_P213],note:'램프함과 PB2함으로 갈 5가닥을 한 관에 넣어 J박스까지 보냅니다.'},
   {id:'d_gr',no:1,from:'J박스',to:'램프함 (GL·RL)',pts:[[950,82],[950,450]],wires:W_GR13,note:'공통 L2는 함 안에서 GL과 RL에 같이 묶어요.'},
-  {id:'d_pb2',no:2,from:'J박스',to:'PB2함 (PB2·CAP)',pts:[[982,50],[1250,50],[1250,450]],wires:W_P213,note:'PB2는 따로 떨어진 함에 있어서 입력(N)과 출력(O) 두 가닥이 갑니다.'},
-  {id:'d_pb',no:1,from:'제어함 TB6',to:'PB함 (PB0·PB1)',pts:[[350,870],[350,1270],[-50,1270],[-50,870]],wires:W_PB13,note:'PB함은 아래쪽 TB6에서 나갑니다. PB함 안에서 PB0은 N과 CN 사이, PB1은 CN과 O 사이에 연결돼요.'},
+  {id:'d_pb2',no:2,from:'J박스',to:'PB2함 (PB2·CAP)',pts:[[982,50],[1250,50],[1250,450]],wires:W_P213,note:'PB2는 따로 떨어진 함에 있어서 NO L1과 NO L2 두 가닥이 갑니다.'},
+  {id:'d_pb',no:1,from:'제어함 TB6',to:'PB함 (PB0·PB1)',pts:[[350,870],[350,1270],[-50,1270],[-50,870]],wires:W_PB13,note:'PB함은 아래쪽 TB6에서 나갑니다. PB함 안에서 PB0(NC)은 L1과 L2 사이, PB1(NO)은 L1과 L2 사이에 연결돼요.'},
   {id:'d_tb2',no:2,from:'제어함 TB6',to:'TB2 (전동기 M1)',pts:[[450,870],[450,1370],[-75,1370]],wires:[['TB6 U1','TB2 U1','R'],['TB6 V1','TB2 V1','S'],['TB6 W1','TB2 W1','T'],['TB6 PE','TB2 PE','PE']],note:'M1 전동기로 가는 3상과 접지입니다.'},
   {id:'d_tb4',no:1,from:'제어함 TB6',to:'TB4 (LS1·LS2)',pts:[[550,870],[550,1410]],wires:[['TB6 LS1(N)','TB4 LS1 N','ctrl'],['TB6 LS1(O)','TB4 LS1 O','ctrl'],['TB6 LS2(N)','TB4 LS2 N','ctrl'],['TB6 LS2(O)','TB4 LS2 O','ctrl']],note:'리밋스위치 LS1, LS2의 입력(N)과 출력(O)을 TB4로 보냅니다.'},
   {id:'d_tb3',no:2,from:'제어함 TB6',to:'TB3 (전동기 M2)',pts:[[650,870],[650,1270],[1075,1270]],wires:[['TB6 U2','TB3 U2','R'],['TB6 V2','TB3 V2','S'],['TB6 W2','TB3 W2','T'],['TB6 PE','TB3 PE','PE']],note:'M2 전동기로 가는 3상과 접지입니다.'}
 ];
 const W_GR12=[['TB5 RL(L1)','RL L1','ctrl'],['TB5 GL(L1)','GL L1','ctrl'],['TB5 공통(L2)','GL·RL 공통 L2','ctrl']];
-const W_P212=[['TB5 PB2(N)','PB2 입력 N','ctrl'],['TB5 PB2(O)','PB2 출력 O','ctrl']];
-const W_PB12=[['TB5 PB0(N)','PB함 PB0 입력 N','ctrl'],['TB5 공통(CN)','PB함 공통 CN','ctrl'],['TB5 PB1(O)','PB함 PB1 출력 O','ctrl']];
+const W_P212=[['TB5 PB2(NO L1)','PB2 NO L1','ctrl'],['TB5 PB2(NO L2)','PB2 NO L2','ctrl']];
+const W_PB12=[['TB5 PB0(NC L1)','PB함 PB0 NC L1','ctrl'],['TB5 공통(PB0 NC L2·PB1 NO L1)','PB함 공통 (PB0 NC L2·PB1 NO L1)','ctrl'],['TB5 PB1(NO L2)','PB함 PB1 NO L2','ctrl']];
 const W_WY12=[['TB6 WL(L1)','WL L1','ctrl'],['TB6 YL(L1)','YL L1','ctrl'],['TB6 공통(L2)','WL·YL 공통 L2','ctrl']];
 const DUCTS_12=[
   {id:'d_gr',no:1,from:'제어함 TB5',to:'램프함 (GL·RL)',pts:[[400,450],[400,50],[0,50],[0,450]],wires:W_GR12,note:'공통 L2는 함 안에서 GL과 RL에 같이 묶어요.'},
   {id:'d_tb1',no:3,from:'TB1 (전원)',to:'제어함 TB5',pts:[[500,450],[500,-40]],wires:[['TB1 L1','TB5 L1','R'],['TB1 L2','TB5 L2','S'],['TB1 L3','TB5 L3','T'],['TB1 PE','TB5 PE','PE']],note:'전원 3상과 접지를 케이블 하나로 제어함에 넣습니다.'},
   {id:'d_jp',no:2,from:'제어함 TB5',to:'J박스',pts:[[600,450],[600,50],[918,50]],wires:[...W_P212,...W_PB12],note:'PB2함과 PB함으로 갈 5가닥을 한 관에 넣어 J박스까지 보냅니다.'},
-  {id:'d_pb2',no:1,from:'J박스',to:'PB2함 (PB2·CAP)',pts:[[950,82],[950,450]],wires:W_P212,note:'PB2는 따로 떨어진 함에 있어서 입력(N)과 출력(O) 두 가닥이 갑니다.'},
-  {id:'d_pb',no:2,from:'J박스',to:'PB함 (PB0·PB1)',pts:[[982,50],[1250,50],[1250,450]],wires:W_PB12,note:'PB함 안에서 PB0은 N과 CN 사이, PB1은 CN과 O 사이에 연결돼요.'},
+  {id:'d_pb2',no:1,from:'J박스',to:'PB2함 (PB2·CAP)',pts:[[950,82],[950,450]],wires:W_P212,note:'PB2는 따로 떨어진 함에 있어서 NO L1과 NO L2 두 가닥이 갑니다.'},
+  {id:'d_pb',no:2,from:'J박스',to:'PB함 (PB0·PB1)',pts:[[982,50],[1250,50],[1250,450]],wires:W_PB12,note:'PB함 안에서 PB0(NC)은 L1과 L2 사이, PB1(NO)은 L1과 L2 사이에 연결돼요.'},
   {id:'d_tb3',no:2,from:'제어함 TB6',to:'TB3 (전동기 M2)',pts:[[350,870],[350,1270],[-75,1270]],wires:[['TB6 U2','TB3 U2','R'],['TB6 V2','TB3 V2','S'],['TB6 W2','TB3 W2','T'],['TB6 PE','TB3 PE','PE']],note:'M2 전동기로 가는 3상과 접지입니다.'},
   {id:'d_tb4',no:1,from:'제어함 TB6',to:'TB4 (LS1·LS2)',pts:[[450,870],[450,1410]],wires:[['TB6 LS1(N)','TB4 LS1 N','ctrl'],['TB6 LS1(O)','TB4 LS1 O','ctrl'],['TB6 LS2(N)','TB4 LS2 N','ctrl'],['TB6 LS2(O)','TB4 LS2 O','ctrl']],note:'리밋스위치 LS1, LS2의 입력(N)과 출력(O)을 TB4로 보냅니다.'},
   {id:'d_tb2',no:2,from:'제어함 TB6',to:'TB2 (전동기 M1)',pts:[[550,870],[550,1370],[1075,1370]],wires:[['TB6 U1','TB2 U1','R'],['TB6 V1','TB2 V1','S'],['TB6 W1','TB2 W1','T'],['TB6 PE','TB2 PE','PE']],note:'M1 전동기로 가는 3상과 접지입니다.'},
   {id:'d_wy',no:1,from:'제어함 TB6',to:'램프함 (WL·YL)',pts:[[650,870],[650,1270],[1050,1270],[1050,870]],wires:W_WY12,note:'공통 L2는 함 안에서 WL과 YL에 같이 묶어요.'}
 ];
-const W_PB11=[['TB6 PB0(N)','PB함 PB0 입력 N','ctrl'],['TB6 공통(CN)','PB함 공통 CN','ctrl'],['TB6 PB1(O)','PB함 PB1 출력 O','ctrl']];
-const W_P211=[['TB5 PB2(N)','PB2 입력 N','ctrl'],['TB5 PB2(O)','PB2 출력 O','ctrl']];
+const W_PB11=[['TB6 PB0(NC L1)','PB함 PB0 NC L1','ctrl'],['TB6 공통(PB0 NC L2·PB1 NO L1)','PB함 공통 (PB0 NC L2·PB1 NO L1)','ctrl'],['TB6 PB1(NO L2)','PB함 PB1 NO L2','ctrl']];
+const W_P211=[['TB5 PB2(NO L1)','PB2 NO L1','ctrl'],['TB5 PB2(NO L2)','PB2 NO L2','ctrl']];
 const W_GR11=[['TB5 GL(L1)','GL L1','ctrl'],['TB5 RL(L1)','RL L1','ctrl'],['TB5 공통(L2)','GL·RL 공통 L2','ctrl']];
 const W_WY11=[['TB5 WL(L1)','WL L1','ctrl'],['TB5 YL(L1)','YL L1','ctrl'],['TB5 공통(L2)','WL·YL 공통 L2','ctrl']];
 const DUCTS_11=[
-  {id:'d_pb2',no:2,from:'J박스',to:'PB2함 (PB2·CAP)',pts:[[268,50],[0,50],[0,450]],wires:W_P211,note:'PB2는 따로 떨어진 함에 있어서 입력(N)과 출력(O) 두 가닥이 갑니다.'},
+  {id:'d_pb2',no:2,from:'J박스',to:'PB2함 (PB2·CAP)',pts:[[268,50],[0,50],[0,450]],wires:W_P211,note:'PB2는 따로 떨어진 함에 있어서 NO L1과 NO L2 두 가닥이 갑니다.'},
   {id:'d_gr',no:1,from:'J박스',to:'램프함 (GL·RL)',pts:[[300,82],[300,450]],wires:W_GR11,note:'공통 L2는 함 안에서 GL과 RL에 같이 묶어요.'},
   {id:'d_jp',no:2,from:'제어함 TB5',to:'J박스',pts:[[650,450],[650,50],[332,50]],wires:[...W_P211,...W_GR11],note:'PB2함과 램프함으로 갈 5가닥을 한 관에 넣어 J박스까지 보냅니다.'},
   {id:'d_tb1',no:3,from:'TB1 (전원)',to:'제어함 TB5',pts:[[750,450],[750,-40]],wires:[['TB1 L1','TB5 L1','R'],['TB1 L2','TB5 L2','S'],['TB1 L3','TB5 L3','T'],['TB1 PE','TB5 PE','PE']],note:'전원 3상과 접지를 케이블 하나로 제어함에 넣습니다.'},
   {id:'d_wy',no:1,from:'제어함 TB5',to:'램프함 (WL·YL)',pts:[[850,450],[850,50],[1250,50],[1250,450]],wires:W_WY11,note:'공통 L2는 함 안에서 WL과 YL에 같이 묶어요.'},
-  {id:'d_pb',no:2,from:'제어함 TB6',to:'PB함 (PB0·PB1)',pts:[[600,870],[600,1270],[200,1270],[200,870]],wires:W_PB11,note:'이 문제는 PB0·PB1함이 아래쪽 TB6에서 나갑니다. PB함 안에서 PB0은 N과 CN 사이, PB1은 CN과 O 사이에 연결돼요.'},
+  {id:'d_pb',no:2,from:'제어함 TB6',to:'PB함 (PB0·PB1)',pts:[[600,870],[600,1270],[200,1270],[200,870]],wires:W_PB11,note:'이 문제는 PB0·PB1함이 아래쪽 TB6에서 나갑니다. PB함 안에서 PB0(NC)은 L1과 L2 사이, PB1(NO)은 L1과 L2 사이에 연결돼요.'},
   {id:'d_tb2',no:1,from:'제어함 TB6',to:'TB2 (전동기 M1)',pts:[[700,870],[700,1370],[175,1370]],wires:[['TB6 U1','TB2 U1','R'],['TB6 V1','TB2 V1','S'],['TB6 W1','TB2 W1','T'],['TB6 PE','TB2 PE','PE']],note:'M1 전동기로 가는 3상과 접지입니다.'},
   {id:'d_tb4',no:2,from:'제어함 TB6',to:'TB4 (LS1·LS2)',pts:[[800,870],[800,1410]],wires:[['TB6 LS1(N)','TB4 LS1 N','ctrl'],['TB6 LS1(O)','TB4 LS1 O','ctrl'],['TB6 LS2(N)','TB4 LS2 N','ctrl'],['TB6 LS2(O)','TB4 LS2 O','ctrl']],note:'리밋스위치 LS1, LS2의 입력(N)과 출력(O)을 TB4로 보냅니다.'},
   {id:'d_tb3',no:1,from:'제어함 TB6',to:'TB3 (전동기 M2)',pts:[[900,870],[900,1270],[1325,1270]],wires:[['TB6 U2','TB3 U2','R'],['TB6 V2','TB3 V2','S'],['TB6 W2','TB3 W2','T'],['TB6 PE','TB3 PE','PE']],note:'M2 전동기로 가는 3상과 접지입니다.'}
 ];
-const W_PB10=[['TB5 PB0(N)','PB함 PB0 입력 N','ctrl'],['TB5 공통(CN)','PB함 공통 CN','ctrl'],['TB5 PB1(O)','PB함 PB1 출력 O','ctrl']];
+const W_PB10=[['TB5 PB0(NC L1)','PB함 PB0 NC L1','ctrl'],['TB5 공통(PB0 NC L2·PB1 NO L1)','PB함 공통 (PB0 NC L2·PB1 NO L1)','ctrl'],['TB5 PB1(NO L2)','PB함 PB1 NO L2','ctrl']];
 const W_WY10=[['TB5 WL(L1)','WL L1','ctrl'],['TB5 YL(L1)','YL L1','ctrl'],['TB5 공통(L2)','WL·YL 공통 L2','ctrl']];
 const W_GR10=[['TB5 GL(L1)','GL L1','ctrl'],['TB5 RL(L1)','RL L1','ctrl'],['TB5 공통(L2)','GL·RL 공통 L2','ctrl']];
 const DUCTS_10=[
-  {id:'d_pb',no:1,from:'제어함 TB5',to:'PB함 (PB0·PB1)',pts:[[400,450],[400,50],[0,50],[0,450]],wires:W_PB10,note:'PB함 안에서 PB0은 N과 CN 사이, PB1은 CN과 O 사이에 연결돼요.'},
+  {id:'d_pb',no:1,from:'제어함 TB5',to:'PB함 (PB0·PB1)',pts:[[400,450],[400,50],[0,50],[0,450]],wires:W_PB10,note:'PB함 안에서 PB0(NC)은 L1과 L2 사이, PB1(NO)은 L1과 L2 사이에 연결돼요.'},
   {id:'d_tb1',no:3,from:'TB1 (전원)',to:'제어함 TB5',pts:[[500,450],[500,-40]],wires:[['TB1 L1','TB5 L1','R'],['TB1 L2','TB5 L2','S'],['TB1 L3','TB5 L3','T'],['TB1 PE','TB5 PE','PE']],note:'전원 3상과 접지를 케이블 하나로 제어함에 넣습니다.'},
   {id:'d_jp',no:2,from:'제어함 TB5',to:'J박스',pts:[[600,450],[600,50],[918,50]],wires:[...W_WY10,...W_GR10],note:'두 램프함으로 갈 6가닥을 한 관에 넣어 J박스까지 보냅니다.'},
   {id:'d_wy',no:1,from:'J박스',to:'램프함 (WL·YL)',pts:[[950,82],[950,450]],wires:W_WY10,note:'공통 L2는 함 안에서 WL과 YL에 같이 묶어요.'},
   {id:'d_gr',no:2,from:'J박스',to:'램프함 (GL·RL)',pts:[[982,50],[1250,50],[1250,450]],wires:W_GR10,note:'공통 L2는 함 안에서 GL과 RL에 같이 묶어요.'},
-  {id:'d_pb2',no:1,from:'제어함 TB6',to:'PB2함 (PB2·CAP)',pts:[[350,870],[350,1270],[-50,1270],[-50,870]],wires:[['TB6 PB2(N)','PB2 입력 N','ctrl'],['TB6 PB2(O)','PB2 출력 O','ctrl']],note:'PB2는 따로 떨어진 함에 있어서 입력(N)과 출력(O) 두 가닥이 갑니다.'},
+  {id:'d_pb2',no:1,from:'제어함 TB6',to:'PB2함 (PB2·CAP)',pts:[[350,870],[350,1270],[-50,1270],[-50,870]],wires:[['TB6 PB2(NO L1)','PB2 NO L1','ctrl'],['TB6 PB2(NO L2)','PB2 NO L2','ctrl']],note:'PB2는 따로 떨어진 함에 있어서 NO L1과 NO L2 두 가닥이 갑니다.'},
   {id:'d_tb3',no:2,from:'제어함 TB6',to:'TB3 (전동기 M2)',pts:[[450,870],[450,1370],[-75,1370]],wires:[['TB6 U2','TB3 U2','R'],['TB6 V2','TB3 V2','S'],['TB6 W2','TB3 W2','T'],['TB6 PE','TB3 PE','PE']],note:'M2 전동기로 가는 3상과 접지입니다.'},
   {id:'d_tb4',no:1,from:'제어함 TB6',to:'TB4 (LS1·LS2)',pts:[[550,870],[550,1410]],wires:[['TB6 LS1(N)','TB4 LS1 N','ctrl'],['TB6 LS1(O)','TB4 LS1 O','ctrl'],['TB6 LS2(N)','TB4 LS2 N','ctrl'],['TB6 LS2(O)','TB4 LS2 O','ctrl']],note:'리밋스위치 LS1, LS2의 입력(N)과 출력(O)을 TB4로 보냅니다.'},
   {id:'d_tb2',no:2,from:'제어함 TB6',to:'TB2 (전동기 M1)',pts:[[650,870],[650,1270],[1075,1270]],wires:[['TB6 U1','TB2 U1','R'],['TB6 V1','TB2 V1','S'],['TB6 W1','TB2 W1','T'],['TB6 PE','TB2 PE','PE']],note:'M1 전동기로 가는 3상과 접지입니다.'}
@@ -2013,7 +2013,7 @@ const DUCTS_10=[
 const W_SS9=[['TB5 S/S(공)','SS함 공통','ctrl'],['TB5 S/S(M)','SS함 M(수동)','ctrl'],['TB5 S/S(A)','SS함 A(자동)','ctrl']];
 const W_RG9=[['TB5 RL(L1)','RL L1','ctrl'],['TB5 GL(L1)','GL L1','ctrl'],['TB5 공통(L2)','RL·GL 공통 L2','ctrl']];
 const W_YB9=[['TB5 YL(L1)','YL L1','ctrl'],['TB5 BZ(L1)','BZ L1','ctrl'],['TB5 공통(L2)','YL·BZ 공통 L2','ctrl']];
-const W_PB9=[['TB6 PB0(N)','PB함 PB0 입력 N','ctrl'],['TB6 공통(CN)','PB함 공통 CN','ctrl'],['TB6 PB1(O)','PB함 PB1 출력 O','ctrl']];
+const W_PB9=[['TB6 PB0(NC L1)','PB함 PB0 NC L1','ctrl'],['TB6 공통(PB0 NC L2·PB1 NO L1)','PB함 공통 (PB0 NC L2·PB1 NO L1)','ctrl'],['TB6 PB1(NO L2)','PB함 PB1 NO L2','ctrl']];
 const DUCTS_9=[
   {id:'d_ss',no:2,from:'J박스',to:'SS함 (SS·CAP)',pts:[[268,50],[0,50],[0,450]],wires:W_SS9,note:'J박스에서 3가닥을 셀렉터 스위치로 보냅니다.'},
   {id:'d_rg',no:1,from:'J박스',to:'램프함 (RL·GL)',pts:[[300,82],[300,450]],wires:W_RG9,note:'공통 L2는 함 안에서 RL과 GL에 같이 묶어요.'},
@@ -2023,24 +2023,24 @@ const DUCTS_9=[
   {id:'d_tb3',no:1,from:'제어함 TB6',to:'TB3 (전동기 M2)',pts:[[600,870],[600,1270],[175,1270]],wires:[['TB6 U2','TB3 U2','R'],['TB6 V2','TB3 V2','S'],['TB6 W2','TB3 W2','T'],['TB6 PE','TB3 PE','PE']],note:'M2 전동기로 가는 3상과 접지입니다.'},
   {id:'d_tb4',no:2,from:'제어함 TB6',to:'TB4 (FLS 전극)',pts:[[700,870],[700,1410]],wires:[['TB6 E1','TB4 E1','ctrl'],['TB6 E2','TB4 E2','ctrl'],['TB6 E3','TB4 E3','ctrl']],note:'FLS 전극 E1, E2, E3을 수조 쪽 단자대로 보냅니다.'},
   {id:'d_tb2',no:1,from:'제어함 TB6',to:'TB2 (전동기 M1)',pts:[[800,870],[800,1370],[1325,1370]],wires:[['TB6 U1','TB2 U1','R'],['TB6 V1','TB2 V1','S'],['TB6 W1','TB2 W1','T'],['TB6 PE','TB2 PE','PE']],note:'M1 전동기로 가는 3상과 접지입니다.'},
-  {id:'d_pb',no:2,from:'제어함 TB6',to:'PB함 (PB0·PB1)',pts:[[900,870],[900,1270],[1300,1270],[1300,870]],wires:W_PB9,note:'PB함은 아래쪽 TB6에서 나갑니다. PB함 안에서 PB0은 N과 CN 사이, PB1은 CN과 O 사이에 연결돼요.'}
+  {id:'d_pb',no:2,from:'제어함 TB6',to:'PB함 (PB0·PB1)',pts:[[900,870],[900,1270],[1300,1270],[1300,870]],wires:W_PB9,note:'PB함은 아래쪽 TB6에서 나갑니다. PB함 안에서 PB0(NC)은 L1과 L2 사이, PB1(NO)은 L1과 L2 사이에 연결돼요.'}
 ];
 const W_RG5=[['TB5 RL(L1)','RL L1','ctrl'],['TB5 GL(L1)','GL L1','ctrl'],['TB5 공통(L2)','RL·GL 공통 L2','ctrl']];
 const W_SS5=[['TB5 S/S(공)','SS함 공통','ctrl'],['TB5 S/S(M)','SS함 M(수동)','ctrl'],['TB5 S/S(A)','SS함 A(자동)','ctrl']];
-const W_PB5=[['TB5 PB0(N)','PB함 PB0 입력 N','ctrl'],['TB5 공통(CN)','PB함 공통 CN','ctrl'],['TB5 PB1(O)','PB함 PB1 출력 O','ctrl']];
+const W_PB5=[['TB5 PB0(NC L1)','PB함 PB0 NC L1','ctrl'],['TB5 공통(PB0 NC L2·PB1 NO L1)','PB함 공통 (PB0 NC L2·PB1 NO L1)','ctrl'],['TB5 PB1(NO L2)','PB함 PB1 NO L2','ctrl']];
 const W_YB5=[['TB6 YL/BZ(L1)','YL·BZ L1','ctrl'],['TB6 YL/BZ(L2)','YL·BZ 공통 L2','ctrl']];
 const DUCTS_5=[
   {id:'d_rg',no:1,from:'제어함 TB5',to:'램프함 (RL·GL)',pts:[[400,450],[400,50],[0,50],[0,450]],wires:W_RG5,note:'공통 L2는 함 안에서 RL과 GL에 같이 묶어요.'},
   {id:'d_tb1',no:3,from:'TB1 (전원)',to:'제어함 TB5',pts:[[500,450],[500,-40]],wires:[['TB1 L1','TB5 L1','R'],['TB1 L2','TB5 L2','S'],['TB1 L3','TB5 L3','T'],['TB1 PE','TB5 PE','PE']],note:'전원 3상과 접지를 케이블 하나로 제어함에 넣습니다.'},
   {id:'d_jp',no:2,from:'제어함 TB5',to:'J박스',pts:[[600,450],[600,50],[918,50]],wires:[...W_SS5,...W_PB5],note:'SS함과 PB함으로 갈 6가닥을 한 관에 넣어 J박스까지 보냅니다.'},
   {id:'d_ss',no:1,from:'J박스',to:'SS함 (SS·CAP)',pts:[[950,82],[950,450]],wires:W_SS5,note:'J박스에서 3가닥을 셀렉터 스위치로 보냅니다.'},
-  {id:'d_pb',no:2,from:'J박스',to:'PB함 (PB0·PB1)',pts:[[982,50],[1250,50],[1250,450]],wires:W_PB5,note:'PB함 안에서 PB0은 N과 CN 사이, PB1은 CN과 O 사이에 연결돼요.'},
+  {id:'d_pb',no:2,from:'J박스',to:'PB함 (PB0·PB1)',pts:[[982,50],[1250,50],[1250,450]],wires:W_PB5,note:'PB함 안에서 PB0(NC)은 L1과 L2 사이, PB1(NO)은 L1과 L2 사이에 연결돼요.'},
   {id:'d_tb3',no:2,from:'제어함 TB6',to:'TB3 (전동기 M2)',pts:[[350,870],[350,1270],[-75,1270]],wires:[['TB6 U2','TB3 U2','R'],['TB6 V2','TB3 V2','S'],['TB6 W2','TB3 W2','T'],['TB6 PE','TB3 PE','PE']],note:'M2 전동기로 가는 3상과 접지입니다.'},
   {id:'d_tb4',no:1,from:'제어함 TB6',to:'TB4 (FLS 전극)',pts:[[450,870],[450,1410]],wires:[['TB6 E1','TB4 E1','ctrl'],['TB6 E2','TB4 E2','ctrl'],['TB6 E3','TB4 E3','ctrl']],note:'FLS 전극 E1, E2, E3을 수조 쪽 단자대로 보냅니다.'},
   {id:'d_tb2',no:2,from:'제어함 TB6',to:'TB2 (전동기 M1)',pts:[[550,870],[550,1370],[1075,1370]],wires:[['TB6 U1','TB2 U1','R'],['TB6 V1','TB2 V1','S'],['TB6 W1','TB2 W1','T'],['TB6 PE','TB2 PE','PE']],note:'M1 전동기로 가는 3상과 접지입니다.'},
   {id:'d_yb',no:1,from:'제어함 TB6',to:'경보함 (YL·BZ)',pts:[[650,870],[650,1270],[1050,1270],[1050,870]],wires:W_YB5,note:'YL과 BZ는 EOCR a접점에 함께 연결돼 L1, L2 두 가닥이면 됩니다. 함 안에서 두 기구의 L1끼리, L2끼리 점퍼로 묶어요.'}
 ];
-const W_PB4=[['TB6 PB0(N)','PB함 PB0 입력 N','ctrl'],['TB6 공통(CN)','PB함 공통 CN','ctrl'],['TB6 PB1(O)','PB함 PB1 출력 O','ctrl']];
+const W_PB4=[['TB6 PB0(NC L1)','PB함 PB0 NC L1','ctrl'],['TB6 공통(PB0 NC L2·PB1 NO L1)','PB함 공통 (PB0 NC L2·PB1 NO L1)','ctrl'],['TB6 PB1(NO L2)','PB함 PB1 NO L2','ctrl']];
 const DUCTS_4=[
   {id:'d_yb',no:1,from:'제어함 TB5',to:'경보함 (YL·BZ)',pts:[[400,450],[400,50],[0,50],[0,450]],wires:W_YB4,note:'YL과 BZ는 EOCR a접점에 함께 연결돼 L1, L2 두 가닥이면 됩니다. 함 안에서 두 기구의 L1끼리, L2끼리 점퍼로 묶어요.'},
   {id:'d_tb1',no:3,from:'TB1 (전원)',to:'제어함 TB5',pts:[[500,450],[500,-40]],wires:[['TB1 L1','TB5 L1','R'],['TB1 L2','TB5 L2','S'],['TB1 L3','TB5 L3','T'],['TB1 PE','TB5 PE','PE']],note:'전원 3상과 접지를 케이블 하나로 제어함에 넣습니다.'},
@@ -2050,7 +2050,7 @@ const DUCTS_4=[
   {id:'d_tb2',no:2,from:'제어함 TB6',to:'TB2 (전동기 M1)',pts:[[350,870],[350,1270],[-75,1270]],wires:[['TB6 U1','TB2 U1','R'],['TB6 V1','TB2 V1','S'],['TB6 W1','TB2 W1','T'],['TB6 PE','TB2 PE','PE']],note:'M1 전동기로 가는 3상과 접지입니다.'},
   {id:'d_tb3',no:1,from:'제어함 TB6',to:'TB3 (전동기 M2)',pts:[[450,870],[450,1410]],wires:[['TB6 U2','TB3 U2','R'],['TB6 V2','TB3 V2','S'],['TB6 W2','TB3 W2','T'],['TB6 PE','TB3 PE','PE']],note:'M2 전동기로 가는 3상과 접지입니다.'},
   {id:'d_tb4',no:2,from:'제어함 TB6',to:'TB4 (FLS 전극)',pts:[[550,870],[550,1370],[1075,1370]],wires:[['TB6 E1','TB4 E1','ctrl'],['TB6 E2','TB4 E2','ctrl'],['TB6 E3','TB4 E3','ctrl']],note:'FLS 전극 E1, E2, E3을 수조 쪽 단자대로 보냅니다.'},
-  {id:'d_pb',no:1,from:'제어함 TB6',to:'PB함 (PB0·PB1)',pts:[[650,870],[650,1270],[1050,1270],[1050,870]],wires:W_PB4,note:'PB함은 아래쪽 TB6에서 나갑니다. PB함 안에서 PB0은 N과 CN 사이, PB1은 CN과 O 사이에 연결돼요.'}
+  {id:'d_pb',no:1,from:'제어함 TB6',to:'PB함 (PB0·PB1)',pts:[[650,870],[650,1270],[1050,1270],[1050,870]],wires:W_PB4,note:'PB함은 아래쪽 TB6에서 나갑니다. PB함 안에서 PB0(NC)은 L1과 L2 사이, PB1(NO)은 L1과 L2 사이에 연결돼요.'}
 ];
 const DUCTS_16=DUCTS_16_f(), DUCTS_17=DUCTS_17_f(), DUCTS_18=DUCTS_18_f();
 const DUCTS=({1:DUCTS_1,2:DUCTS_2,3:DUCTS_3,4:DUCTS_4,5:DUCTS_5,6:DUCTS_6,7:DUCTS_7,8:DUCTS_8,9:DUCTS_9,10:DUCTS_10,11:DUCTS_11,12:DUCTS_12,13:DUCTS_13,14:DUCTS_14,15:DUCTS_15,16:DUCTS_16,17:DUCTS_17,18:DUCTS_18})[CUR_VAR];
@@ -2079,10 +2079,10 @@ TB5.forEach((c,i)=>{ if(c) LT['TB5-'+c[2]]=[PX0+73+12.7*(i+.5),492,c[0]+(c[1]?' 
 TB6.forEach((c,i)=>{ if(c) LT['TB6-'+c[2]]=[PX0+73+12.7*(i+.5),828,c[0]+(c[1]?' '+c[1]:'')]; });
 if(CUR_VAR===18){
   Object.assign(LT,{
-    'PB2-N':[6,500,'N'],'PB2-O':[30,500,'O'],
+    'PB2-N':[6,500,'NO L1'],'PB2-O':[30,500,'NO L2'],
     'RL-1':[306,500,'L1'],'RL-2':[330,500,'L2'],'GL-1':[318,575,'L1'],'GL-2':[342,575,'L2'],
     'WL-1':[1256,500,'L1'],'WL-2':[1280,500,'L2'],'YL-1':[1268,575,'L1'],'YL-2':[1292,575,'L2'],
-    'PB0-N':[1318,750,'N'],'PB0-CN':[1342,750,'CN'],'PB1-CN':[1306,825,'CN'],'PB1-O':[1330,825,'O']
+    'PB0-N':[1318,750,'NC L1'],'PB0-CN':[1342,750,'NC L2'],'PB1-CN':[1306,825,'NO L1'],'PB1-O':[1330,825,'NO L2']
   });
   ['L1','L2','L3','PE'].forEach((k,i)=>LT['TB1-'+k]=[711+26*i,-72,k]);
   ['U2','V2','W2','PE'].forEach((k,i)=>LT['TB3-'+k]=[145,1231+26*i,k]);
@@ -2090,10 +2090,10 @@ if(CUR_VAR===18){
   ['U1','V1','W1','PE'].forEach((k,i)=>LT['TB2-'+k]=[1355,1331+26*i,k]);
 } else if(CUR_VAR===17){
   Object.assign(LT,{
-    'PB0-N':[6,500,'N'],'PB0-CN':[30,500,'CN'],'PB1-CN':[18,575,'CN'],'PB1-O':[42,575,'O'],
+    'PB0-N':[6,500,'NC L1'],'PB0-CN':[30,500,'NC L2'],'PB1-CN':[18,575,'NO L1'],'PB1-O':[42,575,'NO L2'],
     'WL-1':[956,500,'L1'],'WL-2':[980,500,'L2'],'YL-1':[968,575,'L1'],'YL-2':[992,575,'L2'],
     'RL-1':[1256,500,'L1'],'RL-2':[1280,500,'L2'],'GL-1':[1268,575,'L1'],'GL-2':[1292,575,'L2'],
-    'PB2-N':[1068,750,'N'],'PB2-O':[1092,750,'O']
+    'PB2-N':[1068,750,'NO L1'],'PB2-O':[1092,750,'NO L2']
   });
   ['L1','L2','L3','PE'].forEach((k,i)=>LT['TB1-'+k]=[461+26*i,-72,k]);
   ['U1','V1','W1','PE'].forEach((k,i)=>LT['TB2-'+k]=[-105,1231+26*i,k]);
@@ -2103,8 +2103,8 @@ if(CUR_VAR===18){
   Object.assign(LT,{
     'RL-1':[6,500,'L1'],'RL-2':[30,500,'L2'],'GL-1':[18,575,'L1'],'GL-2':[42,575,'L2'],
     'WL-1':[306,500,'L1'],'WL-2':[330,500,'L2'],'YL-1':[318,575,'L1'],'YL-2':[342,575,'L2'],
-    'PB0-N':[1256,500,'N'],'PB0-CN':[1280,500,'CN'],'PB1-CN':[1268,575,'CN'],'PB1-O':[1292,575,'O'],
-    'PB2-N':[1318,750,'N'],'PB2-O':[1342,750,'O']
+    'PB0-N':[1256,500,'NC L1'],'PB0-CN':[1280,500,'NC L2'],'PB1-CN':[1268,575,'NO L1'],'PB1-O':[1292,575,'NO L2'],
+    'PB2-N':[1318,750,'NO L1'],'PB2-O':[1342,750,'NO L2']
   });
   ['L1','L2','L3','PE'].forEach((k,i)=>LT['TB1-'+k]=[711+26*i,-72,k]);
   ['U1','V1','W1','PE'].forEach((k,i)=>LT['TB2-'+k]=[145,1231+26*i,k]);
@@ -2114,8 +2114,8 @@ if(CUR_VAR===18){
   Object.assign(LT,{
     'RL-1':[6,500,'L1'],'RL-2':[30,500,'L2'],'GL-1':[18,575,'L1'],'GL-2':[42,575,'L2'],
     'WL-1':[306,500,'L1'],'WL-2':[330,500,'L2'],'YL-1':[318,575,'L1'],'YL-2':[342,575,'L2'],
-    'PB1-CN':[1256,500,'CN'],'PB1-O':[1280,500,'O'],'PB0-N':[1268,575,'N'],'PB0-CN':[1292,575,'CN'],
-    'PB2-N':[218,750,'N'],'PB2-O':[242,750,'O']
+    'PB1-CN':[1256,500,'NO L1'],'PB1-O':[1280,500,'NO L2'],'PB0-N':[1268,575,'NC L1'],'PB0-CN':[1292,575,'NC L2'],
+    'PB2-N':[218,750,'NO L1'],'PB2-O':[242,750,'NO L2']
   });
   ['L1','L2','L3','PE'].forEach((k,i)=>LT['TB1-'+k]=[711+26*i,-72,k]);
   ['U1','V1','W1','PE'].forEach((k,i)=>LT['TB2-'+k]=[145,1331+26*i,k]);
@@ -2123,8 +2123,8 @@ if(CUR_VAR===18){
   [['LS1N','N'],['LS1O','O'],['LS2N','N'],['LS2O','O']].forEach(([k,l],i)=>LT['TB4-'+k]=[1355,1231+26*i,l]);
 } else if(CUR_VAR===14){
   Object.assign(LT,{
-    'PB2-N':[6,500,'N'],'PB2-O':[30,500,'O'],
-    'PB0-N':[956,500,'N'],'PB0-CN':[980,500,'CN'],'PB1-CN':[968,575,'CN'],'PB1-O':[992,575,'O'],
+    'PB2-N':[6,500,'NO L1'],'PB2-O':[30,500,'NO L2'],
+    'PB0-N':[956,500,'NC L1'],'PB0-CN':[980,500,'NC L2'],'PB1-CN':[968,575,'NO L1'],'PB1-O':[992,575,'NO L2'],
     'WL-1':[1256,500,'L1'],'WL-2':[1280,500,'L2'],'YL-1':[1268,575,'L1'],'YL-2':[1292,575,'L2'],
     'GL-1':[-32,750,'L1'],'GL-2':[-8,750,'L2'],'RL-1':[-44,825,'L1'],'RL-2':[-20,825,'L2']
   });
@@ -2136,8 +2136,8 @@ if(CUR_VAR===18){
   Object.assign(LT,{
     'WL-1':[6,500,'L1'],'WL-2':[30,500,'L2'],'YL-1':[18,575,'L1'],'YL-2':[42,575,'L2'],
     'GL-1':[956,500,'L1'],'GL-2':[980,500,'L2'],'RL-1':[968,575,'L1'],'RL-2':[992,575,'L2'],
-    'PB2-N':[1256,500,'N'],'PB2-O':[1280,500,'O'],
-    'PB0-N':[-32,750,'N'],'PB0-CN':[-8,750,'CN'],'PB1-CN':[-44,825,'CN'],'PB1-O':[-20,825,'O']
+    'PB2-N':[1256,500,'NO L1'],'PB2-O':[1280,500,'NO L2'],
+    'PB0-N':[-32,750,'NC L1'],'PB0-CN':[-8,750,'NC L2'],'PB1-CN':[-44,825,'NO L1'],'PB1-O':[-20,825,'NO L2']
   });
   ['L1','L2','L3','PE'].forEach((k,i)=>LT['TB1-'+k]=[461+26*i,-72,k]);
   ['U1','V1','W1','PE'].forEach((k,i)=>LT['TB2-'+k]=[-105,1331+26*i,k]);
@@ -2146,8 +2146,8 @@ if(CUR_VAR===18){
 } else if(CUR_VAR===12){
   Object.assign(LT,{
     'GL-1':[6,500,'L1'],'GL-2':[30,500,'L2'],'RL-1':[18,575,'L1'],'RL-2':[42,575,'L2'],
-    'PB2-N':[956,500,'N'],'PB2-O':[980,500,'O'],
-    'PB0-N':[1256,500,'N'],'PB0-CN':[1280,500,'CN'],'PB1-CN':[1268,575,'CN'],'PB1-O':[1292,575,'O'],
+    'PB2-N':[956,500,'NO L1'],'PB2-O':[980,500,'NO L2'],
+    'PB0-N':[1256,500,'NC L1'],'PB0-CN':[1280,500,'NC L2'],'PB1-CN':[1268,575,'NO L1'],'PB1-O':[1292,575,'NO L2'],
     'WL-1':[1068,750,'L1'],'WL-2':[1092,750,'L2'],'YL-1':[1056,825,'L1'],'YL-2':[1080,825,'L2']
   });
   ['L1','L2','L3','PE'].forEach((k,i)=>LT['TB1-'+k]=[461+26*i,-72,k]);
@@ -2156,10 +2156,10 @@ if(CUR_VAR===18){
   ['U1','V1','W1','PE'].forEach((k,i)=>LT['TB2-'+k]=[1105,1331+26*i,k]);
 } else if(CUR_VAR===11){
   Object.assign(LT,{
-    'PB2-N':[6,500,'N'],'PB2-O':[30,500,'O'],
+    'PB2-N':[6,500,'NO L1'],'PB2-O':[30,500,'NO L2'],
     'GL-1':[306,500,'L1'],'GL-2':[330,500,'L2'],'RL-1':[318,575,'L1'],'RL-2':[342,575,'L2'],
     'WL-1':[1256,500,'L1'],'WL-2':[1280,500,'L2'],'YL-1':[1268,575,'L1'],'YL-2':[1292,575,'L2'],
-    'PB0-N':[218,750,'N'],'PB0-CN':[242,750,'CN'],'PB1-CN':[206,825,'CN'],'PB1-O':[230,825,'O']
+    'PB0-N':[218,750,'NC L1'],'PB0-CN':[242,750,'NC L2'],'PB1-CN':[206,825,'NO L1'],'PB1-O':[230,825,'NO L2']
   });
   ['L1','L2','L3','PE'].forEach((k,i)=>LT['TB1-'+k]=[711+26*i,-72,k]);
   ['U1','V1','W1','PE'].forEach((k,i)=>LT['TB2-'+k]=[145,1331+26*i,k]);
@@ -2167,10 +2167,10 @@ if(CUR_VAR===18){
   ['U2','V2','W2','PE'].forEach((k,i)=>LT['TB3-'+k]=[1355,1231+26*i,k]);
 } else if(CUR_VAR===10){
   Object.assign(LT,{
-    'PB0-N':[6,500,'N'],'PB0-CN':[30,500,'CN'],'PB1-CN':[18,575,'CN'],'PB1-O':[42,575,'O'],
+    'PB0-N':[6,500,'NC L1'],'PB0-CN':[30,500,'NC L2'],'PB1-CN':[18,575,'NO L1'],'PB1-O':[42,575,'NO L2'],
     'WL-1':[956,500,'L1'],'WL-2':[980,500,'L2'],'YL-1':[968,575,'L1'],'YL-2':[992,575,'L2'],
     'GL-1':[1256,500,'L1'],'GL-2':[1280,500,'L2'],'RL-1':[1268,575,'L1'],'RL-2':[1292,575,'L2'],
-    'PB2-N':[-32,750,'N'],'PB2-O':[-8,750,'O']
+    'PB2-N':[-32,750,'NO L1'],'PB2-O':[-8,750,'NO L2']
   });
   ['L1','L2','L3','PE'].forEach((k,i)=>LT['TB1-'+k]=[461+26*i,-72,k]);
   ['U2','V2','W2','PE'].forEach((k,i)=>LT['TB3-'+k]=[-105,1331+26*i,k]);
@@ -2181,7 +2181,7 @@ if(CUR_VAR===18){
     'SS-C':[-2,500,'공'],'SS-M':[20,500,'M'],'SS-A':[42,500,'A'],
     'RL-1':[306,500,'L1'],'RL-2':[330,500,'L2'],'GL-1':[318,575,'L1'],'GL-2':[342,575,'L2'],
     'YL-1':[1256,500,'L1'],'YL-2':[1280,500,'L2'],'BZ-1':[1268,575,'L1'],'BZ-2':[1292,575,'L2'],
-    'PB0-N':[1318,750,'N'],'PB0-CN':[1342,750,'CN'],'PB1-CN':[1306,825,'CN'],'PB1-O':[1330,825,'O']
+    'PB0-N':[1318,750,'NC L1'],'PB0-CN':[1342,750,'NC L2'],'PB1-CN':[1306,825,'NO L1'],'PB1-O':[1330,825,'NO L2']
   });
   ['L1','L2','L3','PE'].forEach((k,i)=>LT['TB1-'+k]=[711+26*i,-72,k]);
   ['U2','V2','W2','PE'].forEach((k,i)=>LT['TB3-'+k]=[145,1231+26*i,k]);
@@ -2189,7 +2189,7 @@ if(CUR_VAR===18){
   ['U1','V1','W1','PE'].forEach((k,i)=>LT['TB2-'+k]=[1355,1331+26*i,k]);
 } else if(CUR_VAR===8){
   Object.assign(LT,{
-    'PB0-N':[6,500,'N'],'PB0-CN':[30,500,'CN'],'PB1-CN':[18,575,'CN'],'PB1-O':[42,575,'O'],
+    'PB0-N':[6,500,'NC L1'],'PB0-CN':[30,500,'NC L2'],'PB1-CN':[18,575,'NO L1'],'PB1-O':[42,575,'NO L2'],
     'SS-C':[298,500,'공'],'SS-M':[320,500,'M'],'SS-A':[342,500,'A'],
     'GL-1':[1256,500,'L1'],'GL-2':[1280,500,'L2'],'RL-1':[1268,575,'L1'],'RL-2':[1292,575,'L2'],
     'YL-1':[1318,750,'L1'],'YL-2':[1342,750,'L2'],'BZ-1':[1306,825,'L1'],'BZ-2':[1330,825,'L2']
@@ -2203,7 +2203,7 @@ if(CUR_VAR===18){
     'YL-1':[6,500,'L1'],'YL-2':[30,500,'L2'],'BZ-1':[18,575,'L1'],'BZ-2':[42,575,'L2'],
     'RL-1':[956,500,'L1'],'RL-2':[980,500,'L2'],'GL-1':[968,575,'L1'],'GL-2':[992,575,'L2'],
     'SS-C':[1248,500,'공'],'SS-M':[1270,500,'M'],'SS-A':[1292,500,'A'],
-    'PB0-N':[-32,750,'N'],'PB0-CN':[-8,750,'CN'],'PB1-CN':[-44,825,'CN'],'PB1-O':[-20,825,'O']
+    'PB0-N':[-32,750,'NC L1'],'PB0-CN':[-8,750,'NC L2'],'PB1-CN':[-44,825,'NO L1'],'PB1-O':[-20,825,'NO L2']
   });
   ['L1','L2','L3','PE'].forEach((k,i)=>LT['TB1-'+k]=[461+26*i,-72,k]);
   ['U1','V1','W1','PE'].forEach((k,i)=>LT['TB2-'+k]=[-105,1331+26*i,k]);
@@ -2214,7 +2214,7 @@ if(CUR_VAR===18){
     'YL-1':[6,500,'L1'],'YL-2':[30,500,'L2'],'BZ-1':[18,575,'L1'],'BZ-2':[42,575,'L2'],
     'RL-1':[956,500,'L1'],'RL-2':[980,500,'L2'],'GL-1':[968,575,'L1'],'GL-2':[992,575,'L2'],
     'SS-C':[1248,500,'공'],'SS-M':[1270,500,'M'],'SS-A':[1292,500,'A'],
-    'PB1-CN':[-32,750,'CN'],'PB1-O':[-8,750,'O'],'PB0-N':[-44,825,'N'],'PB0-CN':[-20,825,'CN']
+    'PB1-CN':[-32,750,'NO L1'],'PB1-O':[-8,750,'NO L2'],'PB0-N':[-44,825,'NC L1'],'PB0-CN':[-20,825,'NC L2']
   });
   ['L1','L2','L3','PE'].forEach((k,i)=>LT['TB1-'+k]=[461+26*i,-72,k]);
   ['U2','V2','W2','PE'].forEach((k,i)=>LT['TB3-'+k]=[-105,1331+26*i,k]);
@@ -2224,7 +2224,7 @@ if(CUR_VAR===18){
   Object.assign(LT,{
     'RL-1':[6,500,'L1'],'RL-2':[30,500,'L2'],'GL-1':[18,575,'L1'],'GL-2':[42,575,'L2'],
     'SS-C':[948,500,'공'],'SS-M':[970,500,'M'],'SS-A':[992,500,'A'],
-    'PB0-N':[1256,500,'N'],'PB0-CN':[1280,500,'CN'],'PB1-CN':[1268,575,'CN'],'PB1-O':[1292,575,'O'],
+    'PB0-N':[1256,500,'NC L1'],'PB0-CN':[1280,500,'NC L2'],'PB1-CN':[1268,575,'NO L1'],'PB1-O':[1292,575,'NO L2'],
     'YL-1':[1068,750,'L1'],'YL-2':[1092,750,'L2'],'BZ-1':[1056,825,'L1'],'BZ-2':[1080,825,'L2']
   });
   ['L1','L2','L3','PE'].forEach((k,i)=>LT['TB1-'+k]=[461+26*i,-72,k]);
@@ -2236,7 +2236,7 @@ if(CUR_VAR===18){
     'YL-1':[6,500,'L1'],'YL-2':[30,500,'L2'],'BZ-1':[18,575,'L1'],'BZ-2':[42,575,'L2'],
     'RL-1':[956,500,'L1'],'RL-2':[980,500,'L2'],'GL-1':[968,575,'L1'],'GL-2':[992,575,'L2'],
     'SS-C':[1248,500,'공'],'SS-M':[1270,500,'M'],'SS-A':[1292,500,'A'],
-    'PB0-N':[1068,750,'N'],'PB0-CN':[1092,750,'CN'],'PB1-CN':[1056,825,'CN'],'PB1-O':[1080,825,'O']
+    'PB0-N':[1068,750,'NC L1'],'PB0-CN':[1092,750,'NC L2'],'PB1-CN':[1056,825,'NO L1'],'PB1-O':[1080,825,'NO L2']
   });
   ['L1','L2','L3','PE'].forEach((k,i)=>LT['TB1-'+k]=[461+26*i,-72,k]);
   ['U1','V1','W1','PE'].forEach((k,i)=>LT['TB2-'+k]=[-105,1231+26*i,k]);
@@ -2244,7 +2244,7 @@ if(CUR_VAR===18){
   ['E1','E2','E3'].forEach((k,i)=>LT['TB4-'+k]=[1105,1344+26*i,k]);
 } else if(CUR_VAR===3){
   Object.assign(LT,{
-    'PB0-N':[6,500,'N'],'PB0-CN':[30,500,'CN'],'PB1-CN':[18,575,'CN'],'PB1-O':[42,575,'O'],
+    'PB0-N':[6,500,'NC L1'],'PB0-CN':[30,500,'NC L2'],'PB1-CN':[18,575,'NO L1'],'PB1-O':[42,575,'NO L2'],
     'YL-1':[956,500,'L1'],'YL-2':[980,500,'L2'],'BZ-1':[968,575,'L1'],'BZ-2':[992,575,'L2'],
     'RL-1':[1256,500,'L1'],'RL-2':[1280,500,'L2'],'GL-1':[1268,575,'L1'],'GL-2':[1292,575,'L2'],
     'SS-C':[-52,750,'공'],'SS-M':[-30,750,'M'],'SS-A':[-8,750,'A']
@@ -2258,7 +2258,7 @@ if(CUR_VAR===18){
     'YL-1':[6,500,'L1'],'YL-2':[30,500,'L2'],'BZ-1':[18,575,'L1'],'BZ-2':[42,575,'L2'],
     'GL-1':[956,500,'L1'],'GL-2':[980,500,'L2'],'RL-1':[968,575,'L1'],'RL-2':[992,575,'L2'],
     'SS-C':[1248,500,'공'],'SS-M':[1270,500,'M'],'SS-A':[1292,500,'A'],
-    'PB0-N':[-32,750,'N'],'PB0-CN':[-8,750,'CN'],'PB1-CN':[-44,825,'CN'],'PB1-O':[-20,825,'O']
+    'PB0-N':[-32,750,'NC L1'],'PB0-CN':[-8,750,'NC L2'],'PB1-CN':[-44,825,'NO L1'],'PB1-O':[-20,825,'NO L2']
   });
   ['L1','L2','L3','PE'].forEach((k,i)=>LT['TB1-'+k]=[461+26*i,-72,k]);
   ['U1','V1','W1','PE'].forEach((k,i)=>LT['TB2-'+k]=[1110,1231+26*i,k]);
@@ -2266,7 +2266,7 @@ if(CUR_VAR===18){
   ['E1','E2','E3'].forEach((k,i)=>LT['TB4-'+k]=[524+26*i,1440,k]);
 } else {
 Object.assign(LT,{
-  'PB1-CN':[6,500,'CN'],'PB1-O':[30,500,'O'],'PB0-N':[18,575,'N'],'PB0-CN':[42,575,'CN'],
+  'PB1-CN':[6,500,'NO L1'],'PB1-O':[30,500,'NO L2'],'PB0-N':[18,575,'NC L1'],'PB0-CN':[42,575,'NC L2'],
   'SS-C':[298,500,'공'],'SS-M':[320,500,'M'],'SS-A':[342,500,'A'],
   'RL-1':[1256,500,'L1'],'RL-2':[1280,500,'L2'],'GL-1':[1268,575,'L1'],'GL-2':[1292,575,'L2'],
   'YL-1':[218,750,'L1'],'YL-2':[242,750,'L2'],'BZ-1':[206,825,'L1'],'BZ-2':[230,825,'L2']
@@ -2733,7 +2733,7 @@ const LCFG = CUR_VAR===18 ? {
 function layoutStatic(){
   const T=(x,y,t,c='lt c')=>`<text class="${c}" x="${x}" y="${y}">${t}</text>`;
   const scr=(id)=>{ const [x,y,l]=LT[id]; return `<circle class="lscr" cx="${x}" cy="${y}" r="5.5"/>`; };
-  const tl=(id,dx,dy,anchor='middle')=>{ const [x,y,l]=LT[id]; return `<text class="ltl" x="${x+dx}" y="${y+dy}" text-anchor="${anchor}">${l}</text>`; };
+  const tl=(id,dx,dy,anchor='middle')=>{ const [x,y,l]=LT[id]; if(/^N[CO] L\d$/.test(l)){ const [a1,a2]=l.split(' '); return `<text class="ltl" x="${x+dx}" y="${y+dy}" text-anchor="${anchor}" style="font-size:10px"><tspan x="${x+dx}">${a1}</tspan><tspan x="${x+dx}" dy="10">${a2}</tspan></text>`; } return `<text class="ltl" x="${x+dx}" y="${y+dy}" text-anchor="${anchor}">${l}</text>`; };
   const X0=PX0, C0=PX0+200;
   let o='';
   const [dt,dl,db]=LCFG.dims;
@@ -2743,7 +2743,7 @@ function layoutStatic(){
   o+=T(X0+40,695,'① PE 전선관','lt s')+T(X0+40,728,'② 플렉시블 전선관','lt s')+T(X0+40,761,'③ 케이블','lt s');
   const tbStrip=(arr,y,name,sy,ly)=>{ let r=`<rect class="bx" x="${X0+73}" y="${y}" width="254" height="30" rx="2" style="stroke-width:2"/>`;
     arr.forEach((c,i)=>{ const x=X0+73+12.7*i; if(i) r+=`<path class="bx2" d="M${x} ${y} V${y+30}" style="stroke-width:.8"/>`; const cx=x+6.35;
-      r+=`<circle class="lscr${c?'':' off'}" cx="${cx}" cy="${sy}" r="4"/>`; if(c) r+=`<text class="ltt" x="${cx}" y="${ly}">${c[1]||c[0]}</text>`; });
+      r+=`<circle class="lscr${c?'':' off'}" cx="${cx}" cy="${sy}" r="4"/>`; if(c){ const lb=c[1]||c[0]; if(/[ |]/.test(lb)){ const parts=lb.includes('|')?lb.split('|').map(t=>t.replace(' ','')):lb.split(' '); parts.forEach((t,k)=>{ r+=`<text class="ltt" x="${cx}" y="${ly-3+k*6}" style="font-size:5px">${t}</text>`; }); } else r+=`<text class="ltt" x="${cx}" y="${ly}">${lb}</text>`; } });
     return r+`<text class="ltl" x="${X0+65}" y="${y+19}" text-anchor="end" style="font-weight:700">${name}</text>`; };
   o+=tbStrip(TB5,485,'TB5',492,510)+tbStrip(TB6,805,'TB6',828,815);
   o+=`<circle class="bx" cx="${JX}" cy="50" r="32"/>`+`<text class="lt c" x="${JX}" y="6">J</text>`;
@@ -2998,7 +2998,7 @@ function ctrlSymbols1(){
   // SS · PB (외부 기구)
   s+=contact(S,60,95,'b')+contact(FC,60,95,'a')+L(S,60,FC,60)+L(FC+7,77.5,S-3.3,77.5,'dash')+L(FC+7,77.5,FC+13,77.5)+L(FC+13,73,FC+13,82)+T_(S+10,58,'SS','lbl sm')+T_(S+8,108,'M','tag')+T_(FC-14,108,'A','tag');
   s+=contact(S,120,160,'b',{pb:true,label:'PB0'})+contact(S,190,230,'a',{pb:true,label:'PB1'});
-  s+=T_(S-13,118,'N','tag')+T_(S-13,172,'C','tag')+T_(S-13,242,'O','tag');
+  s+=T_(S+6,120,'NC L1','tag')+T_(S+6,170,'NC L2','tag')+T_(S+6,188,'NO L1','tag')+T_(S+6,246,'NO L2','tag');
   s+=contact(TS,190,230,'a',{label:'T'});
   s+=contact(FC,230,270,'a',{label:'FLS'});
   s+=coil(FC,'X');
@@ -3024,7 +3024,7 @@ function ctrlSymbols2(){
   s+=T_(E1x-26,514,'TB4','tag');
   s+=contact(S,60,95,'b')+contact(FC,60,95,'a')+L(S,60,FC,60)+L(FC+7,77.5,S-3.3,77.5,'dash')+L(FC+7,77.5,FC+13,77.5)+L(FC+13,73,FC+13,82)+T_(S+10,58,'SS','lbl sm')+T_(S+8,108,'M','tag')+T_(FC-14,108,'A','tag');
   s+=contact(S,120,160,'b',{pb:true,label:'PB0'})+contact(S,190,230,'a',{pb:true,label:'PB1'});
-  s+=T_(S-13,118,'N','tag')+T_(S-13,172,'C','tag')+T_(S-13,242,'O','tag');
+  s+=T_(S+6,120,'NC L1','tag')+T_(S+6,170,'NC L2','tag')+T_(S+6,188,'NO L1','tag')+T_(S+6,246,'NO L2','tag');
   s+=contact(TS,190,230,'a',{label:'T'});
   s+=contact(FC,230,270,'a',{label:'FLS'});
   s+=coil(FC,'X')+coil(S,'T');
@@ -3041,12 +3041,12 @@ function ctrlSymbols18(){
   let s='';
   s+=`<circle class="fillp" cx="${EP}" cy="460" r="16"/>`+T_(EP,463.5,'EOCR','lbl c" style="font-size:9.5px;letter-spacing:-.3px');
   s+=contact(EA,110,150,'a',{label:'EOCR',eocr:1})+eocrTop()+lamp(EA,'YL');
-  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,24,'PB0','lbl c sm')+T_(458,60,'N','tag')+T_(PBq-4,60,'C','tag');
+  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag" text-anchor="middle')+T_(PBq,31,'NC L2','tag" text-anchor="middle');
   [[c1,'LS1','X1'],[c2,'LS2','X2']].forEach(([x,ls,xc])=>{ s+=contact(x,60,100,'a',{label:ls})+T_(x-12,66,'N','tag')+T_(x-12,108,'O','tag')+coil(x,xc,true); });
-  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-12,108,'O','tag')+contact(c4,60,100,'a',{label:'T1'});
+  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-6,108,'NO L2','tag" text-anchor="end')+contact(c4,60,100,'a',{label:'T1'});
   s+=contact(c3,130,170,'a',{label:'X1'})+contact(c3,190,230,'b',{label:'X2'});
   s+=coil(c3,'MC1',true)+coil(c4,'T1',true)+contact(c5,70,110,'a',{label:'MC1'})+lamp(c5,'RL');
-  s+=contact(c6,60,100,'a',{pb:true,label:'PB2'})+T_(c6-12,66,'N','tag')+T_(c6-12,108,'O','tag')+contact(c7,60,100,'a',{label:'T2'});
+  s+=contact(c6,60,100,'a',{pb:true,label:'PB2'})+T_(c6-6,68,'NO L1','tag" text-anchor="end')+T_(c6-6,108,'NO L2','tag" text-anchor="end')+contact(c7,60,100,'a',{label:'T2'});
   s+=contact(c6,130,170,'b',{label:'X1'})+contact(c6,190,230,'a',{label:'X2'});
   s+=coil(c6,'MC2',true)+coil(c7,'T2',true)+contact(c8,70,110,'a',{label:'MC2'})+lamp(c8,'GL');
   s+=contact(c9,60,100,'a',{timer:true,label:'T1',lx:22})+contact(c10,60,100,'a',{timer:true,label:'T2',lx:22})+lamp(c9,'WL');
@@ -3057,12 +3057,12 @@ function ctrlSymbols17(){
   let s='';
   s+=`<circle class="fillp" cx="${EP}" cy="460" r="16"/>`+T_(EP,463.5,'EOCR','lbl c" style="font-size:9.5px;letter-spacing:-.3px');
   s+=contact(EA,110,150,'a',{label:'EOCR',eocr:1})+eocrTop()+lamp(EA,'YL');
-  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,24,'PB0','lbl c sm')+T_(458,60,'N','tag')+T_(PBq-4,60,'C','tag');
+  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag" text-anchor="middle')+T_(PBq,31,'NC L2','tag" text-anchor="middle');
   [[c1,'LS1','X1'],[c2,'LS2','X2']].forEach(([x,ls,xc])=>{ s+=contact(x,60,100,'a',{label:ls})+T_(x-12,66,'N','tag')+T_(x-12,108,'O','tag')+coil(x,xc,true); });
-  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-12,108,'O','tag')+contact(c4,60,100,'a',{label:'T1'});
+  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-6,108,'NO L2','tag" text-anchor="end')+contact(c4,60,100,'a',{label:'T1'});
   s+=contact(c3,160,200,'a',{label:'X1'})+contact(c3,220,260,'b',{label:'X2'})+contact(c4,160,200,'b',{label:'X1'})+contact(c4,220,260,'a',{label:'X2'});
   s+=coil(c3,'MC1',true)+coil(c4,'T1',true)+contact(c5,70,110,'a',{label:'MC1'})+lamp(c5,'RL');
-  s+=contact(c6,60,100,'a',{pb:true,label:'PB2'})+T_(c6-12,66,'N','tag')+T_(c6-12,108,'O','tag')+contact(c7,60,100,'a',{label:'T2'});
+  s+=contact(c6,60,100,'a',{pb:true,label:'PB2'})+T_(c6-6,68,'NO L1','tag" text-anchor="end')+T_(c6-6,108,'NO L2','tag" text-anchor="end')+contact(c7,60,100,'a',{label:'T2'});
   s+=contact(c6,160,200,'a',{timer:true,label:'T1',lx:22})+contact(c6,270,310,'b',{timer:true,label:'T2',lx:-34})+contact(c7,270,310,'a',{timer:true,label:'T2',lx:22});
   s+=coil(c6,'MC2',true)+lamp(c7,'WL')+coil(c8,'T2',true)+contact(c9,70,110,'a',{label:'MC2'})+lamp(c9,'GL');
   return s;
@@ -3072,11 +3072,11 @@ function ctrlSymbols16(){
   let s='';
   s+=`<circle class="fillp" cx="${EP}" cy="460" r="16"/>`+T_(EP,463.5,'EOCR','lbl c" style="font-size:9.5px;letter-spacing:-.3px');
   s+=contact(EA,110,150,'a',{label:'EOCR',eocr:1})+eocrTop()+lamp(EA,'YL');
-  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,24,'PB0','lbl c sm')+T_(458,60,'N','tag')+T_(PBq-4,60,'C','tag');
+  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag" text-anchor="middle')+T_(PBq,31,'NC L2','tag" text-anchor="middle');
   [[c1,'LS1','T1'],[c2,'LS2','T2']].forEach(([x,ls,tc])=>{ s+=contact(x,60,100,'a',{label:ls})+T_(x-12,66,'N','tag')+T_(x-12,108,'O','tag')+coil(x,tc,true); });
-  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-12,108,'O','tag')+contact(c4,60,100,'a',{label:'X1'})+contact(c5,60,100,'a',{timer:true,label:'T1',lx:22});
+  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-6,108,'NO L2','tag" text-anchor="end')+contact(c4,60,100,'a',{label:'X1'})+contact(c5,60,100,'a',{timer:true,label:'T1',lx:22});
   s+=coil(c3,'MC1',true)+coil(c4,'X1',true)+contact(c6,70,110,'a',{label:'MC1'})+lamp(c6,'RL');
-  s+=contact(c7,60,100,'a',{pb:true,label:'PB2'})+T_(c7-12,66,'N','tag')+T_(c7-12,108,'O','tag')+contact(c8,60,100,'a',{label:'X2'})+contact(c9,60,100,'a',{label:'T2'});
+  s+=contact(c7,60,100,'a',{pb:true,label:'PB2'})+T_(c7-6,68,'NO L1','tag" text-anchor="end')+T_(c7-6,108,'NO L2','tag" text-anchor="end')+contact(c8,60,100,'a',{label:'X2'})+contact(c9,60,100,'a',{label:'T2'});
   s+=contact(c7,170,210,'a',{label:'T1'})+contact(c7,280,320,'b',{timer:true,label:'T2',lx:-34})+contact(c8,280,320,'a',{timer:true,label:'T2',lx:22});
   s+=coil(c7,'MC2',true)+lamp(c8,'WL')+coil(c9,'X2',true)+contact(c10,70,110,'a',{label:'MC2'})+lamp(c10,'GL');
   return s;
@@ -3086,12 +3086,12 @@ function ctrlSymbols15(){
   let s='';
   s+=`<circle class="fillp" cx="${EP}" cy="460" r="16"/>`+T_(EP,463.5,'EOCR','lbl c" style="font-size:9.5px;letter-spacing:-.3px');
   s+=contact(EA,110,150,'a',{label:'EOCR',eocr:1})+eocrTop()+lamp(EA,'YL');
-  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,24,'PB0','lbl c sm')+T_(458,60,'N','tag')+T_(PBq-4,60,'C','tag');
+  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag" text-anchor="middle')+T_(PBq,31,'NC L2','tag" text-anchor="middle');
   [[c1,'LS1','X1'],[c2,'LS2','X2']].forEach(([x,ls,xc])=>{ s+=contact(x,60,100,'a',{label:ls})+T_(x-12,66,'N','tag')+T_(x-12,108,'O','tag')+coil(x,xc,true); });
-  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-12,108,'O','tag')+contact(c4,60,100,'a',{label:'T1'});
+  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-6,108,'NO L2','tag" text-anchor="end')+contact(c4,60,100,'a',{label:'T1'});
   s+=contact(c3,150,190,'a',{label:'X1'})+contact(cb,150,190,'a',{label:'X2'})+contact(c3,250,290,'b',{timer:true,label:'T1',lx:30});
   s+=coil(c3,'MC1',true)+coil(c4,'T1',true)+contact(c5,70,110,'a',{label:'MC1'})+lamp(c5,'RL');
-  s+=contact(c6,60,100,'a',{pb:true,label:'PB2'})+T_(c6-12,66,'N','tag')+T_(c6-12,108,'O','tag')+contact(c7,60,100,'a',{label:'T2'});
+  s+=contact(c6,60,100,'a',{pb:true,label:'PB2'})+T_(c6-6,68,'NO L1','tag" text-anchor="end')+T_(c6-6,108,'NO L2','tag" text-anchor="end')+contact(c7,60,100,'a',{label:'T2'});
   s+=contact(c6,130,170,'a',{label:'X1'})+contact(c6,190,230,'a',{label:'X2'})+contact(c6,280,320,'b',{timer:true,label:'T2',lx:30});
   s+=coil(c6,'MC2',true)+coil(c7,'T2',true)+contact(c8,70,110,'a',{label:'MC2'})+lamp(c8,'GL');
   s+=contact(c9,60,100,'b',{label:'MC1'})+contact(c9,130,170,'b',{label:'MC2'})+lamp(c9,'WL');
@@ -3102,12 +3102,12 @@ function ctrlSymbols14(){
   let s='';
   s+=`<circle class="fillp" cx="${EP}" cy="460" r="16"/>`+T_(EP,463.5,'EOCR','lbl c" style="font-size:9.5px;letter-spacing:-.3px');
   s+=contact(EA,110,150,'a',{label:'EOCR',eocr:1})+eocrTop()+lamp(EA,'YL');
-  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,24,'PB0','lbl c sm')+T_(458,60,'N','tag')+T_(PBq-4,60,'C','tag');
+  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag" text-anchor="middle')+T_(PBq,31,'NC L2','tag" text-anchor="middle');
   [[c1,'LS1','X1'],[c2,'LS2','X2']].forEach(([x,ls,xc])=>{ s+=contact(x,60,100,'a',{label:ls})+T_(x-12,66,'N','tag')+T_(x-12,108,'O','tag')+coil(x,xc,true); });
-  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-12,108,'O','tag')+contact(c4,60,100,'a',{label:'T1'});
+  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-6,108,'NO L2','tag" text-anchor="end')+contact(c4,60,100,'a',{label:'T1'});
   s+=contact(c3,150,190,'a',{label:'X1'})+contact(c3,210,250,'a',{label:'X2'})+contact(c3,270,310,'b',{timer:true,label:'T1',lx:30});
   s+=coil(c3,'MC1',true)+coil(c4,'T1',true)+contact(c5,70,110,'a',{label:'MC1'})+lamp(c5,'RL');
-  s+=contact(c6,60,100,'a',{pb:true,label:'PB2'})+T_(c6-12,66,'N','tag')+T_(c6-12,108,'O','tag')+contact(c7,60,100,'a',{label:'T2'});
+  s+=contact(c6,60,100,'a',{pb:true,label:'PB2'})+T_(c6-6,68,'NO L1','tag" text-anchor="end')+T_(c6-6,108,'NO L2','tag" text-anchor="end')+contact(c7,60,100,'a',{label:'T2'});
   s+=contact(c6,160,200,'a',{label:'X1'})+contact(c7,160,200,'a',{label:'X2'})+contact(c6,270,310,'b',{timer:true,label:'T2',lx:30});
   s+=coil(c6,'MC2',true)+coil(c7,'T2',true)+contact(c8,70,110,'a',{label:'MC2'})+lamp(c8,'GL');
   s+=contact(c9,60,100,'b',{label:'MC1'})+contact(c9,130,170,'b',{label:'MC2'})+lamp(c9,'WL');
@@ -3117,9 +3117,9 @@ function ctrlSymbols13(){
   let s='';
   s+=`<circle class="fillp" cx="${EP}" cy="460" r="16"/>`+T_(EP,463.5,'EOCR','lbl c" style="font-size:9.5px;letter-spacing:-.3px');
   s+=contact(EA,110,150,'a',{label:'EOCR',eocr:1})+eocrTop()+lamp(EA,'YL');
-  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,24,'PB0','lbl c sm')+T_(458,60,'N','tag')+T_(PBq-4,60,'C','tag');
+  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag" text-anchor="middle')+T_(PBq,31,'NC L2','tag" text-anchor="middle');
   const [a,b,c,d,e,f]=G;
-  [[a,1],[d,2]].forEach(([x,n])=>{ s+=contact(x,60,100,'a',{pb:true})+(n===2?T_(x-12,66,'N','tag'):'')+T_(x-12,108,'O','tag')+T_(x-50,n===1?85:62,'PB'+n,'lbl sm'); });
+  [[a,1],[d,2]].forEach(([x,n])=>{ s+=contact(x,60,100,'a',{pb:true})+(n===2?T_(x-6,68,'NO L1','tag" text-anchor="end'):'')+T_(x-6,108,'NO L2','tag" text-anchor="end')+T_(x-58,n===1?85:124,'PB'+n,'lbl sm'); });
   s+=contact(b,60,100,'a',{label:'X1'})+contact(c,60,100,'a',{label:'LS1'})+T_(c-12,66,'N','tag')+T_(c-12,108,'O','tag');
   s+=contact(a,160,200,'b',{timer:true,label:'T2',lx:30});
   s+=contact(e,60,100,'a',{label:'X2'})+contact(f,60,100,'a',{timer:true,label:'T1',lx:22});
@@ -3134,9 +3134,9 @@ function ctrlSymbols12(){
   let s='';
   s+=`<circle class="fillp" cx="${EP}" cy="460" r="16"/>`+T_(EP,463.5,'EOCR','lbl c" style="font-size:9.5px;letter-spacing:-.3px');
   s+=contact(EA,110,150,'a',{label:'EOCR',eocr:1})+eocrTop()+lamp(EA,'YL');
-  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,24,'PB0','lbl c sm')+T_(458,60,'N','tag')+T_(PBq-4,60,'C','tag');
+  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag" text-anchor="middle')+T_(PBq,31,'NC L2','tag" text-anchor="middle');
   const [a,b,c,d,e,f]=G;
-  [[a,1],[d,2]].forEach(([x,n])=>{ s+=contact(x,60,100,'a',{pb:true})+(n===2?T_(x-12,66,'N','tag'):'')+T_(x-12,108,'O','tag')+T_(x-50,n===1?85:62,'PB'+n,'lbl sm'); });
+  [[a,1],[d,2]].forEach(([x,n])=>{ s+=contact(x,60,100,'a',{pb:true})+(n===2?T_(x-6,68,'NO L1','tag" text-anchor="end'):'')+T_(x-6,108,'NO L2','tag" text-anchor="end')+T_(x-58,n===1?85:124,'PB'+n,'lbl sm'); });
   s+=contact(b,60,100,'a',{label:'X1'})+contact(c,60,100,'a',{timer:true,label:'T2',lx:22});
   s+=contact(e,60,100,'a',{label:'X2'})+contact(f,60,100,'a',{timer:true,label:'T1',lx:22});
   s+=coil(a,'X1',true)+contact(b,260,300,'a',{label:'LS1',lx:-44})+T_(b-12,258,'N','tag')+T_(b-12,312,'O','tag')+coil(b,'MC1',true)+contact(c,260,300,'b',{label:'MC1'})+coil(c,'T1',true);
@@ -3150,9 +3150,9 @@ function ctrlSymbols11(){
   let s='';
   s+=`<circle class="fillp" cx="${EP}" cy="460" r="16"/>`+T_(EP,463.5,'EOCR','lbl c" style="font-size:9.5px;letter-spacing:-.3px');
   s+=contact(EA,110,150,'a',{label:'EOCR',eocr:1})+eocrTop()+lamp(EA,'YL');
-  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,24,'PB0','lbl c sm')+T_(458,60,'N','tag')+T_(PBq-4,60,'C','tag');
+  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag" text-anchor="middle')+T_(PBq,31,'NC L2','tag" text-anchor="middle');
   [[1,2,0],[2,1,3]].forEach(([n,m,k])=>{ const a=G[k],b=G[k+1],c=G[k+2];
-    s+=contact(a,60,100,'a',{pb:true})+(n===2?T_(a-12,66,'N','tag'):'')+T_(a-12,108,'O','tag')+T_(a-50,85,'PB'+n,'lbl sm');
+    s+=contact(a,60,100,'a',{pb:true})+(n===2?T_(a-6,68,'NO L1','tag" text-anchor="end'):'')+T_(a-6,108,'NO L2','tag" text-anchor="end')+T_(a-50,85,'PB'+n,'lbl sm');
     s+=contact(b,60,100,'a',{timer:true,label:'T'+n,lx:22})+coil(a,'X'+n,true);
     s+=contact(b,260,300,'a',{label:'LS'+n,lx:-44})+T_(b-12,258,'N','tag')+T_(b-12,312,'O','tag')+coil(b,'MC'+n,true);
     s+=contact(c,260,300,'b',{label:'X'+m})+coil(c,'T'+n,true); });
@@ -3166,9 +3166,9 @@ function ctrlSymbols10(){
   let s='';
   s+=`<circle class="fillp" cx="${EP}" cy="460" r="16"/>`+T_(EP,463.5,'EOCR','lbl c" style="font-size:9.5px;letter-spacing:-.3px');
   s+=contact(EA,110,150,'a',{label:'EOCR',eocr:1})+eocrTop()+lamp(EA,'YL');
-  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,24,'PB0','lbl c sm')+T_(458,60,'N','tag')+T_(PBq-4,60,'C','tag');
+  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag" text-anchor="middle')+T_(PBq,31,'NC L2','tag" text-anchor="middle');
   [[1,0],[2,3]].forEach(([n,k])=>{ const a=G[k],b=G[k+1],c=G[k+2];
-    s+=contact(a,60,100,'a',{pb:true})+(n===2?T_(a-12,66,'N','tag'):'')+T_(a-12,108,'O','tag')+T_(a-50,85,'PB'+n,'lbl sm');
+    s+=contact(a,60,100,'a',{pb:true})+(n===2?T_(a-6,68,'NO L1','tag" text-anchor="end'):'')+T_(a-6,108,'NO L2','tag" text-anchor="end')+T_(a-50,85,'PB'+n,'lbl sm');
     s+=contact(b,60,100,'a',{label:'X'+n})+coil(a,'X'+n,true);
     s+=contact(b,260,300,'a',{label:'LS'+n,lx:-44})+T_(b-12,258,'N','tag')+T_(b-12,312,'O','tag')+coil(b,'T'+n,true);
     s+=contact(c,260,300,'a',{timer:true,label:'T'+n,lx:22})+coil(c,'MC'+n,true); });
@@ -3191,7 +3191,7 @@ function ctrlSymbols9(){
   [E1x,E2x,E3x].forEach((x,i)=>{ s+=`<rect class="fillp" x="${x-5}" y="505" width="10" height="10"/>`+T_(x,524,['E1','E2','E3'][i],'tag" text-anchor="middle'); });
   s+=T_(E1x-26,514,'TB4','tag');
   s+=contact(S,120,160,'b',{pb:true,label:'PB0'})+contact(S,190,230,'a',{pb:true,label:'PB1'});
-  s+=T_(S-13,118,'N','tag')+T_(S-13,172,'C','tag')+T_(S-13,242,'O','tag');
+  s+=T_(S+6,120,'NC L1','tag')+T_(S+6,170,'NC L2','tag')+T_(S+6,188,'NO L1','tag')+T_(S+6,246,'NO L2','tag');
   s+=contact(TS,190,230,'a',{label:'X'})+coil(S,'X')+coil(TS,'T');
   s+=contact(TH,70,110,'a',{timer:true,label:'T',lx:20})+coil(TH,'MC2',true);
   s+=contact(RLx,70,110,'a',{label:'MC1'})+contact(GLx,70,110,'a',{label:'MC2'});
@@ -3210,7 +3210,7 @@ function ctrlSymbols8(){
   s+=contact(FC,230,270,'a',{label:'FLS'})+coil(FC,'X')+coil(FRc8,'FR');
   s+=contact(YLx,330,370,'b',{label:'FR',lx:30,flicker:1})+lamp(YLx,'YL');
   s+=contact(S,120,160,'b',{pb:true,label:'PB0'})+contact(S,190,230,'a',{pb:true,label:'PB1'});
-  s+=T_(S-13,118,'N','tag')+T_(S-13,172,'C','tag')+T_(S-13,242,'O','tag');
+  s+=T_(S+6,120,'NC L1','tag')+T_(S+6,170,'NC L2','tag')+T_(S+6,188,'NO L1','tag')+T_(S+6,246,'NO L2','tag');
   s+=contact(TS,190,230,'a',{label:'T'})+contact(S,290,330,'b',{label:'X'})+coil(S,'T');
   s+=contact(XA,60,100,'a',{label:'X'})+contact(TH,230,270,'b',{timer:true,label:'T',lx:-30});
   s+=coil(XA,'MC1',true)+coil(TH,'MC2',true);
@@ -3230,7 +3230,7 @@ function ctrlSymbols7(){
   s+=contact(FC,60,95,'a')+contact(S,60,95,'b')+L(FC+7,77.5,S-3.3,77.5,'dash')+L(FC+7,77.5,FC+13,77.5)+L(FC+13,73,FC+13,82)+T_(S+10,58,'SS','lbl sm')+T_(FC-14,108,'A','tag')+T_(S+8,108,'M','tag');
   s+=contact(FC,230,270,'a',{label:'FLS'})+coil(FC,'FR');
   s+=contact(S,120,160,'b',{pb:true,label:'PB0'})+contact(S,190,230,'a',{pb:true,label:'PB1'});
-  s+=T_(S-13,118,'N','tag')+T_(S-13,172,'C','tag')+T_(S-13,242,'O','tag');
+  s+=T_(S+6,120,'NC L1','tag')+T_(S+6,170,'NC L2','tag')+T_(S+6,188,'NO L1','tag')+T_(S+6,246,'NO L2','tag');
   s+=contact(TS,190,230,'a',{label:'X'})+coil(S,'X');
   s+=contact(XA,60,100,'a',{label:'X'})+contact(XA,150,190,'b',{label:'FR',lx:30,flicker:1})+coil(XA,'T');
   s+=contact(M1,330,370,'b',{timer:true,label:'T',lx:-30})+contact(TH,330,370,'a',{timer:true,label:'T',lx:22});
@@ -3251,7 +3251,7 @@ function ctrlSymbols6(){
   s+=contact(FLSx,60,95,'a')+contact(S,60,95,'b')+L(FLSx+7,77.5,S-3.3,77.5,'dash')+L(FLSx+7,77.5,FLSx+13,77.5)+L(FLSx+13,73,FLSx+13,82)+T_(S+10,58,'SS','lbl sm')+T_(FLSx-14,108,'A','tag')+T_(S+8,108,'M','tag');
   s+=contact(FC,230,270,'a',{label:'FLS'})+coil(FC,'X');
   s+=contact(S,120,160,'b',{pb:true,label:'PB0'})+contact(S,190,230,'a',{pb:true,label:'PB1'});
-  s+=T_(S-13,118,'N','tag')+T_(S-13,172,'C','tag')+T_(S-13,242,'O','tag');
+  s+=T_(S+6,120,'NC L1','tag')+T_(S+6,170,'NC L2','tag')+T_(S+6,188,'NO L1','tag')+T_(S+6,246,'NO L2','tag');
   s+=contact(TS,190,230,'a',{label:'T'})+contact(S,290,330,'b',{label:'X'})+coil(S,'T');
   s+=contact(XA,60,100,'a',{label:'X'})+contact(XA,330,370,'a',{timer:true,label:'T',lx:22})+coil(XA,'FR');
   s+=contact(M1,330,370,'b',{label:'FR',lx:30,flicker:1})+coil(M1,'MC1',true)+lamp(RLx,'RL');
@@ -3271,7 +3271,7 @@ function ctrlSymbols5(){
   s+=contact(FLSx,60,95,'a')+contact(S,60,95,'b')+L(FLSx+7,77.5,S-3.3,77.5,'dash')+L(FLSx+7,77.5,FLSx+13,77.5)+L(FLSx+13,73,FLSx+13,82)+T_(S+10,58,'SS','lbl sm')+T_(FLSx-14,108,'A','tag')+T_(S+8,108,'M','tag');
   s+=contact(FC,230,270,'a',{label:'FLS'})+coil(FC,'X')+coil(TCx,'T');
   s+=contact(S,120,160,'b',{pb:true,label:'PB0'})+contact(S,190,230,'a',{pb:true,label:'PB1'});
-  s+=T_(S-13,118,'N','tag')+T_(S-13,172,'C','tag')+T_(S-13,242,'O','tag');
+  s+=T_(S+6,120,'NC L1','tag')+T_(S+6,170,'NC L2','tag')+T_(S+6,188,'NO L1','tag')+T_(S+6,246,'NO L2','tag');
   s+=contact(TS,190,230,'a',{label:'X'});
   s+=contact(FRc,330,370,'b',{timer:true,label:'T',lx:26})+coil(FRc,'FR');
   s+=contact(M1,330,370,'b',{label:'FR',lx:15,flicker:1})+contact(TH,330,370,'a',{label:'FR',lx:18,flicker:1});
@@ -3293,7 +3293,7 @@ function ctrlSymbols4(){
   s+=contact(FC,60,95,'a')+contact(S,60,95,'b')+L(FC+7,77.5,S-3.3,77.5,'dash')+L(FC+7,77.5,FC+13,77.5)+L(FC+13,73,FC+13,82)+T_(S+10,58,'SS','lbl sm')+T_(FC-14,108,'A','tag')+T_(S+8,108,'M','tag');
   s+=contact(FC,230,270,'a',{label:'FLS'})+coil(FC,'FR');
   s+=contact(S,120,160,'b',{pb:true,label:'PB0'})+contact(S,190,230,'a',{pb:true,label:'PB1'});
-  s+=T_(S-13,118,'N','tag')+T_(S-13,172,'C','tag')+T_(S-13,242,'O','tag');
+  s+=T_(S+6,120,'NC L1','tag')+T_(S+6,170,'NC L2','tag')+T_(S+6,188,'NO L1','tag')+T_(S+6,246,'NO L2','tag');
   s+=contact(TS,190,230,'a',{label:'X'})+coil(S,'X');
   s+=contact(XA,60,100,'a',{label:'X'});
   s+=contact(XA,230,270,'b',{label:'FR',lx:-32,flicker:1})+contact(TH,230,270,'a',{label:'FR',lx:20,flicker:1});
@@ -3318,7 +3318,7 @@ function ctrlSymbols3(){
   [E1x,E2x,E3x].forEach((x,i)=>{ s+=`<rect class="fillp" x="${x-5}" y="505" width="10" height="10"/>`+T_(x,524,['E1','E2','E3'][i],'tag" text-anchor="middle'); });
   s+=T_(E1x-26,514,'TB4','tag');
   s+=contact(S,120,160,'b',{pb:true,label:'PB0'})+contact(S,190,230,'a',{pb:true,label:'PB1'});
-  s+=T_(S-13,118,'N','tag')+T_(S-13,172,'C','tag')+T_(S-13,242,'O','tag');
+  s+=T_(S+6,120,'NC L1','tag')+T_(S+6,170,'NC L2','tag')+T_(S+6,188,'NO L1','tag')+T_(S+6,246,'NO L2','tag');
   s+=contact(TS,190,230,'a',{label:'T'})+contact(TS,290,330,'a',{timer:true,label:'T',lx:22});
   s+=coil(S,'T')+coil(TS,'X');
   s+=contact(RLx,70,110,'a',{label:'MC1'})+contact(GLx,70,110,'a',{label:'MC2'});
@@ -3527,7 +3527,7 @@ function panelSVG(){
   s+=`<rect class="duct" x="${MARGIN.L[0]-2}" y="${CH.top[0]}" width="${MARGIN.L[1]-MARGIN.L[0]+4}" height="${CH.bot[1]-CH.top[0]}" rx="1.5"/><rect class="duct" x="${MARGIN.R[0]-2}" y="${CH.top[0]}" width="${MARGIN.R[1]-MARGIN.R[0]+4}" height="${CH.bot[1]-CH.top[0]}" rx="1.5"/>`;
   const tb=(arr,y,name,screwY,t1,t2)=>{
     let o=`<rect class="part" x="${TBX}" y="${y}" width="${TBW}" height="30" rx="1.5"/>`;
-    arr.forEach((c,i)=>{ const x=TBX+CELL*i; if(i) o+=L(x,y,x,y+30,'tbdiv'); if(c){ o+=`<text class="tbtxt" x="${x+CELL/2}" y="${t1}">${c[0]}</text>`; if(c[1]) o+=`<text class="tbsub" x="${x+CELL/2}" y="${t2}">${c[1]}</text>`; } else o+=`<g class="pin blank"><circle cx="${x+CELL/2}" cy="${screwY}" r="3.1"/></g>`; });
+    arr.forEach((c,i)=>{ const x=TBX+CELL*i; if(i) o+=L(x,y,x,y+30,'tbdiv'); if(c){ o+=`<text class="tbtxt" x="${x+CELL/2}" y="${t1}">${c[0]}</text>`; if(c[1]) c[1].split('|').forEach((t,k)=>{ o+=`<text class="tbsub" x="${x+CELL/2}" y="${t2+k*3.4}" style="${c[1].length>4?'font-size:2.7px':''}">${t}</text>`; }); } else o+=`<g class="pin blank"><circle cx="${x+CELL/2}" cy="${screwY}" r="3.1"/></g>`; });
     return o+`<text class="tbsub" x="${TBX-3}" y="${y+17}" text-anchor="end" style="text-anchor:end;font-size:4.5px;font-weight:700">${name}</text>`;
   };
   s+=tb(TB5,35,'TB5',59,43,50)+tb(TB6,355,'TB6',361,373,380);
