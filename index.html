@@ -99,7 +99,7 @@ button{font:inherit;color:inherit}
 #sch .sym .fillp{fill:var(--paper)}
 #sch .sym .term{fill:var(--paper);stroke-width:1.2}
 #sch .sym .dash{stroke-dasharray:4 3;stroke-width:1.1}
-#sch .sym .lampYL{fill:rgba(230,180,0,.28)} #sch .sym .lampRL{fill:rgba(220,60,50,.2)} #sch .sym .lampGL{fill:rgba(40,160,80,.2)} #sch .sym .lampWL{fill:rgba(150,160,170,.18)}
+#sch .sym .lampYL{fill:rgba(230,180,0,.28)} #sch .sym .lampRL{fill:rgba(220,60,50,.2)} #sch.mode-pins .pbtag{display:none} #sch .pbtag{fill:#D0306A!important;font-size:10px;font-weight:700} #sch .sym .lampGL{fill:rgba(40,160,80,.2)} #sch .sym .lampWL{fill:rgba(150,160,170,.18)}
 #sch .ext{stroke:var(--ink-soft);stroke-width:1.4;fill:none;stroke-dasharray:3 2}
 #sch .jn{fill:var(--ink)}
 #sch .lbl{fill:var(--ink);font-size:12px;font-weight:600;stroke:none}
@@ -269,7 +269,7 @@ button{font:inherit;color:inherit}
   <header class="top">
     <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px">
       <h1>전기기능사 실기 연습장</h1>
-      <button class="btn" id="resetAll" title="이 브라우저에 저장된 내 진도를 모두 지웁니다">처음부터 다시 하기</button>
+      <button class="btn" id="resetAll" title="지금 보고 있는 문제의 진도만 지웁니다. 다른 문제의 진도는 그대로 남습니다.">처음부터 다시 하기</button>
     </div>
     <p>공개문제 도면에 핀번호를 적어 보고, 도면의 선을 눌러 주어진 배치판에 실제 작업처럼 배선해 보세요.</p>
   </header>
@@ -1106,8 +1106,8 @@ const EL_C4 = {
   M2_A:{comp:'MC2',name:'MC2 보조 a접점 (GL)',ans:[4,10],slots:V(GLx,70,110)}
 };
 const EL = Object.assign({}, EL_MAIN, ({1:EL_C1,2:EL_C2,3:EL_C3,4:EL_C4,5:EL_C5,6:EL_C6,7:EL_C7,8:EL_C8,9:EL_C9,10:EL_C10,11:EL_C11,12:EL_C12,13:EL_C13,14:EL_C14,15:EL_C15,16:EL_C16,17:EL_C17,18:EL_C18})[CUR_VAR]);
-const EL_IDS = Object.keys(EL);
-const TOTAL_SLOTS = EL_IDS.reduce((n,id)=>n+EL[id].ans.length,0);
+let EL_IDS = Object.keys(EL);
+let TOTAL_SLOTS = EL_IDS.reduce((n,id)=>n+EL[id].ans.length,0);
 
 /* ================= 2단계: 배선 목록 =================
    도면의 선 1개 = 제어함 전선 1가닥. a/b는 제어함 단자 id */
@@ -2904,17 +2904,45 @@ const sel={slot:null,wire:null,hint:null,fresh:null,duct:null,dhint:null,dfresh:
 const ducted=new Set((state.ducts||[]).filter(id=>DUCTS.some(d=>d.id===id)));
 let ST={};
 function save(){ state.wired=[...wired]; state.ducts=[...ducted]; try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} }
+/* 1단계 채점: 칸별 집계(WEB-01)
+   - 순서가 정해진 항목(주회로·전극·표시등 L1/L2)과, 같은 기구의 공통 핀을 함께 쓰는 접점은 칸 위치까지 본다.
+   - 그 밖의 접점·코일은 방향과 무관하게 맞은 번호를 칸마다 센다(중복 입력은 한 번만 인정).
+   - EOCR의 ⑪은 기구 안에서 ⑩과 이어져 있으므로 EOCR 접점의 ⑩ 자리에 한해 ⑪도 정답으로 본다. */
+let SL={}, RS={};
+const EOCR_ALT=(e,v)=>(e.comp==='EOCR' && v===11 && e.ans.includes(10)) ? 10 : v;
+function sharedCommons(){
+  const m={}, ids=EL_IDS.filter(id=>!EL[id].exact && !EL[id].pow);
+  ids.forEach(a=>ids.forEach(b=>{
+    if (a===b || EL[a].comp!==EL[b].comp) return;
+    const c=EL[a].ans.find(v=>EL[b].ans.includes(v));
+    if (c!=null) m[a]=c;
+  }));
+  return m;
+}
 function computeStatus(){
-  const st={};
+  const st={}; SL={}; RS={};
+  const common=sharedCommons();
   for (const id of EL_IDS){
-    const e=EL[id], u=state.pins[id]||[];
-    const filled=e.ans.filter((_,i)=>u[i]!=null).length;
-    if (filled<e.ans.length){ st[id]=filled?'part':'empty'; continue; }
-    const ok = e.exact ? e.ans.every((v,i)=>u[i]===v) : [...u].sort((a,b)=>a-b).join()===[...e.ans].sort((a,b)=>a-b).join();
-    st[id]=ok?'ok':'bad';
+    const e=EL[id], n=e.ans.length;
+    const u=Array.from({length:n},(_,i)=>{ const v=(state.pins[id]||[])[i]; return v==null?null:EOCR_ALT(e,v); });
+    const ordered=!!e.exact || common[id]!=null;
+    const ok=Array(n).fill(null);
+    if (ordered){ for(let i=0;i<n;i++) if(u[i]!=null) ok[i]=(u[i]===e.ans[i]); }
+    else { const rem=[...e.ans]; for(let i=0;i<n;i++) if(u[i]!=null){ const k=rem.indexOf(u[i]); if(k>=0){ ok[i]=true; rem.splice(k,1); } else ok[i]=false; } }
+    SL[id]=ok;
+    const filled=ok.filter(x=>x!=null).length;
+    if (!filled) st[id]='empty';
+    else if (ok.every(x=>x===true)) st[id]='ok';
+    else if (ok.some(x=>x===false)) st[id]='bad';
+    else st[id]='part';
+    if (st[id]==='bad' && common[id]!=null && filled===n){
+      const a=[...u].sort((x,y)=>x-y).join(), b=[...e.ans].sort((x,y)=>x-y).join();
+      if (a===b) RS[id]={type:'common',pin:common[id]};
+    }
   }
   return st;
 }
+function okSlotCount(){ return EL_IDS.reduce((n,id)=>n+(SL[id]||[]).filter(x=>x===true).length,0); }
 
 /* ================= 도면 기호 ================= */
 const L=(x1,y1,x2,y2,c)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"${c?` class="${c}"`:''}/>`;
@@ -2960,6 +2988,7 @@ function coil(x,label,small){
   return L(x,444,x,444)+`<circle class="fillp" cx="${x}" cy="460" r="16"/>`+`<text class="lbl c${small?' sm':''}" x="${x}" y="${small?464:465}">${label}</text>`;
 }
 function lamp(x,label){
+  if(window.__rec) window.__rec.push([x,label]);
   const d=11.3;
   return `<circle class="lamp${label}" cx="${x}" cy="460" r="16"/>`+L(x-d,460-d,x+d,460+d)+L(x-d,460+d,x+d,460-d)+T_(x+6,500,label,'lbl sm');
 }
@@ -2998,7 +3027,7 @@ function ctrlSymbols1(){
   // SS · PB (외부 기구)
   s+=contact(S,60,95,'b')+contact(FC,60,95,'a')+L(S,60,FC,60)+L(FC+7,77.5,S-3.3,77.5,'dash')+L(FC+7,77.5,FC+13,77.5)+L(FC+13,73,FC+13,82)+T_(S+10,58,'SS','lbl sm')+T_(S+8,108,'M','tag')+T_(FC-14,108,'A','tag');
   s+=contact(S,120,160,'b',{pb:true,label:'PB0'})+contact(S,190,230,'a',{pb:true,label:'PB1'});
-  s+=T_(S+6,120,'NC L1','tag')+T_(S+6,170,'NC L2','tag')+T_(S+6,188,'NO L1','tag')+T_(S+6,246,'NO L2','tag');
+  s+=T_(S+6,120,'NC L1','tag pbtag')+T_(S+6,170,'NC L2','tag pbtag')+T_(S+6,188,'NO L1','tag pbtag')+T_(S+6,246,'NO L2','tag pbtag');
   s+=contact(TS,190,230,'a',{label:'T'});
   s+=contact(FC,230,270,'a',{label:'FLS'});
   s+=coil(FC,'X');
@@ -3024,7 +3053,7 @@ function ctrlSymbols2(){
   s+=T_(E1x-26,514,'TB4','tag');
   s+=contact(S,60,95,'b')+contact(FC,60,95,'a')+L(S,60,FC,60)+L(FC+7,77.5,S-3.3,77.5,'dash')+L(FC+7,77.5,FC+13,77.5)+L(FC+13,73,FC+13,82)+T_(S+10,58,'SS','lbl sm')+T_(S+8,108,'M','tag')+T_(FC-14,108,'A','tag');
   s+=contact(S,120,160,'b',{pb:true,label:'PB0'})+contact(S,190,230,'a',{pb:true,label:'PB1'});
-  s+=T_(S+6,120,'NC L1','tag')+T_(S+6,170,'NC L2','tag')+T_(S+6,188,'NO L1','tag')+T_(S+6,246,'NO L2','tag');
+  s+=T_(S+6,120,'NC L1','tag pbtag')+T_(S+6,170,'NC L2','tag pbtag')+T_(S+6,188,'NO L1','tag pbtag')+T_(S+6,246,'NO L2','tag pbtag');
   s+=contact(TS,190,230,'a',{label:'T'});
   s+=contact(FC,230,270,'a',{label:'FLS'});
   s+=coil(FC,'X')+coil(S,'T');
@@ -3041,12 +3070,12 @@ function ctrlSymbols18(){
   let s='';
   s+=`<circle class="fillp" cx="${EP}" cy="460" r="16"/>`+T_(EP,463.5,'EOCR','lbl c" style="font-size:9.5px;letter-spacing:-.3px');
   s+=contact(EA,110,150,'a',{label:'EOCR',eocr:1})+eocrTop()+lamp(EA,'YL');
-  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag" text-anchor="middle')+T_(PBq,31,'NC L2','tag" text-anchor="middle');
+  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag pbtag" text-anchor="middle')+T_(PBq,31,'NC L2','tag pbtag" text-anchor="middle');
   [[c1,'LS1','X1'],[c2,'LS2','X2']].forEach(([x,ls,xc])=>{ s+=contact(x,60,100,'a',{label:ls})+T_(x-12,66,'N','tag')+T_(x-12,108,'O','tag')+coil(x,xc,true); });
-  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-6,108,'NO L2','tag" text-anchor="end')+contact(c4,60,100,'a',{label:'T1'});
+  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-6,108,'NO L2','tag pbtag" text-anchor="end')+contact(c4,60,100,'a',{label:'T1'});
   s+=contact(c3,130,170,'a',{label:'X1'})+contact(c3,190,230,'b',{label:'X2'});
   s+=coil(c3,'MC1',true)+coil(c4,'T1',true)+contact(c5,70,110,'a',{label:'MC1'})+lamp(c5,'RL');
-  s+=contact(c6,60,100,'a',{pb:true,label:'PB2'})+T_(c6-6,68,'NO L1','tag" text-anchor="end')+T_(c6-6,108,'NO L2','tag" text-anchor="end')+contact(c7,60,100,'a',{label:'T2'});
+  s+=contact(c6,60,100,'a',{pb:true,label:'PB2'})+T_(c6-6,68,'NO L1','tag pbtag" text-anchor="end')+T_(c6-6,108,'NO L2','tag pbtag" text-anchor="end')+contact(c7,60,100,'a',{label:'T2'});
   s+=contact(c6,130,170,'b',{label:'X1'})+contact(c6,190,230,'a',{label:'X2'});
   s+=coil(c6,'MC2',true)+coil(c7,'T2',true)+contact(c8,70,110,'a',{label:'MC2'})+lamp(c8,'GL');
   s+=contact(c9,60,100,'a',{timer:true,label:'T1',lx:22})+contact(c10,60,100,'a',{timer:true,label:'T2',lx:22})+lamp(c9,'WL');
@@ -3057,12 +3086,12 @@ function ctrlSymbols17(){
   let s='';
   s+=`<circle class="fillp" cx="${EP}" cy="460" r="16"/>`+T_(EP,463.5,'EOCR','lbl c" style="font-size:9.5px;letter-spacing:-.3px');
   s+=contact(EA,110,150,'a',{label:'EOCR',eocr:1})+eocrTop()+lamp(EA,'YL');
-  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag" text-anchor="middle')+T_(PBq,31,'NC L2','tag" text-anchor="middle');
+  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag pbtag" text-anchor="middle')+T_(PBq,31,'NC L2','tag pbtag" text-anchor="middle');
   [[c1,'LS1','X1'],[c2,'LS2','X2']].forEach(([x,ls,xc])=>{ s+=contact(x,60,100,'a',{label:ls})+T_(x-12,66,'N','tag')+T_(x-12,108,'O','tag')+coil(x,xc,true); });
-  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-6,108,'NO L2','tag" text-anchor="end')+contact(c4,60,100,'a',{label:'T1'});
+  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-6,108,'NO L2','tag pbtag" text-anchor="end')+contact(c4,60,100,'a',{label:'T1'});
   s+=contact(c3,160,200,'a',{label:'X1'})+contact(c3,220,260,'b',{label:'X2'})+contact(c4,160,200,'b',{label:'X1'})+contact(c4,220,260,'a',{label:'X2'});
   s+=coil(c3,'MC1',true)+coil(c4,'T1',true)+contact(c5,70,110,'a',{label:'MC1'})+lamp(c5,'RL');
-  s+=contact(c6,60,100,'a',{pb:true,label:'PB2'})+T_(c6-6,68,'NO L1','tag" text-anchor="end')+T_(c6-6,108,'NO L2','tag" text-anchor="end')+contact(c7,60,100,'a',{label:'T2'});
+  s+=contact(c6,60,100,'a',{pb:true,label:'PB2'})+T_(c6-6,68,'NO L1','tag pbtag" text-anchor="end')+T_(c6-6,108,'NO L2','tag pbtag" text-anchor="end')+contact(c7,60,100,'a',{label:'T2'});
   s+=contact(c6,160,200,'a',{timer:true,label:'T1',lx:22})+contact(c6,270,310,'b',{timer:true,label:'T2',lx:-34})+contact(c7,270,310,'a',{timer:true,label:'T2',lx:22});
   s+=coil(c6,'MC2',true)+lamp(c7,'WL')+coil(c8,'T2',true)+contact(c9,70,110,'a',{label:'MC2'})+lamp(c9,'GL');
   return s;
@@ -3072,11 +3101,11 @@ function ctrlSymbols16(){
   let s='';
   s+=`<circle class="fillp" cx="${EP}" cy="460" r="16"/>`+T_(EP,463.5,'EOCR','lbl c" style="font-size:9.5px;letter-spacing:-.3px');
   s+=contact(EA,110,150,'a',{label:'EOCR',eocr:1})+eocrTop()+lamp(EA,'YL');
-  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag" text-anchor="middle')+T_(PBq,31,'NC L2','tag" text-anchor="middle');
+  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag pbtag" text-anchor="middle')+T_(PBq,31,'NC L2','tag pbtag" text-anchor="middle');
   [[c1,'LS1','T1'],[c2,'LS2','T2']].forEach(([x,ls,tc])=>{ s+=contact(x,60,100,'a',{label:ls})+T_(x-12,66,'N','tag')+T_(x-12,108,'O','tag')+coil(x,tc,true); });
-  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-6,108,'NO L2','tag" text-anchor="end')+contact(c4,60,100,'a',{label:'X1'})+contact(c5,60,100,'a',{timer:true,label:'T1',lx:22});
+  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-6,108,'NO L2','tag pbtag" text-anchor="end')+contact(c4,60,100,'a',{label:'X1'})+contact(c5,60,100,'a',{timer:true,label:'T1',lx:22});
   s+=coil(c3,'MC1',true)+coil(c4,'X1',true)+contact(c6,70,110,'a',{label:'MC1'})+lamp(c6,'RL');
-  s+=contact(c7,60,100,'a',{pb:true,label:'PB2'})+T_(c7-6,68,'NO L1','tag" text-anchor="end')+T_(c7-6,108,'NO L2','tag" text-anchor="end')+contact(c8,60,100,'a',{label:'X2'})+contact(c9,60,100,'a',{label:'T2'});
+  s+=contact(c7,60,100,'a',{pb:true,label:'PB2'})+T_(c7-6,68,'NO L1','tag pbtag" text-anchor="end')+T_(c7-6,108,'NO L2','tag pbtag" text-anchor="end')+contact(c8,60,100,'a',{label:'X2'})+contact(c9,60,100,'a',{label:'T2'});
   s+=contact(c7,170,210,'a',{label:'T1'})+contact(c7,280,320,'b',{timer:true,label:'T2',lx:-34})+contact(c8,280,320,'a',{timer:true,label:'T2',lx:22});
   s+=coil(c7,'MC2',true)+lamp(c8,'WL')+coil(c9,'X2',true)+contact(c10,70,110,'a',{label:'MC2'})+lamp(c10,'GL');
   return s;
@@ -3086,12 +3115,12 @@ function ctrlSymbols15(){
   let s='';
   s+=`<circle class="fillp" cx="${EP}" cy="460" r="16"/>`+T_(EP,463.5,'EOCR','lbl c" style="font-size:9.5px;letter-spacing:-.3px');
   s+=contact(EA,110,150,'a',{label:'EOCR',eocr:1})+eocrTop()+lamp(EA,'YL');
-  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag" text-anchor="middle')+T_(PBq,31,'NC L2','tag" text-anchor="middle');
+  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag pbtag" text-anchor="middle')+T_(PBq,31,'NC L2','tag pbtag" text-anchor="middle');
   [[c1,'LS1','X1'],[c2,'LS2','X2']].forEach(([x,ls,xc])=>{ s+=contact(x,60,100,'a',{label:ls})+T_(x-12,66,'N','tag')+T_(x-12,108,'O','tag')+coil(x,xc,true); });
-  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-6,108,'NO L2','tag" text-anchor="end')+contact(c4,60,100,'a',{label:'T1'});
+  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-6,108,'NO L2','tag pbtag" text-anchor="end')+contact(c4,60,100,'a',{label:'T1'});
   s+=contact(c3,150,190,'a',{label:'X1'})+contact(cb,150,190,'a',{label:'X2'})+contact(c3,250,290,'b',{timer:true,label:'T1',lx:30});
   s+=coil(c3,'MC1',true)+coil(c4,'T1',true)+contact(c5,70,110,'a',{label:'MC1'})+lamp(c5,'RL');
-  s+=contact(c6,60,100,'a',{pb:true,label:'PB2'})+T_(c6-6,68,'NO L1','tag" text-anchor="end')+T_(c6-6,108,'NO L2','tag" text-anchor="end')+contact(c7,60,100,'a',{label:'T2'});
+  s+=contact(c6,60,100,'a',{pb:true,label:'PB2'})+T_(c6-6,68,'NO L1','tag pbtag" text-anchor="end')+T_(c6-6,108,'NO L2','tag pbtag" text-anchor="end')+contact(c7,60,100,'a',{label:'T2'});
   s+=contact(c6,130,170,'a',{label:'X1'})+contact(c6,190,230,'a',{label:'X2'})+contact(c6,280,320,'b',{timer:true,label:'T2',lx:30});
   s+=coil(c6,'MC2',true)+coil(c7,'T2',true)+contact(c8,70,110,'a',{label:'MC2'})+lamp(c8,'GL');
   s+=contact(c9,60,100,'b',{label:'MC1'})+contact(c9,130,170,'b',{label:'MC2'})+lamp(c9,'WL');
@@ -3102,12 +3131,12 @@ function ctrlSymbols14(){
   let s='';
   s+=`<circle class="fillp" cx="${EP}" cy="460" r="16"/>`+T_(EP,463.5,'EOCR','lbl c" style="font-size:9.5px;letter-spacing:-.3px');
   s+=contact(EA,110,150,'a',{label:'EOCR',eocr:1})+eocrTop()+lamp(EA,'YL');
-  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag" text-anchor="middle')+T_(PBq,31,'NC L2','tag" text-anchor="middle');
+  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag pbtag" text-anchor="middle')+T_(PBq,31,'NC L2','tag pbtag" text-anchor="middle');
   [[c1,'LS1','X1'],[c2,'LS2','X2']].forEach(([x,ls,xc])=>{ s+=contact(x,60,100,'a',{label:ls})+T_(x-12,66,'N','tag')+T_(x-12,108,'O','tag')+coil(x,xc,true); });
-  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-6,108,'NO L2','tag" text-anchor="end')+contact(c4,60,100,'a',{label:'T1'});
+  s+=contact(c3,60,100,'a',{pb:true,label:'PB1'})+T_(c3-6,108,'NO L2','tag pbtag" text-anchor="end')+contact(c4,60,100,'a',{label:'T1'});
   s+=contact(c3,150,190,'a',{label:'X1'})+contact(c3,210,250,'a',{label:'X2'})+contact(c3,270,310,'b',{timer:true,label:'T1',lx:30});
   s+=coil(c3,'MC1',true)+coil(c4,'T1',true)+contact(c5,70,110,'a',{label:'MC1'})+lamp(c5,'RL');
-  s+=contact(c6,60,100,'a',{pb:true,label:'PB2'})+T_(c6-6,68,'NO L1','tag" text-anchor="end')+T_(c6-6,108,'NO L2','tag" text-anchor="end')+contact(c7,60,100,'a',{label:'T2'});
+  s+=contact(c6,60,100,'a',{pb:true,label:'PB2'})+T_(c6-6,68,'NO L1','tag pbtag" text-anchor="end')+T_(c6-6,108,'NO L2','tag pbtag" text-anchor="end')+contact(c7,60,100,'a',{label:'T2'});
   s+=contact(c6,160,200,'a',{label:'X1'})+contact(c7,160,200,'a',{label:'X2'})+contact(c6,270,310,'b',{timer:true,label:'T2',lx:30});
   s+=coil(c6,'MC2',true)+coil(c7,'T2',true)+contact(c8,70,110,'a',{label:'MC2'})+lamp(c8,'GL');
   s+=contact(c9,60,100,'b',{label:'MC1'})+contact(c9,130,170,'b',{label:'MC2'})+lamp(c9,'WL');
@@ -3117,9 +3146,9 @@ function ctrlSymbols13(){
   let s='';
   s+=`<circle class="fillp" cx="${EP}" cy="460" r="16"/>`+T_(EP,463.5,'EOCR','lbl c" style="font-size:9.5px;letter-spacing:-.3px');
   s+=contact(EA,110,150,'a',{label:'EOCR',eocr:1})+eocrTop()+lamp(EA,'YL');
-  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag" text-anchor="middle')+T_(PBq,31,'NC L2','tag" text-anchor="middle');
+  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag pbtag" text-anchor="middle')+T_(PBq,31,'NC L2','tag pbtag" text-anchor="middle');
   const [a,b,c,d,e,f]=G;
-  [[a,1],[d,2]].forEach(([x,n])=>{ s+=contact(x,60,100,'a',{pb:true})+(n===2?T_(x-6,68,'NO L1','tag" text-anchor="end'):'')+T_(x-6,108,'NO L2','tag" text-anchor="end')+T_(x-58,n===1?85:124,'PB'+n,'lbl sm'); });
+  [[a,1],[d,2]].forEach(([x,n])=>{ s+=contact(x,60,100,'a',{pb:true})+(n===2?T_(x-6,68,'NO L1','tag pbtag" text-anchor="end'):'')+T_(x-6,108,'NO L2','tag pbtag" text-anchor="end')+T_(x-58,n===1?85:124,'PB'+n,'lbl sm'); });
   s+=contact(b,60,100,'a',{label:'X1'})+contact(c,60,100,'a',{label:'LS1'})+T_(c-12,66,'N','tag')+T_(c-12,108,'O','tag');
   s+=contact(a,160,200,'b',{timer:true,label:'T2',lx:30});
   s+=contact(e,60,100,'a',{label:'X2'})+contact(f,60,100,'a',{timer:true,label:'T1',lx:22});
@@ -3134,9 +3163,9 @@ function ctrlSymbols12(){
   let s='';
   s+=`<circle class="fillp" cx="${EP}" cy="460" r="16"/>`+T_(EP,463.5,'EOCR','lbl c" style="font-size:9.5px;letter-spacing:-.3px');
   s+=contact(EA,110,150,'a',{label:'EOCR',eocr:1})+eocrTop()+lamp(EA,'YL');
-  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag" text-anchor="middle')+T_(PBq,31,'NC L2','tag" text-anchor="middle');
+  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag pbtag" text-anchor="middle')+T_(PBq,31,'NC L2','tag pbtag" text-anchor="middle');
   const [a,b,c,d,e,f]=G;
-  [[a,1],[d,2]].forEach(([x,n])=>{ s+=contact(x,60,100,'a',{pb:true})+(n===2?T_(x-6,68,'NO L1','tag" text-anchor="end'):'')+T_(x-6,108,'NO L2','tag" text-anchor="end')+T_(x-58,n===1?85:124,'PB'+n,'lbl sm'); });
+  [[a,1],[d,2]].forEach(([x,n])=>{ s+=contact(x,60,100,'a',{pb:true})+(n===2?T_(x-6,68,'NO L1','tag pbtag" text-anchor="end'):'')+T_(x-6,108,'NO L2','tag pbtag" text-anchor="end')+T_(x-58,n===1?85:124,'PB'+n,'lbl sm'); });
   s+=contact(b,60,100,'a',{label:'X1'})+contact(c,60,100,'a',{timer:true,label:'T2',lx:22});
   s+=contact(e,60,100,'a',{label:'X2'})+contact(f,60,100,'a',{timer:true,label:'T1',lx:22});
   s+=coil(a,'X1',true)+contact(b,260,300,'a',{label:'LS1',lx:-44})+T_(b-12,258,'N','tag')+T_(b-12,312,'O','tag')+coil(b,'MC1',true)+contact(c,260,300,'b',{label:'MC1'})+coil(c,'T1',true);
@@ -3150,9 +3179,9 @@ function ctrlSymbols11(){
   let s='';
   s+=`<circle class="fillp" cx="${EP}" cy="460" r="16"/>`+T_(EP,463.5,'EOCR','lbl c" style="font-size:9.5px;letter-spacing:-.3px');
   s+=contact(EA,110,150,'a',{label:'EOCR',eocr:1})+eocrTop()+lamp(EA,'YL');
-  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag" text-anchor="middle')+T_(PBq,31,'NC L2','tag" text-anchor="middle');
+  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag pbtag" text-anchor="middle')+T_(PBq,31,'NC L2','tag pbtag" text-anchor="middle');
   [[1,2,0],[2,1,3]].forEach(([n,m,k])=>{ const a=G[k],b=G[k+1],c=G[k+2];
-    s+=contact(a,60,100,'a',{pb:true})+(n===2?T_(a-6,68,'NO L1','tag" text-anchor="end'):'')+T_(a-6,108,'NO L2','tag" text-anchor="end')+T_(a-50,85,'PB'+n,'lbl sm');
+    s+=contact(a,60,100,'a',{pb:true})+(n===2?T_(a-6,68,'NO L1','tag pbtag" text-anchor="end'):'')+T_(a-6,108,'NO L2','tag pbtag" text-anchor="end')+T_(a-50,85,'PB'+n,'lbl sm');
     s+=contact(b,60,100,'a',{timer:true,label:'T'+n,lx:22})+coil(a,'X'+n,true);
     s+=contact(b,260,300,'a',{label:'LS'+n,lx:-44})+T_(b-12,258,'N','tag')+T_(b-12,312,'O','tag')+coil(b,'MC'+n,true);
     s+=contact(c,260,300,'b',{label:'X'+m})+coil(c,'T'+n,true); });
@@ -3166,9 +3195,9 @@ function ctrlSymbols10(){
   let s='';
   s+=`<circle class="fillp" cx="${EP}" cy="460" r="16"/>`+T_(EP,463.5,'EOCR','lbl c" style="font-size:9.5px;letter-spacing:-.3px');
   s+=contact(EA,110,150,'a',{label:'EOCR',eocr:1})+eocrTop()+lamp(EA,'YL');
-  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag" text-anchor="middle')+T_(PBq,31,'NC L2','tag" text-anchor="middle');
+  s+=L(465,43.3,PBq,43.3)+L(485,43.3,485,51)+L(480,51,490,51)+term(465,40)+term(PBq,40)+T_(485,16,'PB0','lbl c sm')+T_(465,31,'NC L1','tag pbtag" text-anchor="middle')+T_(PBq,31,'NC L2','tag pbtag" text-anchor="middle');
   [[1,0],[2,3]].forEach(([n,k])=>{ const a=G[k],b=G[k+1],c=G[k+2];
-    s+=contact(a,60,100,'a',{pb:true})+(n===2?T_(a-6,68,'NO L1','tag" text-anchor="end'):'')+T_(a-6,108,'NO L2','tag" text-anchor="end')+T_(a-50,85,'PB'+n,'lbl sm');
+    s+=contact(a,60,100,'a',{pb:true})+(n===2?T_(a-6,68,'NO L1','tag pbtag" text-anchor="end'):'')+T_(a-6,108,'NO L2','tag pbtag" text-anchor="end')+T_(a-50,85,'PB'+n,'lbl sm');
     s+=contact(b,60,100,'a',{label:'X'+n})+coil(a,'X'+n,true);
     s+=contact(b,260,300,'a',{label:'LS'+n,lx:-44})+T_(b-12,258,'N','tag')+T_(b-12,312,'O','tag')+coil(b,'T'+n,true);
     s+=contact(c,260,300,'a',{timer:true,label:'T'+n,lx:22})+coil(c,'MC'+n,true); });
@@ -3191,7 +3220,7 @@ function ctrlSymbols9(){
   [E1x,E2x,E3x].forEach((x,i)=>{ s+=`<rect class="fillp" x="${x-5}" y="505" width="10" height="10"/>`+T_(x,524,['E1','E2','E3'][i],'tag" text-anchor="middle'); });
   s+=T_(E1x-26,514,'TB4','tag');
   s+=contact(S,120,160,'b',{pb:true,label:'PB0'})+contact(S,190,230,'a',{pb:true,label:'PB1'});
-  s+=T_(S+6,120,'NC L1','tag')+T_(S+6,170,'NC L2','tag')+T_(S+6,188,'NO L1','tag')+T_(S+6,246,'NO L2','tag');
+  s+=T_(S+6,120,'NC L1','tag pbtag')+T_(S+6,170,'NC L2','tag pbtag')+T_(S+6,188,'NO L1','tag pbtag')+T_(S+6,246,'NO L2','tag pbtag');
   s+=contact(TS,190,230,'a',{label:'X'})+coil(S,'X')+coil(TS,'T');
   s+=contact(TH,70,110,'a',{timer:true,label:'T',lx:20})+coil(TH,'MC2',true);
   s+=contact(RLx,70,110,'a',{label:'MC1'})+contact(GLx,70,110,'a',{label:'MC2'});
@@ -3210,7 +3239,7 @@ function ctrlSymbols8(){
   s+=contact(FC,230,270,'a',{label:'FLS'})+coil(FC,'X')+coil(FRc8,'FR');
   s+=contact(YLx,330,370,'b',{label:'FR',lx:30,flicker:1})+lamp(YLx,'YL');
   s+=contact(S,120,160,'b',{pb:true,label:'PB0'})+contact(S,190,230,'a',{pb:true,label:'PB1'});
-  s+=T_(S+6,120,'NC L1','tag')+T_(S+6,170,'NC L2','tag')+T_(S+6,188,'NO L1','tag')+T_(S+6,246,'NO L2','tag');
+  s+=T_(S+6,120,'NC L1','tag pbtag')+T_(S+6,170,'NC L2','tag pbtag')+T_(S+6,188,'NO L1','tag pbtag')+T_(S+6,246,'NO L2','tag pbtag');
   s+=contact(TS,190,230,'a',{label:'T'})+contact(S,290,330,'b',{label:'X'})+coil(S,'T');
   s+=contact(XA,60,100,'a',{label:'X'})+contact(TH,230,270,'b',{timer:true,label:'T',lx:-30});
   s+=coil(XA,'MC1',true)+coil(TH,'MC2',true);
@@ -3230,7 +3259,7 @@ function ctrlSymbols7(){
   s+=contact(FC,60,95,'a')+contact(S,60,95,'b')+L(FC+7,77.5,S-3.3,77.5,'dash')+L(FC+7,77.5,FC+13,77.5)+L(FC+13,73,FC+13,82)+T_(S+10,58,'SS','lbl sm')+T_(FC-14,108,'A','tag')+T_(S+8,108,'M','tag');
   s+=contact(FC,230,270,'a',{label:'FLS'})+coil(FC,'FR');
   s+=contact(S,120,160,'b',{pb:true,label:'PB0'})+contact(S,190,230,'a',{pb:true,label:'PB1'});
-  s+=T_(S+6,120,'NC L1','tag')+T_(S+6,170,'NC L2','tag')+T_(S+6,188,'NO L1','tag')+T_(S+6,246,'NO L2','tag');
+  s+=T_(S+6,120,'NC L1','tag pbtag')+T_(S+6,170,'NC L2','tag pbtag')+T_(S+6,188,'NO L1','tag pbtag')+T_(S+6,246,'NO L2','tag pbtag');
   s+=contact(TS,190,230,'a',{label:'X'})+coil(S,'X');
   s+=contact(XA,60,100,'a',{label:'X'})+contact(XA,150,190,'b',{label:'FR',lx:30,flicker:1})+coil(XA,'T');
   s+=contact(M1,330,370,'b',{timer:true,label:'T',lx:-30})+contact(TH,330,370,'a',{timer:true,label:'T',lx:22});
@@ -3251,7 +3280,7 @@ function ctrlSymbols6(){
   s+=contact(FLSx,60,95,'a')+contact(S,60,95,'b')+L(FLSx+7,77.5,S-3.3,77.5,'dash')+L(FLSx+7,77.5,FLSx+13,77.5)+L(FLSx+13,73,FLSx+13,82)+T_(S+10,58,'SS','lbl sm')+T_(FLSx-14,108,'A','tag')+T_(S+8,108,'M','tag');
   s+=contact(FC,230,270,'a',{label:'FLS'})+coil(FC,'X');
   s+=contact(S,120,160,'b',{pb:true,label:'PB0'})+contact(S,190,230,'a',{pb:true,label:'PB1'});
-  s+=T_(S+6,120,'NC L1','tag')+T_(S+6,170,'NC L2','tag')+T_(S+6,188,'NO L1','tag')+T_(S+6,246,'NO L2','tag');
+  s+=T_(S+6,120,'NC L1','tag pbtag')+T_(S+6,170,'NC L2','tag pbtag')+T_(S+6,188,'NO L1','tag pbtag')+T_(S+6,246,'NO L2','tag pbtag');
   s+=contact(TS,190,230,'a',{label:'T'})+contact(S,290,330,'b',{label:'X'})+coil(S,'T');
   s+=contact(XA,60,100,'a',{label:'X'})+contact(XA,330,370,'a',{timer:true,label:'T',lx:22})+coil(XA,'FR');
   s+=contact(M1,330,370,'b',{label:'FR',lx:30,flicker:1})+coil(M1,'MC1',true)+lamp(RLx,'RL');
@@ -3271,7 +3300,7 @@ function ctrlSymbols5(){
   s+=contact(FLSx,60,95,'a')+contact(S,60,95,'b')+L(FLSx+7,77.5,S-3.3,77.5,'dash')+L(FLSx+7,77.5,FLSx+13,77.5)+L(FLSx+13,73,FLSx+13,82)+T_(S+10,58,'SS','lbl sm')+T_(FLSx-14,108,'A','tag')+T_(S+8,108,'M','tag');
   s+=contact(FC,230,270,'a',{label:'FLS'})+coil(FC,'X')+coil(TCx,'T');
   s+=contact(S,120,160,'b',{pb:true,label:'PB0'})+contact(S,190,230,'a',{pb:true,label:'PB1'});
-  s+=T_(S+6,120,'NC L1','tag')+T_(S+6,170,'NC L2','tag')+T_(S+6,188,'NO L1','tag')+T_(S+6,246,'NO L2','tag');
+  s+=T_(S+6,120,'NC L1','tag pbtag')+T_(S+6,170,'NC L2','tag pbtag')+T_(S+6,188,'NO L1','tag pbtag')+T_(S+6,246,'NO L2','tag pbtag');
   s+=contact(TS,190,230,'a',{label:'X'});
   s+=contact(FRc,330,370,'b',{timer:true,label:'T',lx:26})+coil(FRc,'FR');
   s+=contact(M1,330,370,'b',{label:'FR',lx:15,flicker:1})+contact(TH,330,370,'a',{label:'FR',lx:18,flicker:1});
@@ -3293,7 +3322,7 @@ function ctrlSymbols4(){
   s+=contact(FC,60,95,'a')+contact(S,60,95,'b')+L(FC+7,77.5,S-3.3,77.5,'dash')+L(FC+7,77.5,FC+13,77.5)+L(FC+13,73,FC+13,82)+T_(S+10,58,'SS','lbl sm')+T_(FC-14,108,'A','tag')+T_(S+8,108,'M','tag');
   s+=contact(FC,230,270,'a',{label:'FLS'})+coil(FC,'FR');
   s+=contact(S,120,160,'b',{pb:true,label:'PB0'})+contact(S,190,230,'a',{pb:true,label:'PB1'});
-  s+=T_(S+6,120,'NC L1','tag')+T_(S+6,170,'NC L2','tag')+T_(S+6,188,'NO L1','tag')+T_(S+6,246,'NO L2','tag');
+  s+=T_(S+6,120,'NC L1','tag pbtag')+T_(S+6,170,'NC L2','tag pbtag')+T_(S+6,188,'NO L1','tag pbtag')+T_(S+6,246,'NO L2','tag pbtag');
   s+=contact(TS,190,230,'a',{label:'X'})+coil(S,'X');
   s+=contact(XA,60,100,'a',{label:'X'});
   s+=contact(XA,230,270,'b',{label:'FR',lx:-32,flicker:1})+contact(TH,230,270,'a',{label:'FR',lx:20,flicker:1});
@@ -3318,7 +3347,7 @@ function ctrlSymbols3(){
   [E1x,E2x,E3x].forEach((x,i)=>{ s+=`<rect class="fillp" x="${x-5}" y="505" width="10" height="10"/>`+T_(x,524,['E1','E2','E3'][i],'tag" text-anchor="middle'); });
   s+=T_(E1x-26,514,'TB4','tag');
   s+=contact(S,120,160,'b',{pb:true,label:'PB0'})+contact(S,190,230,'a',{pb:true,label:'PB1'});
-  s+=T_(S+6,120,'NC L1','tag')+T_(S+6,170,'NC L2','tag')+T_(S+6,188,'NO L1','tag')+T_(S+6,246,'NO L2','tag');
+  s+=T_(S+6,120,'NC L1','tag pbtag')+T_(S+6,170,'NC L2','tag pbtag')+T_(S+6,188,'NO L1','tag pbtag')+T_(S+6,246,'NO L2','tag pbtag');
   s+=contact(TS,190,230,'a',{label:'T'})+contact(TS,290,330,'a',{timer:true,label:'T',lx:22});
   s+=coil(S,'T')+coil(TS,'X');
   s+=contact(RLx,70,110,'a',{label:'MC1'})+contact(GLx,70,110,'a',{label:'MC2'});
@@ -3370,7 +3399,7 @@ function slotsSVG(id){
     if (state.mode==='wire') return `<text class="pinlbl" x="${cx}" y="${cy+4}">${e.ans[i]}</text>`;
     const u=(state.pins[id]||[])[i];
     let c='slot';
-    if (state.checked && u!=null){ if(ST[id]==='ok') c+=' ok'; else if(ST[id]==='bad') c+=' bad'; }
+    if (state.checked && u!=null){ const r=(SL[id]||[])[i]; if(r===true) c+=' ok'; else if(r===false) c+=' bad'; }
     if (sel.slot && sel.slot.id===id && sel.slot.i===i) c+=' active';
     return `<g class="${c}" data-slot="${id}:${i}" tabindex="0" role="button" aria-label="${e.name} ${i+1}번째 핀번호${u!=null?' '+u:' 비어 있음'}"><rect x="${cx-w/2}" y="${cy-7}" width="${w}" height="14" rx="3"/><text x="${cx}" y="${cy+4}">${u!=null?u:''}</text></g>`;
   }).join('');
@@ -3391,7 +3420,9 @@ function renderSchematic(){
 
 /* ================= 렌더링: 1단계 오른쪽 ================= */
 function hintFor(id){
-  const e=EL[id], r=REF[REF_OF[e.comp]];
+  const e=EL[id];
+  if (e.pow) return '램프·부저 같은 기구의 전원 단자입니다. 도면에서 위쪽(전원선 쪽) 칸은 L1, 아래쪽(공통선 쪽) 칸은 L2를 고르세요.';
+  const r=REF[REF_OF[e.comp]];
   if (id==='FLS_E') return 'FLS 내부결선도에서 전극 E1, E2, E3에 해당하는 핀을 차례로 적으세요. 칸은 왼쪽부터 E1, E2, E3 순서예요.';
   const set=[...e.ans].sort((a,b)=>a-b).join();
   const m=r.items.find(it=>it.length===3 && [it[1],it[2]].sort((a,b)=>a-b).join()===set);
@@ -3514,8 +3545,11 @@ function renderSidePins(){
   if (sel.slot){
     const id=sel.slot.id, e=EL[id], s=ST[id];
     now=`<h4>${e.name}</h4><p>${hintFor(id)}</p>`;
-    if (state.checked && s==='bad') now+=`<p class="warn">내부결선도와 맞지 않아요. 파란색으로 표시된 핀을 다시 보세요.</p>`;
-    else if (state.checked && s==='ok') now+=`<p style="color:var(--ok);font-weight:600">맞았어요.</p>`;
+    const CC='①②③④⑤⑥⑦⑧⑨⑩⑪⑫', used11=e.comp==='EOCR' && (state.pins[id]||[]).includes(11);
+    if (state.checked && RS[id] && RS[id].type==='common') now+=`<p class="warn">접점 번호의 쌍은 맞지만 공통 ${CC[RS[id].pin-1]}의 위치가 다른 접점과 일치하지 않습니다. 같은 공통을 쓰는 접점은 공통 쪽 끝이 도면에서 한 점에 이어져 있어요.</p>`;
+    else if (state.checked && s==='bad') now+=`<p class="warn">빨간 칸이 내부결선도와 맞지 않아요. 파란색으로 표시된 핀을 다시 보세요.</p>`;
+    else if (state.checked && s==='part') now+=`<p class="warn">아직 비어 있는 칸이 있어요.</p>`;
+    else if (state.checked && s==='ok') now+=`<p style="color:var(--ok);font-weight:600">맞았어요.${used11?' ⑪은 EOCR 안에서 ⑩과 이어져 있어 정답으로 인정해요. 시험지 도면의 번호는 ⑩이에요.':''}</p>`;
   } else now=`<h4>도면의 점선 칸을 눌러 시작하세요</h4><p>칸을 누르면 번호판이 열려요. 어느 기구의 어떤 접점인지 아래 내부결선도에 파란색으로 표시됩니다.</p>`;
   $('#side').innerHTML=`<div class="pane-bar"><h3>기구 내부결선도</h3></div><div class="card now">${now}</div><div class="refs">${['EOCR','MC','X','T','FR','FLS'].filter(k=>EL_IDS.some(id=>REF_OF[EL[id].comp]===k)).map(refCard).join('')}</div>`;
 }
@@ -3619,7 +3653,7 @@ function renderSideDuct(){
 function render(){
   ST=computeStatus();
   const filled=EL_IDS.reduce((n,id)=>n+(state.pins[id]||[]).filter(v=>v!=null).length,0);
-  const okSlots=EL_IDS.filter(id=>ST[id]==='ok').reduce((n,id)=>n+EL[id].ans.length,0);
+  const okSlots=okSlotCount();
   document.querySelectorAll('.steps button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.mode===state.mode)));
   $('#work').classList.toggle('big', state.mode==='wire' && !!state.big); $('#work').classList.toggle('wire', state.mode==='wire');
   $('#cnt-pins').textContent=state.checked?`${okSlots}/${TOTAL_SLOTS} 정답`:`${filled}/${TOTAL_SLOTS}`;
@@ -3631,7 +3665,7 @@ function render(){
   if (state.mode==='pins'){
     tools.innerHTML=`<button class="btn primary" data-act="check">채점하기</button><button class="btn" data-act="answer">정답 채우기</button><button class="btn" data-act="clearpins">모두 지우기</button>`;
     st.innerHTML=state.checked
-      ? (okSlots===TOTAL_SLOTS?`<span class="good">${TOTAL_SLOTS}칸 모두 맞았어요.</span> 이제 2단계에서 제어함에 배선해 보세요.`:`<b>${okSlots}/${TOTAL_SLOTS}칸 정답.</b> 빨간 칸을 눌러 무엇이 틀렸는지 확인하세요.`)
+      ? (okSlots===TOTAL_SLOTS?`<span class="good">${TOTAL_SLOTS}칸 모두 맞았어요.</span> 이제 2단계에서 제어함에 배선해 보세요.`:`<b>${okSlots}/${TOTAL_SLOTS}칸 정답.</b> 칸마다 따로 채점해요. 빨간 칸을 눌러 무엇이 틀렸는지 확인하세요.`)
       : `칸을 채운 뒤 채점하기를 누르세요. 입력 <b>${filled}/${TOTAL_SLOTS}</b>칸`;
     renderSchematic(); renderSidePins();
   } else if (state.mode==='duct'){
@@ -3655,9 +3689,9 @@ const kp=$('#keypad');
 function openKeypad(id,i){
   sel.slot={id,i}; render();
   const g=document.querySelector(`[data-slot="${id}:${i}"]`);
-  const e=EL[id], max=COMP_MAX[e.comp], cur=(state.pins[id]||[])[i];
+  const e=EL[id], max=COMP_MAX[e.comp], cur=(state.pins[id]||[])[i], opts=e.pow?['L1','L2']:Array.from({length:max},(_,k)=>k+1);
   kp.innerHTML=`<div class="kp-head">${e.name}<span>${i+1}/${e.ans.length}번째</span></div>
-    <div class="kp-grid">${Array.from({length:max},(_,k)=>`<button data-n="${k+1}"${cur===k+1?' style="border-color:var(--sel)"':''}>${k+1}</button>`).join('')}</div>
+    <div class="kp-grid"${e.pow?' style="grid-template-columns:repeat(2,1fr)"':''}>${opts.map(v=>`<button data-n="${v}"${cur===v?' style="border-color:var(--sel)"':''}>${v}</button>`).join('')}</div>
     <div class="kp-foot"><button data-n="clear">비우기</button><button data-n="close">닫기</button></div>`;
   kp.hidden=false;
   if (g){ const r=g.getBoundingClientRect(), w=kp.offsetWidth, h=kp.offsetHeight;
@@ -3672,7 +3706,7 @@ kp.addEventListener('click',e=>{
   if (n==='close'){ closeKeypad(); return; }
   const arr=state.pins[id]=(state.pins[id]||[]).slice(); while(arr.length<EL[id].ans.length) arr.push(null);
   if (n==='clear'){ arr[i]=null; closeKeypad(); render(); return; }
-  arr[i]=+n;
+  arr[i]=EL[id].pow ? n : +n;
   const next=arr.findIndex((v,k)=>k>i && v==null);
   if (next>=0) openKeypad(id,next);
   else { closeKeypad(); render(); const g=document.querySelector(`[data-slot="${id}:${i}"]`); if(g) g.focus({preventScroll:true}); }
@@ -3725,7 +3759,7 @@ $('#side').addEventListener('mouseout',e=>{
 });
 $('#tools').addEventListener('click',e=>{
   const b=e.target.closest('[data-act]'); if(!b) return; const a=b.dataset.act;
-  if (a==='check'){ state.checked=true; ST=computeStatus(); const bad=EL_IDS.find(id=>ST[id]!=='ok'); sel.slot=bad?{id:bad,i:0}:null; render(); }
+  if (a==='check'){ state.checked=true; ST=computeStatus(); const bad=EL_IDS.find(id=>ST[id]!=='ok'); sel.slot=bad?{id:bad,i:Math.max(0,(SL[bad]||[]).findIndex(x=>x!==true))}:null; render(); }
   if (a==='answer'){ EL_IDS.forEach(id=>state.pins[id]=[...EL[id].ans]); state.checked=true; sel.slot=null; render(); }
   if (a==='clearpins'){ state.pins={}; state.checked=false; sel.slot=null; closeKeypad(); render(); }
   if (a==='next'){ const w=WIRES.find(x=>!wired.has(x.id)); sel.hint=w?w.id:null; sel.wire=null; render(); }
@@ -3739,7 +3773,7 @@ document.querySelectorAll('.steps button').forEach(b=>b.addEventListener('click'
 function ductClick(id){ if(!ducted.has(id)){ ducted.add(id); sel.dfresh=id; if(sel.dhint===id) sel.dhint=null; sel.duct=id; } else sel.duct=(sel.duct===id?null:id); render(); }
 $('#lay').addEventListener('click',e=>{ const g=e.target.closest('[data-duct]'); if(g) ductClick(g.dataset.duct); });
 $('#resetAll').addEventListener('click',()=>{
-  if(!confirm('핀번호, 제어함 배선, 배관 입선 진도를 모두 지우고 처음부터 시작할까요?')) return;
+  if(!confirm(`지금 문제(${CUR_PROB}-${CUR_VAR-(CUR_PROB===1?0:9)})의 핀번호 입력, 제어함 배선, 배관 입선을 초기화할까요?\n다른 문제의 진도는 그대로 남습니다.`)) return;
   state.pins={}; state.checked=false; wired.clear(); ducted.clear(); state.mode='pins';
   Object.assign(sel,{slot:null,wire:null,hint:null,duct:null,dhint:null}); closeKeypad(); render();
 });
@@ -3753,6 +3787,14 @@ $('#probList').innerHTML=PROBLEMS.map(p=>`<button data-prob="${p.no}" aria-curre
   $('#lay').setAttribute('viewBox', LCFG.view);
   $('#varList').addEventListener('click',e=>{ const b=e.target.closest('[data-var]'); if(!b||b.disabled) return; location.hash='v'+b.dataset.var; location.reload(); }); document.title=`공개문제 ${p.no}-${vi} | 전기기능사 실기 연습장`; }
 window.addEventListener('hashchange',()=>location.reload());
+(()=>{ try{
+  window.__rec=[]; const out=window['ctrlSymbols'+CUR_VAR](); const rec=window.__rec; window.__rec=null;
+  const NM={YL:'YL 램프(황색)',RL:'RL 램프(적색)',GL:'GL 램프(녹색)',WL:'WL 램프(백색)'};
+  rec.forEach(([x,l])=>{ EL['PW_'+l]={comp:'PWR',pow:true,exact:true,name:(NM[l]||l+' 램프')+' 전원',ans:['L1','L2'],slots:C(x)}; });
+  const m=out.match(/x="([\d.]+)" y="444" width="28" height="32" rx="3"\/>/);
+  if(m){ const bx=+m[1]+14; EL['PW_BZ']={comp:'PWR',pow:true,exact:true,name:'BZ 부저 전원',ans:['L1','L2'],slots:C(bx)}; }
+}catch(err){ window.__rec=null; console.warn('power slots',err); } })();
+EL_IDS = Object.keys(EL); TOTAL_SLOTS = EL_IDS.reduce((n,id)=>n+EL[id].ans.length,0);
 render();
 </script>
 </body>
